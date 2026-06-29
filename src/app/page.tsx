@@ -192,9 +192,6 @@ export default function Home() {
       <footer className="border-t border-gray-800 bg-gray-950 py-12">
         <div className="mx-auto max-w-7xl px-6 text-center text-gray-400">
           <p>© 2026 PT Zomet Teknologi Indonesia. All rights reserved.</p>
-          <p className="mt-2 text-sm">
-            Powered by Next.js, Tailwind CSS, and ❤️
-          </p>
         </div>
       </footer>
     </main>
