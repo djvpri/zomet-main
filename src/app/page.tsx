@@ -71,6 +71,7 @@ export default function Home() {
       description_en: 'Restaurant POS with table management, delivery, and kitchen display system.',
       url: 'https://zresto.zomet.my.id/',
       icon: '🍽️',
+      bsIcon: 'bi-cup-hot',
       tags: ['POS', 'Restaurant'],
       status: 'active',
     },
@@ -81,6 +82,7 @@ export default function Home() {
       description_en: 'Billiard rental management system with real-time per-table timer and automated cashier.',
       url: 'https://zbilliar.zomet.my.id/',
       icon: '🎱',
+      bsIcon: 'bi-trophy',
       tags: ['POS', 'Billiard'],
       status: 'active',
     },
@@ -113,6 +115,7 @@ export default function Home() {
       description_en: 'Attendance system with face recognition and GPS geofencing validation.',
       url: 'https://zabsen.zomet.my.id/',
       icon: '📋',
+      bsIcon: 'bi-clipboard-check',
       tags: ['HR', 'Attendance'],
       status: 'active',
     },
@@ -134,6 +137,7 @@ export default function Home() {
       description_en: 'Room booking for meeting rooms and co-working spaces.',
       url: 'https://z-rooms.zomet.my.id/',
       icon: '🏠',
+      bsIcon: 'bi-house-door',
       tags: ['Booking', 'Workspace'],
       status: 'active',
     },
@@ -144,6 +148,7 @@ export default function Home() {
       description_en: 'Healthcare platform with digital medical records and consultations.',
       url: 'https://zmedics.zomet.my.id/',
       icon: '🏥',
+      bsIcon: 'bi-hospital',
       tags: ['Health', 'SaaS'],
       status: 'active',
     },
@@ -253,6 +258,22 @@ export default function Home() {
           <p>© 2026 PT Zomet Teknologi Indonesia. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* Floating WhatsApp button */}
+      <a
+        href="https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zomet"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat via WhatsApp"
+        className="group fixed bottom-6 right-6 z-50 flex items-center gap-0 rounded-full bg-[#25D366] text-white shadow-lg shadow-black/30 transition-all duration-300 hover:gap-3 hover:pr-5 hover:shadow-xl active:scale-95"
+      >
+        <span className="grid h-14 w-14 shrink-0 place-items-center">
+          <i className="bi bi-whatsapp text-3xl animate-[pulse_2.5s_ease-in-out_infinite]" />
+        </span>
+        <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-all duration-300 group-hover:max-w-xs group-hover:opacity-100">
+          Chat via WhatsApp
+        </span>
+      </a>
     </main>
   )
 }
