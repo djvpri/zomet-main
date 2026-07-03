@@ -11,6 +11,7 @@ interface App {
   description_en: string
   url: string
   icon: string
+  bsIcon: string
   tags: string[]
   status: string
 }
@@ -26,6 +27,7 @@ export default function Home() {
       description_en: 'AI Screenshot Solver powered by Gemini. Answers questions from screenshots instantly, hidden on screen.',
       url: 'https://zsnap.zomet.my.id/',
       icon: '🤖',
+      bsIcon: 'bi-robot',
       tags: ['AI', 'Productivity'],
       status: 'active',
     },
@@ -36,6 +38,7 @@ export default function Home() {
       description_en: 'Jewelry Store POS System with multi-metal support (gold, silver, platinum, palladium).',
       url: 'https://zgold.zomet.my.id/',
       icon: '💎',
+      bsIcon: 'bi-gem',
       tags: ['POS', 'Jewelry'],
       status: 'active',
     },
@@ -46,6 +49,7 @@ export default function Home() {
       description_en: 'Workshop POS SaaS for motorcycle, car, and heavy equipment workshops.',
       url: 'https://zbengkel.zomet.my.id/',
       icon: '🔧',
+      bsIcon: 'bi-tools',
       tags: ['POS', 'Workshop'],
       status: 'active',
     },
@@ -56,6 +60,7 @@ export default function Home() {
       description_en: 'Laundry POS with offline-first and PWA features for mobile convenience.',
       url: 'https://zlaundry.zomet.my.id/',
       icon: '🧺',
+      bsIcon: 'bi-droplet',
       tags: ['POS', 'Laundry'],
       status: 'active',
     },
@@ -86,6 +91,7 @@ export default function Home() {
       description_en: 'Simple digital cashier app, mobile-friendly for shops, cafes, and SMEs.',
       url: 'https://zpos.zomet.my.id/',
       icon: '🛒',
+      bsIcon: 'bi-cart3',
       tags: ['POS', 'Commerce'],
       status: 'active',
     },
@@ -96,6 +102,7 @@ export default function Home() {
       description_en: 'AI-powered face identification system with real-time accuracy for access control.',
       url: 'https://zface.zomet.my.id/',
       icon: '👤',
+      bsIcon: 'bi-person-badge',
       tags: ['AI', 'Security'],
       status: 'active',
     },
@@ -116,6 +123,7 @@ export default function Home() {
       description_en: 'Gym membership management with classes, schedules, and financial reports.',
       url: 'https://zgym.zomet.my.id/',
       icon: '💪',
+      bsIcon: 'bi-heart-pulse',
       tags: ['Fitness', 'SaaS'],
       status: 'active',
     },
@@ -146,6 +154,7 @@ export default function Home() {
       description_en: 'Centralized hub for user and app management across Zomet ecosystem.',
       url: 'https://zone.zomet.my.id/',
       icon: '🌐',
+      bsIcon: 'bi-globe2',
       tags: ['Hub', 'Admin'],
       status: 'active',
     },
@@ -160,7 +169,7 @@ export default function Home() {
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div className="text-2xl font-bold">🚀 Zomet</div>
+          <div className="flex items-center gap-2 text-2xl font-bold"><i className="bi bi-grid-3x3-gap-fill text-blue-400"></i> Zomet</div>
           <button
             onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
             className="rounded-lg bg-gray-800 px-4 py-2 text-sm hover:bg-gray-700"
@@ -198,7 +207,7 @@ export default function Home() {
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className="text-5xl mb-4">{app.icon}</div>
+                  <i className={`bi ${app.bsIcon} text-5xl mb-4 block`}></i>
                   <h3 className="text-xl font-semibold">{app.name}</h3>
                   <p className="mt-3 text-sm text-gray-400">
                     {lang === 'id' ? app.description : app.description_en}
