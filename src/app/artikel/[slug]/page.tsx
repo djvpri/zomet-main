@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAllArticles, getArticle, formatDate } from '@/lib/articles'
+import ShareButtons from './ShareButtons'
 
 export async function generateStaticParams() {
   return getAllArticles().map((a) => ({ slug: a.slug }))
@@ -105,8 +106,15 @@ export default async function ArtikelDetailPage({ params }: { params: { slug: st
           dangerouslySetInnerHTML={{ __html: article.content ?? '' }}
         />
 
+        {/* Share buttons */}
+        <ShareButtons
+          url={`https://www.zomet.my.id/artikel/${article.slug}`}
+          title={article.title}
+          description={article.description}
+        />
+
         {/* Footer artikel */}
-        <div className="mt-16 pt-8 border-t border-gray-800">
+        <div className="mt-8">
           <Link
             href="/artikel"
             className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm"
