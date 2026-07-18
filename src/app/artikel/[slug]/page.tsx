@@ -43,10 +43,10 @@ export default async function ArtikelDetailPage({ params }: { params: { slug: st
     publisher: {
       '@type': 'Organization',
       name: 'Zomet',
-      url: 'https://zomet.my.id',
-      logo: { '@type': 'ImageObject', url: 'https://zomet.my.id/logo.png' },
+      url: 'https://www.zomet.my.id',
+      logo: { '@type': 'ImageObject', url: 'https://www.zomet.my.id/logo.png' },
     },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://zomet.my.id/artikel/${article.slug}` },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.zomet.my.id/artikel/${article.slug}` },
   }
 
   return (
