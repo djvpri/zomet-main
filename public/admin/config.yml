@@ -3,7 +3,7 @@ backend:
   repo: djvpri/zomet-main
   branch: main
   auth_type: pkce
-  app_id: GANTI_DENGAN_GITHUB_OAUTH_CLIENT_ID
+  app_id: Ov23lize641MQwN4TumP
 
 media_folder: "public/images/artikel"
 public_folder: "/images/artikel"
