@@ -2,8 +2,6 @@ backend:
   name: github
   repo: djvpri/zomet-main
   branch: main
-  auth_type: pkce
-  app_id: Ov23lize641MQwN4TumP
 
 media_folder: "public/images/artikel"
 public_folder: "/images/artikel"
