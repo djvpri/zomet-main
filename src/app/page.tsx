@@ -219,12 +219,17 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2 text-2xl font-bold"><i className="bi bi-grid-3x3-gap-fill text-blue-400"></i> Zomet</div>
-          <button
-            onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
-            className="rounded-lg bg-gray-800 px-4 py-2 text-sm hover:bg-gray-700"
-          >
-            {lang === 'id' ? 'EN' : 'ID'}
-          </button>
+          <div className="flex items-center gap-3">
+            <Link href="/artikel" className="text-sm text-gray-300 hover:text-white hidden sm:block">
+              Artikel
+            </Link>
+            <button
+              onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
+              className="rounded-lg bg-gray-800 px-4 py-2 text-sm hover:bg-gray-700"
+            >
+              {lang === 'id' ? 'EN' : 'ID'}
+            </button>
+          </div>
         </nav>
       </header>
 

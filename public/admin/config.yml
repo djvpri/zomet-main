@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: djvpri/zomet-main
+  branch: main
+  auth_type: pkce
+  app_id: GANTI_DENGAN_GITHUB_OAUTH_CLIENT_ID
+
+media_folder: "public/images/artikel"
+public_folder: "/images/artikel"
+
+locale: id
+
+collections:
+  - name: "artikel"
+    label: "Artikel"
+    label_singular: "Artikel"
+    folder: "content/artikel"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "Judul", name: "title", widget: "string", hint: "Judul artikel (maks 70 karakter untuk SEO)" }
+      - { label: "Deskripsi (meta SEO)", name: "description", widget: "text", hint: "Deskripsi singkat 150-160 karakter" }
+      - { label: "Tanggal", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD MMMM YYYY", time_format: false, default: "" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["Tips", "UMKM"], hint: "Pisahkan dengan koma" }
+      - { label: "Konten Artikel", name: "body", widget: "markdown" }
