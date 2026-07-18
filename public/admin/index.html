@@ -4,9 +4,45 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zomet CMS</title>
-  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url">
 </head>
 <body>
+  <script>window.CMS_MANUAL_INIT = true</script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    CMS.init({
+      config: {
+        backend: {
+          name: 'github',
+          repo: 'djvpri/zomet-main',
+          branch: 'main',
+          auth_type: 'pkce',
+          app_id: 'Ov23lize641MQwN4TumP',
+        },
+        locale: 'id',
+        media_folder: 'public/images/artikel',
+        public_folder: '/images/artikel',
+        collections: [
+          {
+            name: 'artikel',
+            label: 'Artikel',
+            label_singular: 'Artikel',
+            folder: 'content/artikel',
+            create: true,
+            delete: true,
+            slug: '{{slug}}',
+            summary: '{{title}} — {{date}}',
+            sortable_fields: ['date', 'title'],
+            fields: [
+              { label: 'Judul', name: 'title', widget: 'string', hint: 'Judul artikel (maks 70 karakter untuk SEO)' },
+              { label: 'Deskripsi (meta SEO)', name: 'description', widget: 'text', hint: 'Deskripsi singkat 150-160 karakter' },
+              { label: 'Tanggal', name: 'date', widget: 'datetime', format: 'YYYY-MM-DD', date_format: 'DD MMMM YYYY', time_format: false, default: '' },
+              { label: 'Tags', name: 'tags', widget: 'list', default: ['Tips', 'UMKM'], hint: 'Pisahkan dengan koma' },
+              { label: 'Konten Artikel', name: 'body', widget: 'markdown' },
+            ],
+          },
+        ],
+      }
+    })
+  </script>
 </body>
 </html>
