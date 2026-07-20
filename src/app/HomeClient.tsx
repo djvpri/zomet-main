@@ -8,6 +8,10 @@ interface App {
   id: string; name: string; description: string; description_en: string
   url: string; bsIcon: string; tags: string[]
 }
+interface Testimoni {
+  id: string; user: string; initial: string; color: string
+  bisnis: string; kota: string; app: string; bintang: number; kutipan: string
+}
 interface ForumThread {
   id: string; user: string; initial: string; color: string
   waktu: string; judul: string; kategori: 'tips' | 'pertanyaan' | 'update' | 'diskusi'
@@ -59,6 +63,30 @@ const apps: App[] = [
   { id: 'zbarber', name: 'ZBarber', description: 'Manajemen barbershop: appointment, jadwal barber, layanan, dan laporan.', description_en: 'Barbershop management: appointments, barber schedules, services, and reports.', url: 'https://zbarber.zomet.my.id/', bsIcon: 'bi-scissors', tags: ['Beauty', 'Service'] },
   { id: 'ztrader', name: 'ZTrader', description: 'Simulator battle 10 AI trading di pasar saham IDX LQ45 & Global secara real-time.', description_en: 'Real-time battle simulator for 10 AI traders on IDX LQ45 & Global stock markets.', url: 'https://ztrader.zomet.my.id/', bsIcon: 'bi-graph-up-arrow', tags: ['AI', 'Trading'] },
   { id: 'zone', name: 'ZOne', description: 'Hub terpusat untuk manajemen user dan app di ekosistem Zomet.', description_en: 'Centralized hub for user and app management across Zomet ecosystem.', url: 'https://zone.zomet.my.id/', bsIcon: 'bi-globe2', tags: ['Hub', 'Admin'] },
+]
+
+// ── 20 testimoni — dibagi 2 baris marquee, masing-masing diacak ──────────────
+const allTestimoni: Testimoni[] = [
+  { id: 'tm1',  user: 'Ahmad Rizki',        initial: 'AR', color: 'bg-blue-600',   bisnis: 'Toko Berkah',           kota: 'Surabaya',  app: 'ZPos',      bintang: 5, kutipan: 'ZPos bikin laporan harian cuma 10 menit. Dulu 2 jam manual pakai buku catatan!' },
+  { id: 'tm2',  user: 'Dewi Rahayu',        initial: 'DR', color: 'bg-violet-600', bisnis: 'Bengkel Maju Jaya',     kota: 'Bandung',   app: 'ZBengkel',  bintang: 5, kutipan: 'Work order ZBengkel bikin mekanik saya terorganisir. Tidak ada lagi orderan yang terlewat.' },
+  { id: 'tm3',  user: 'Siti Nurhaliza',     initial: 'SN', color: 'bg-pink-600',   bisnis: 'FitZone Gym',           kota: 'Jakarta',   app: 'ZGym',      bintang: 5, kutipan: 'Member naik 40% setelah pakai ZGym. Booking kelas online bikin member makin betah.' },
+  { id: 'tm4',  user: 'Budi Santoso',       initial: 'BS', color: 'bg-green-600',  bisnis: 'Laundry Express',       kota: 'Yogyakarta',app: 'ZLaundry', bintang: 5, kutipan: 'Mode offline ZLaundry penyelamat! Mati internet, bisnis tetap jalan tanpa gangguan.' },
+  { id: 'tm5',  user: 'Hendra Kurniawan',   initial: 'HK', color: 'bg-orange-600', bisnis: 'Warung Bahagia',        kota: 'Malang',    app: 'Z-Resto',   bintang: 5, kutipan: 'Kitchen Display ZResto bikin dapur sat-set. Order tidak pernah ketukar antar meja lagi.' },
+  { id: 'tm6',  user: 'Rina Wahyuni',       initial: 'RW', color: 'bg-amber-600',  bisnis: 'Toko Mulia Emas',       kota: 'Semarang',  app: 'ZGold',     bintang: 5, kutipan: 'Laporan stok emas harian di ZGold akurat banget. Tidak ada selisih lagi di akhir bulan.' },
+  { id: 'tm7',  user: 'Fajar Nugroho',      initial: 'FN', color: 'bg-teal-600',   bisnis: 'Bengkel Jaya Motor',    kota: 'Medan',     app: 'ZBengkel',  bintang: 5, kutipan: 'Estimasi selesai otomatis ZBengkel bikin pelanggan tidak kabur nunggu. Omzet naik 25%.' },
+  { id: 'tm8',  user: 'Mega Lestari',       initial: 'ML', color: 'bg-pink-600',   bisnis: 'Bu Mega Laundry',       kota: 'Bali',      app: 'ZLaundry', bintang: 5, kutipan: 'Notifikasi WA ZLaundry bikin pelanggan senang. Tidak ada lagi yang nanya sudah selesai belum.' },
+  { id: 'tm9',  user: 'Yanto Pratama',      initial: 'YP', color: 'bg-cyan-600',   bisnis: 'Barber Boss',           kota: 'Surabaya',  app: 'ZBarber',   bintang: 5, kutipan: 'Appointment online ZBarber habis dipesan dalam 2 jam. Antrian jadi terkontrol rapi.' },
+  { id: 'tm10', user: 'Lilis Handayani',    initial: 'LH', color: 'bg-red-600',    bisnis: 'Klinik Sehat Mandiri',  kota: 'Jakarta',   app: 'Z-Medics',  bintang: 5, kutipan: 'Rekam medis digital ZMedics sangat membantu. Riwayat pasien muncul dalam hitungan detik.' },
+  { id: 'tm11', user: 'Rudi Hermawan',      initial: 'RH', color: 'bg-indigo-600', bisnis: 'Tour Indah Nusantara',  kota: 'Lombok',    app: 'ZWisata',   bintang: 5, kutipan: 'Laporan revenue per paket ZWisata bikin saya tahu persis paket mana yang paling laku.' },
+  { id: 'tm12', user: 'Anita Dewi',         initial: 'AD', color: 'bg-purple-600', bisnis: 'Copy Center Prima',     kota: 'Bekasi',    app: 'ZPrint',    bintang: 5, kutipan: 'Harga per m² di ZPrint otomatis terhitung. Tidak ada lagi salah hitung spanduk meter-meteran.' },
+  { id: 'tm13', user: 'Surya Bakti',        initial: 'SB', color: 'bg-blue-600',   bisnis: 'Coffeeshop Asik',       kota: 'Makassar',  app: 'ZPos',      bintang: 5, kutipan: 'ZPos simpel tapi powerful. Staf baru langsung bisa pakai tanpa training panjang.' },
+  { id: 'tm14', user: 'Eko Prasetyo',       initial: 'EP', color: 'bg-green-600',  bisnis: 'Biliar Galaxy',         kota: 'Jakarta',   app: 'ZBilliar',  bintang: 5, kutipan: 'Timer ZBilliar per meja akurat banget. Tidak ada lagi dispute tagihan dengan pelanggan.' },
+  { id: 'tm15', user: 'Ratna Sari',         initial: 'RS', color: 'bg-violet-600', bisnis: 'GoldKu Jewelry',        kota: 'Bandung',   app: 'ZGold',     bintang: 5, kutipan: 'Multi-logam ZGold bikin toko emas saya bisa jual berbagai jenis perhiasan dalam satu sistem.' },
+  { id: 'tm16', user: 'Hasan Basri',        initial: 'HB', color: 'bg-teal-600',   bisnis: 'Travel Berkah',         kota: 'Padang',    app: 'ZWisata',   bintang: 5, kutipan: 'ZWisata bikin saya kelola 20+ paket tour tanpa spreadsheet. Efisiensi naik drastis.' },
+  { id: 'tm17', user: 'Titi Wahyuningsih',  initial: 'TW', color: 'bg-orange-600', bisnis: 'RM Padang Murah',       kota: 'Palembang', app: 'Z-Resto',   bintang: 5, kutipan: 'Manajemen meja ZResto bikin pelayan tidak bingung. Semua orderan ter-handle dengan baik.' },
+  { id: 'tm18', user: 'Wawan Kurniawan',    initial: 'WK', color: 'bg-red-600',    bisnis: 'Bengkel Sejahtera',     kota: 'Semarang',  app: 'ZBengkel',  bintang: 5, kutipan: 'Laporan servis per mekanik ZBengkel bikin saya bisa ukur kinerja tim dengan adil dan jelas.' },
+  { id: 'tm19', user: 'Sari Indah',         initial: 'SI', color: 'bg-pink-600',   bisnis: 'Meeting Hub Coworking', kota: 'Jakarta',   app: 'Z-Rooms',   bintang: 5, kutipan: 'Booking meeting room online Z-Rooms menghemat waktu admin saya 3 jam per hari kerja.' },
+  { id: 'tm20', user: 'Doni Fernanda',      initial: 'DF', color: 'bg-amber-600',  bisnis: 'Power House Gym',       kota: 'Surabaya',  app: 'ZGym',      bintang: 5, kutipan: 'Fitur absen member otomatis ZGym bikin saya tahu persis siapa yang aktif dan yang churn.' },
 ]
 
 // ── Pool 32 thread — 8 dipilih secara acak setiap kunjungan ──────────────────
@@ -138,6 +166,33 @@ const KATEGORI_CONFIG = {
 
 const WA_LINK = 'https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20bergabung%20komunitas%20Zomet'
 
+function TestimoniCard({ t }: { t: Testimoni }) {
+  return (
+    <div className="inline-flex w-72 shrink-0 flex-col gap-3 rounded-xl border border-gray-800 bg-gray-900/70 p-5 align-top whitespace-normal">
+      <div className="flex items-center justify-between">
+        <div className="flex gap-0.5">
+          {Array.from({ length: t.bintang }).map((_, i) => (
+            <i key={i} className="bi bi-star-fill text-amber-400 text-xs" />
+          ))}
+        </div>
+        <span className="rounded-full bg-gray-800 px-2 py-0.5 text-xs text-gray-400">{t.app}</span>
+      </div>
+      <p className="text-sm text-gray-300 leading-relaxed line-clamp-3">
+        &ldquo;{t.kutipan}&rdquo;
+      </p>
+      <div className="flex items-center gap-2.5 border-t border-gray-800 pt-3 mt-auto">
+        <div className={`shrink-0 h-8 w-8 rounded-full ${t.color} flex items-center justify-center text-xs font-bold text-white`}>
+          {t.initial}
+        </div>
+        <div className="min-w-0">
+          <p className="text-xs font-semibold text-gray-100 truncate">{t.user}</p>
+          <p className="text-xs text-gray-500 truncate">{t.bisnis} &middot; {t.kota}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function HomeClient({ latestArticles }: Props) {
   const [lang, setLang] = useState<'id' | 'en'>('id')
   const [activeTab, setActiveTab] = useState<'semua' | 'tips' | 'pertanyaan' | 'update' | 'diskusi'>('semua')
@@ -145,17 +200,24 @@ export default function HomeClient({ latestArticles }: Props) {
   // Inisialisasi deterministik untuk SSR; useEffect mengacak di client
   const [displayedThreads, setDisplayedThreads] = useState<ForumThread[]>(allForumThreads.slice(0, 8))
   const [tickerItems, setTickerItems] = useState<string[]>([...allActivitasTicker, ...allActivitasTicker])
+  // Dua baris marquee testimoni: row1 → kiri, row2 → kanan
+  const [tRow1, setTRow1] = useState<Testimoni[]>([...allTestimoni.slice(0, 10), ...allTestimoni.slice(0, 10)])
+  const [tRow2, setTRow2] = useState<Testimoni[]>([...allTestimoni.slice(10), ...allTestimoni.slice(10)])
   const forumRef = useRef<HTMLElement>(null)
 
   const countUsers = useCountUp(2400,  1600, countersStarted)
   const countTrx   = useCountUp(128000, 2000, countersStarted)
   const countSatis = useCountUp(985,   1800, countersStarted)
 
-  // Acak konten forum & ticker setiap kunjungan (client-side, setelah hydration)
+  // Acak konten forum, ticker, dan testimoni setiap kunjungan (client-side)
   useEffect(() => {
     setDisplayedThreads(shuffle(allForumThreads).slice(0, 8))
     const s = shuffle(allActivitasTicker)
     setTickerItems([...s, ...s])
+    const r1 = shuffle(allTestimoni.slice(0, 10))
+    const r2 = shuffle(allTestimoni.slice(10))
+    setTRow1([...r1, ...r1])
+    setTRow2([...r2, ...r2])
   }, [])
 
   useEffect(() => {
@@ -245,6 +307,35 @@ export default function HomeClient({ latestArticles }: Props) {
               </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* ── TESTIMONI ── */}
+      <section className="py-20 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 mb-10">
+          <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-2">
+            <i className="bi bi-chat-quote-fill mr-1.5" />Testimoni
+          </p>
+          <h2 className="text-3xl font-bold md:text-4xl">Dipercaya Ribuan Bisnis</h2>
+          <p className="mt-2 text-gray-400">Kata mereka yang sudah merasakan manfaat ekosistem Zomet.</p>
+        </div>
+
+        {/* Baris 1 — scroll kiri */}
+        <div className="mb-4 cursor-default select-none">
+          <div className="flex animate-marquee gap-4 whitespace-nowrap">
+            {tRow1.map((t, i) => (
+              <TestimoniCard key={`r1-${t.id}-${i}`} t={t} />
+            ))}
+          </div>
+        </div>
+
+        {/* Baris 2 — scroll kanan */}
+        <div className="cursor-default select-none">
+          <div className="flex animate-marquee-reverse gap-4 whitespace-nowrap">
+            {tRow2.map((t, i) => (
+              <TestimoniCard key={`r2-${t.id}-${i}`} t={t} />
+            ))}
+          </div>
         </div>
       </section>
 
