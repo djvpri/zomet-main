@@ -1,57 +1,132 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import type { Article } from '@/lib/articles'
 
 interface App {
-  id: string
-  name: string
-  description: string
-  description_en: string
-  url: string
-  bsIcon: string
-  tags: string[]
+  id: string; name: string; description: string; description_en: string
+  url: string; bsIcon: string; tags: string[]
+}
+interface ForumThread {
+  id: string; user: string; initial: string; color: string
+  waktu: string; judul: string; kategori: 'tips' | 'pertanyaan' | 'update' | 'diskusi'
+  balasan: number; views: number; app: string; pinned?: boolean
+}
+interface Props { latestArticles: Article[] }
+
+function useCountUp(target: number, duration: number, started: boolean) {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    if (!started) return
+    let startTime: number | null = null
+    const step = (ts: number) => {
+      if (!startTime) startTime = ts
+      const p = Math.min((ts - startTime) / duration, 1)
+      setCount(Math.floor(p * target))
+      if (p < 1) requestAnimationFrame(step)
+      else setCount(target)
+    }
+    requestAnimationFrame(step)
+  }, [started, target, duration])
+  return count
 }
 
-interface Props {
-  latestArticles: Article[]
+const apps: App[] = [
+  { id: 'zsnap', name: 'ZSnap', description: 'AI Screenshot Solver berbasis Gemini. Menjawab soal dari screenshot secara instan, tersembunyi di layar.', description_en: 'AI Screenshot Solver powered by Gemini. Answers questions from screenshots instantly, hidden on screen.', url: 'https://zsnap.zomet.my.id/', bsIcon: 'bi-robot', tags: ['AI', 'Productivity'] },
+  { id: 'zgold', name: 'ZGold', description: 'Sistem POS untuk toko perhiasan dengan multi-logam (emas, perak, platinum, palladium).', description_en: 'Jewelry Store POS System with multi-metal support (gold, silver, platinum, palladium).', url: 'https://zgold.zomet.my.id/', bsIcon: 'bi-gem', tags: ['POS', 'Jewelry'] },
+  { id: 'zbengkel', name: 'ZBengkel', description: 'SaaS Workshop POS untuk bengkel motor, mobil, dan alat berat.', description_en: 'Workshop POS SaaS for motorcycle, car, and heavy equipment workshops.', url: 'https://zbengkel.zomet.my.id/', bsIcon: 'bi-tools', tags: ['POS', 'Workshop'] },
+  { id: 'zlaundry', name: 'ZLaundry', description: 'POS Laundry dengan fitur offline-first dan PWA untuk kemudahan mobilitas.', description_en: 'Laundry POS with offline-first and PWA features for mobile convenience.', url: 'https://zlaundry.zomet.my.id/', bsIcon: 'bi-droplet', tags: ['POS', 'Laundry'] },
+  { id: 'zresto', name: 'Z-Resto', description: 'POS Restoran dengan manajemen meja, delivery, dan kitchen display system.', description_en: 'Restaurant POS with table management, delivery, and kitchen display system.', url: 'https://zresto.zomet.my.id/', bsIcon: 'bi-cup-hot', tags: ['POS', 'Restaurant'] },
+  { id: 'zbilliar', name: 'ZBilliar', description: 'Sistem manajemen rental biliar dengan timer real-time per meja dan kasir otomatis.', description_en: 'Billiard rental management system with real-time per-table timer and automated cashier.', url: 'https://zbilliar.zomet.my.id/', bsIcon: 'bi-trophy', tags: ['POS', 'Billiard'] },
+  { id: 'zpos', name: 'ZPos', description: 'Aplikasi kasir digital simpel, mobile-friendly untuk warung, kafe, toko, dan UMKM.', description_en: 'Simple digital cashier app, mobile-friendly for shops, cafes, and SMEs.', url: 'https://zpos.zomet.my.id/', bsIcon: 'bi-cart3', tags: ['POS', 'Commerce'] },
+  { id: 'zface', name: 'ZFace', description: 'Sistem identifikasi wajah berbasis AI dengan real-time accuracy untuk kontrol akses.', description_en: 'AI-powered face identification system with real-time accuracy for access control.', url: 'https://zface.zomet.my.id/', bsIcon: 'bi-person-badge', tags: ['AI', 'Security'] },
+  { id: 'zabsen', name: 'Z-Absen', description: 'Sistem absensi dengan face recognition dan validasi GPS geofencing.', description_en: 'Attendance system with face recognition and GPS geofencing validation.', url: 'https://zabsen.zomet.my.id/', bsIcon: 'bi-clipboard-check', tags: ['HR', 'Attendance'] },
+  { id: 'zgym', name: 'ZGym', description: 'Manajemen membership gym dengan fitur kelas, jadwal, dan laporan keuangan.', description_en: 'Gym membership management with classes, schedules, and financial reports.', url: 'https://zgym.zomet.my.id/', bsIcon: 'bi-heart-pulse', tags: ['Fitness', 'SaaS'] },
+  { id: 'zrooms', name: 'Z-Rooms', description: 'Booking ruangan untuk meeting room dan co-working space.', description_en: 'Room booking for meeting rooms and co-working spaces.', url: 'https://z-rooms.zomet.my.id/', bsIcon: 'bi-house-door', tags: ['Booking', 'Workspace'] },
+  { id: 'zmedics', name: 'Z-Medics', description: 'Platform kesehatan dengan rekam medis digital dan konsultasi.', description_en: 'Healthcare platform with digital medical records and consultations.', url: 'https://zmedics.zomet.my.id/', bsIcon: 'bi-hospital', tags: ['Health', 'SaaS'] },
+  { id: 'zwisata', name: 'ZWisata', description: 'Manajemen paket wisata & tour dengan laporan pendapatan dan booking online.', description_en: 'Tour & travel package management with revenue reports and online booking.', url: 'https://zwisata.zomet.my.id/', bsIcon: 'bi-compass', tags: ['Wisata', 'Booking'] },
+  { id: 'zprint', name: 'ZPrint', description: 'POS percetakan dengan harga fleksibel per pcs, per meter, maupun per m².', description_en: 'Printing shop POS with flexible pricing per piece, per meter, or per m².', url: 'https://zprint.zomet.my.id/', bsIcon: 'bi-printer', tags: ['POS', 'Printing'] },
+  { id: 'zbarber', name: 'ZBarber', description: 'Manajemen barbershop: appointment, jadwal barber, layanan, dan laporan.', description_en: 'Barbershop management: appointments, barber schedules, services, and reports.', url: 'https://zbarber.zomet.my.id/', bsIcon: 'bi-scissors', tags: ['Beauty', 'Service'] },
+  { id: 'ztrader', name: 'ZTrader', description: 'Simulator battle 10 AI trading di pasar saham IDX LQ45 & Global secara real-time.', description_en: 'Real-time battle simulator for 10 AI traders on IDX LQ45 & Global stock markets.', url: 'https://ztrader.zomet.my.id/', bsIcon: 'bi-graph-up-arrow', tags: ['AI', 'Trading'] },
+  { id: 'zone', name: 'ZOne', description: 'Hub terpusat untuk manajemen user dan app di ekosistem Zomet.', description_en: 'Centralized hub for user and app management across Zomet ecosystem.', url: 'https://zone.zomet.my.id/', bsIcon: 'bi-globe2', tags: ['Hub', 'Admin'] },
+]
+
+const forumThreads: ForumThread[] = [
+  { id: '1', user: 'Ahmad Rizki', initial: 'AR', color: 'bg-blue-600', waktu: '2 jam lalu', judul: 'Tips setting laporan harian ZPos supaya kasir lebih efisien dan cepat', kategori: 'tips', balasan: 24, views: 312, app: 'ZPos', pinned: true },
+  { id: '2', user: 'Tim Zomet', initial: 'Z', color: 'bg-indigo-500', waktu: '5 jam lalu', judul: '🚀 Update ZResto v2.3 — Kitchen Display System kini support multi-layar & dark mode!', kategori: 'update', balasan: 41, views: 589, app: 'ZResto', pinned: true },
+  { id: '3', user: 'Sari Dewi', initial: 'SD', color: 'bg-purple-600', waktu: '8 jam lalu', judul: 'ZGym bisa export data member ke Excel atau PDF ya? Butuh buat laporan akhir bulan', kategori: 'pertanyaan', balasan: 8, views: 97, app: 'ZGym' },
+  { id: '4', user: 'Budi Santoso', initial: 'BS', color: 'bg-green-600', waktu: '1 hari lalu', judul: 'Cerita sukses: 3 bulan pakai ZBengkel, omzet naik 30% karena laporan makin rapi', kategori: 'diskusi', balasan: 19, views: 445, app: 'ZBengkel' },
+  { id: '5', user: 'Tim Zomet', initial: 'Z', color: 'bg-indigo-500', waktu: '1 hari lalu', judul: '🔔 ZOne SSO update: login QR & Face ID kini aktif di semua app ekosistem Zomet', kategori: 'update', balasan: 35, views: 701, app: 'ZOne' },
+  { id: '6', user: 'Rina Kusuma', initial: 'RK', color: 'bg-orange-600', waktu: '2 hari lalu', judul: 'Z-Absen GPS sering tidak akurat di dalam gedung 3 lantai, ada yang pernah ngalami?', kategori: 'pertanyaan', balasan: 13, views: 178, app: 'Z-Absen' },
+  { id: '7', user: 'Hendra W.', initial: 'HW', color: 'bg-teal-600', waktu: '3 hari lalu', judul: 'Step-by-step setup ZWisata untuk paket wisata custom per-customer dengan harga beda', kategori: 'tips', balasan: 17, views: 263, app: 'ZWisata' },
+  { id: '8', user: 'Mega Lestari', initial: 'ML', color: 'bg-pink-600', waktu: '4 hari lalu', judul: 'ZLaundry mode offline ngebantu banget waktu internet mati seharian, rekomen buat semua!', kategori: 'diskusi', balasan: 22, views: 334, app: 'ZLaundry' },
+]
+
+const aktivitasTicker = [
+  '🛒 Ahmad R. dari Surabaya baru bergabung di ZPos',
+  '💰 Warung Pak Seno memproses 28 transaksi hari ini',
+  '💪 ZGym FitZone mendaftarkan 5 member baru',
+  '🍽️ Rina K. upgrade Z-Resto ke paket Pro',
+  '🔧 Tim ZBengkel Maju berhasil ekspor laporan bulanan',
+  '🔐 ZOne: 12 pengguna login via Face ID pagi ini',
+  '📈 ZTrader: AI Gemini unggul di sesi trading tadi',
+  '👕 ZLaundry Bu Sari melayani 47 kg cucian hari ini',
+  '✅ Z-Absen: 98% karyawan hadir tepat waktu minggu ini',
+  '✂️ ZBarber Keren memproses 15 appointment hari Sabtu',
+  '🖨️ ZPrint Jaya mencetak 200 pcs kartu nama hari ini',
+  '🧳 ZWisata Indah menjual 3 paket tour ke Bali',
+  '💍 ZGold Toko Mulia transaksi perhiasan Rp 45 juta',
+  '🏢 ZRooms: Meeting room A full booking sampai Jumat',
+]
+
+const KATEGORI_CONFIG = {
+  tips:       { label: 'Tips & Trik', icon: 'bi-lightbulb', cls: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25' },
+  pertanyaan: { label: 'Pertanyaan',  icon: 'bi-question-circle', cls: 'bg-amber-500/15 text-amber-400 border-amber-500/25' },
+  update:     { label: 'Update',      icon: 'bi-megaphone', cls: 'bg-blue-500/15 text-blue-400 border-blue-500/25' },
+  diskusi:    { label: 'Diskusi',     icon: 'bi-chat-dots', cls: 'bg-violet-500/15 text-violet-400 border-violet-500/25' },
 }
+
+const WA_LINK = 'https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20bergabung%20komunitas%20Zomet'
 
 export default function HomeClient({ latestArticles }: Props) {
   const [lang, setLang] = useState<'id' | 'en'>('id')
+  const [activeTab, setActiveTab] = useState<'semua' | 'tips' | 'pertanyaan' | 'update' | 'diskusi'>('semua')
+  const [countersStarted, setCountersStarted] = useState(false)
+  const forumRef = useRef<HTMLElement>(null)
 
-  const apps: App[] = [
-    { id: 'zsnap', name: 'ZSnap', description: 'AI Screenshot Solver berbasis Gemini. Menjawab soal dari screenshot secara instan, tersembunyi di layar.', description_en: 'AI Screenshot Solver powered by Gemini. Answers questions from screenshots instantly, hidden on screen.', url: 'https://zsnap.zomet.my.id/', bsIcon: 'bi-robot', tags: ['AI', 'Productivity'] },
-    { id: 'zgold', name: 'ZGold', description: 'Sistem POS untuk toko perhiasan dengan multi-logam (emas, perak, platinum, palladium).', description_en: 'Jewelry Store POS System with multi-metal support (gold, silver, platinum, palladium).', url: 'https://zgold.zomet.my.id/', bsIcon: 'bi-gem', tags: ['POS', 'Jewelry'] },
-    { id: 'zbengkel', name: 'ZBengkel', description: 'SaaS Workshop POS untuk bengkel motor, mobil, dan alat berat.', description_en: 'Workshop POS SaaS for motorcycle, car, and heavy equipment workshops.', url: 'https://zbengkel.zomet.my.id/', bsIcon: 'bi-tools', tags: ['POS', 'Workshop'] },
-    { id: 'zlaundry', name: 'ZLaundry', description: 'POS Laundry dengan fitur offline-first dan PWA untuk kemudahan mobilitas.', description_en: 'Laundry POS with offline-first and PWA features for mobile convenience.', url: 'https://zlaundry.zomet.my.id/', bsIcon: 'bi-droplet', tags: ['POS', 'Laundry'] },
-    { id: 'zresto', name: 'Z-Resto', description: 'POS Restoran dengan manajemen meja, delivery, dan kitchen display system.', description_en: 'Restaurant POS with table management, delivery, and kitchen display system.', url: 'https://zresto.zomet.my.id/', bsIcon: 'bi-cup-hot', tags: ['POS', 'Restaurant'] },
-    { id: 'zbilliar', name: 'ZBilliar', description: 'Sistem manajemen rental biliar dengan timer real-time per meja dan kasir otomatis.', description_en: 'Billiard rental management system with real-time per-table timer and automated cashier.', url: 'https://zbilliar.zomet.my.id/', bsIcon: 'bi-trophy', tags: ['POS', 'Billiard'] },
-    { id: 'zpos', name: 'ZPos', description: 'Aplikasi kasir digital simpel, mobile-friendly untuk warung, kafe, toko, dan UMKM.', description_en: 'Simple digital cashier app, mobile-friendly for shops, cafes, and SMEs.', url: 'https://zpos.zomet.my.id/', bsIcon: 'bi-cart3', tags: ['POS', 'Commerce'] },
-    { id: 'zface', name: 'ZFace', description: 'Sistem identifikasi wajah berbasis AI dengan real-time accuracy untuk kontrol akses.', description_en: 'AI-powered face identification system with real-time accuracy for access control.', url: 'https://zface.zomet.my.id/', bsIcon: 'bi-person-badge', tags: ['AI', 'Security'] },
-    { id: 'zabsen', name: 'Z-Absen', description: 'Sistem absensi dengan face recognition dan validasi GPS geofencing.', description_en: 'Attendance system with face recognition and GPS geofencing validation.', url: 'https://zabsen.zomet.my.id/', bsIcon: 'bi-clipboard-check', tags: ['HR', 'Attendance'] },
-    { id: 'zgym', name: 'ZGym', description: 'Manajemen membership gym dengan fitur kelas, jadwal, dan laporan keuangan.', description_en: 'Gym membership management with classes, schedules, and financial reports.', url: 'https://zgym.zomet.my.id/', bsIcon: 'bi-heart-pulse', tags: ['Fitness', 'SaaS'] },
-    { id: 'zrooms', name: 'Z-Rooms', description: 'Booking ruangan untuk meeting room dan co-working space.', description_en: 'Room booking for meeting rooms and co-working spaces.', url: 'https://z-rooms.zomet.my.id/', bsIcon: 'bi-house-door', tags: ['Booking', 'Workspace'] },
-    { id: 'zmedics', name: 'Z-Medics', description: 'Platform kesehatan dengan rekam medis digital dan konsultasi.', description_en: 'Healthcare platform with digital medical records and consultations.', url: 'https://zmedics.zomet.my.id/', bsIcon: 'bi-hospital', tags: ['Health', 'SaaS'] },
-    { id: 'zwisata', name: 'ZWisata', description: 'Manajemen paket wisata & tour dengan laporan pendapatan dan booking online.', description_en: 'Tour & travel package management with revenue reports and online booking.', url: 'https://zwisata.zomet.my.id/', bsIcon: 'bi-compass', tags: ['Wisata', 'Booking'] },
-    { id: 'zprint', name: 'ZPrint', description: 'POS percetakan dengan harga fleksibel per pcs, per meter, maupun per m².', description_en: 'Printing shop POS with flexible pricing per piece, per meter, or per m².', url: 'https://zprint.zomet.my.id/', bsIcon: 'bi-printer', tags: ['POS', 'Printing'] },
-    { id: 'zbarber', name: 'ZBarber', description: 'Manajemen barbershop: appointment, jadwal barber, layanan, dan laporan.', description_en: 'Barbershop management: appointments, barber schedules, services, and reports.', url: 'https://zbarber.zomet.my.id/', bsIcon: 'bi-scissors', tags: ['Beauty', 'Service'] },
-    { id: 'ztrader', name: 'ZTrader', description: 'Simulator battle 10 AI trading di pasar saham IDX LQ45 & Global secara real-time.', description_en: 'Real-time battle simulator for 10 AI traders on IDX LQ45 & Global stock markets.', url: 'https://ztrader.zomet.my.id/', bsIcon: 'bi-graph-up-arrow', tags: ['AI', 'Trading'] },
-    { id: 'zone', name: 'ZOne', description: 'Hub terpusat untuk manajemen user dan app di ekosistem Zomet.', description_en: 'Centralized hub for user and app management across Zomet ecosystem.', url: 'https://zone.zomet.my.id/', bsIcon: 'bi-globe2', tags: ['Hub', 'Admin'] },
-  ]
+  const countUsers = useCountUp(2400,  1600, countersStarted)
+  const countTrx   = useCountUp(128000, 2000, countersStarted)
+  const countSatis = useCountUp(985,   1800, countersStarted)
 
-  const title = lang === 'id' ? 'Ekosistem Aplikasi Zomet' : 'Zomet App Ecosystem'
+  useEffect(() => {
+    const el = forumRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setCountersStarted(true); obs.disconnect() }
+    }, { threshold: 0.15 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  const filteredThreads = activeTab === 'semua'
+    ? forumThreads
+    : forumThreads.filter(t => t.kategori === activeTab)
+
+  const title    = lang === 'id' ? 'Ekosistem Aplikasi Zomet' : 'Zomet App Ecosystem'
   const subtitle = lang === 'id' ? 'Platform lengkap untuk kebutuhan bisnis digital Anda' : 'Complete platform for your digital business needs'
-  const ctaText = lang === 'id' ? 'Jelajahi Aplikasi' : 'Explore Apps'
+  const ctaText  = lang === 'id' ? 'Jelajahi Aplikasi' : 'Explore Apps'
 
   function formatDate(dateStr: string) {
     if (!dateStr) return ''
     return new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
   }
 
+  const tickerItems = [...aktivitasTicker, ...aktivitasTicker]
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white">
+
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -59,9 +134,12 @@ export default function HomeClient({ latestArticles }: Props) {
             <i className="bi bi-grid-3x3-gap-fill text-blue-400" /> Zomet
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/artikel" className="text-sm text-gray-300 hover:text-white hidden sm:block">
+            <Link href="/artikel" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
               Artikel
             </Link>
+            <a href="#forum" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
+              Forum
+            </a>
             <button
               onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
               className="rounded-lg bg-gray-800 px-4 py-2 text-sm hover:bg-gray-700 transition-colors"
@@ -113,61 +191,198 @@ export default function HomeClient({ latestArticles }: Props) {
         </div>
       </section>
 
+      {/* ── FORUM & KOMUNITAS ── */}
+      <section id="forum" ref={forumRef} className="mx-auto max-w-7xl px-6 py-20">
+
+        {/* Section header */}
+        <div className="mb-12 flex items-end justify-between gap-4 flex-wrap">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-2">
+              <i className="bi bi-people-fill mr-1.5" />
+              Komunitas
+            </p>
+            <h2 className="text-3xl font-bold md:text-4xl">Forum & Diskusi</h2>
+            <p className="mt-2 text-gray-400">Bergabung dengan ribuan pengguna Zomet — berbagi tips, tanya jawab, dan update terbaru.</p>
+          </div>
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-500 transition-colors"
+          >
+            <i className="bi bi-plus-circle" /> Gabung Komunitas
+          </a>
+        </div>
+
+        {/* Stats counters */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          {[
+            { icon: 'bi-people', value: countUsers.toLocaleString('id-ID') + '+', label: 'Pengguna Aktif', color: 'text-blue-400' },
+            { icon: 'bi-grid-3x3-gap', value: String(apps.length), label: 'Aplikasi Zomet', color: 'text-purple-400' },
+            { icon: 'bi-lightning-charge', value: countTrx.toLocaleString('id-ID') + '+', label: 'Transaksi/Bulan', color: 'text-emerald-400' },
+            { icon: 'bi-star', value: (countSatis / 10).toFixed(1) + '%', label: 'Tingkat Kepuasan', color: 'text-amber-400' },
+          ].map((s) => (
+            <div key={s.label} className="rounded-xl border border-gray-800 bg-gray-900/60 p-5 text-center">
+              <i className={`bi ${s.icon} text-2xl ${s.color} mb-2 block`} />
+              <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
+              <p className="text-xs text-gray-400 mt-1">{s.label}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Activity ticker */}
+        <div className="mb-10 overflow-hidden rounded-xl border border-gray-800 bg-gray-900/40">
+          <div className="flex items-center gap-3 border-b border-gray-800 px-4 py-2">
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-green-400">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+              </span>
+              Live Aktivitas
+            </span>
+            <span className="text-xs text-gray-500">Pembaruan real-time dari seluruh ekosistem Zomet</span>
+          </div>
+          <div className="py-3 cursor-default select-none">
+            <div className="flex animate-marquee whitespace-nowrap gap-8">
+              {tickerItems.map((item, i) => (
+                <span key={i} className="inline-flex items-center gap-2 text-sm text-gray-300 shrink-0">
+                  {item}
+                  <span className="text-gray-700">•</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Tab filter */}
+        <div className="mb-6 flex gap-2 flex-wrap">
+          {([
+            ['semua', 'bi-grid', 'Semua'],
+            ['tips', 'bi-lightbulb', 'Tips & Trik'],
+            ['pertanyaan', 'bi-question-circle', 'Pertanyaan'],
+            ['update', 'bi-megaphone', 'Update'],
+            ['diskusi', 'bi-chat-dots', 'Diskusi'],
+          ] as const).map(([val, icon, label]) => (
+            <button
+              key={val}
+              onClick={() => setActiveTab(val)}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all border ${
+                activeTab === val
+                  ? 'bg-blue-600 border-blue-500 text-white'
+                  : 'bg-gray-900 border-gray-700 text-gray-400 hover:border-gray-500 hover:text-white'
+              }`}
+            >
+              <i className={`bi ${icon} text-xs`} /> {label}
+            </button>
+          ))}
+        </div>
+
+        {/* Thread cards */}
+        <div className="grid gap-3 md:grid-cols-2">
+          {filteredThreads.map((thread) => {
+            const kat = KATEGORI_CONFIG[thread.kategori]
+            return (
+              <a
+                key={thread.id}
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-xl border border-gray-800 bg-gray-900/50 p-5 transition-all hover:border-gray-600 hover:bg-gray-900 cursor-pointer"
+              >
+                <div className="flex items-start gap-3">
+                  {/* Avatar */}
+                  <div className={`shrink-0 h-9 w-9 rounded-full ${thread.color} flex items-center justify-center text-xs font-bold text-white`}>
+                    {thread.initial}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    {/* Meta */}
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      {thread.pinned && (
+                        <span className="inline-flex items-center gap-1 text-xs text-amber-400">
+                          <i className="bi bi-pin-angle-fill" /> Disematkan
+                        </span>
+                      )}
+                      <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs ${kat.cls}`}>
+                        <i className={`bi ${kat.icon}`} /> {kat.label}
+                      </span>
+                      <span className="rounded-full bg-gray-800 px-2 py-0.5 text-xs text-gray-400">{thread.app}</span>
+                    </div>
+                    {/* Title */}
+                    <p className="text-sm font-medium leading-snug text-gray-100 group-hover:text-white line-clamp-2 mb-3">
+                      {thread.judul}
+                    </p>
+                    {/* Footer */}
+                    <div className="flex items-center gap-4 text-xs text-gray-500">
+                      <span className="flex items-center gap-1">
+                        <i className="bi bi-person" /> {thread.user}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <i className="bi bi-chat" /> {thread.balasan} balasan
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <i className="bi bi-eye" /> {thread.views.toLocaleString('id-ID')}
+                      </span>
+                      <span className="ml-auto">{thread.waktu}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            )
+          })}
+        </div>
+
+        {/* CTA gabung */}
+        <div className="mt-10 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-8 text-center">
+          <i className="bi bi-chat-heart text-4xl text-blue-400 mb-4 block" />
+          <h3 className="text-xl font-bold mb-2">Bergabung & Mulai Berdiskusi</h3>
+          <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto">
+            Tanyakan pertanyaanmu, bagikan pengalaman pakai aplikasi Zomet, dan dapatkan tips dari sesama pengguna.
+          </p>
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500 transition-colors"
+          >
+            <i className="bi bi-whatsapp" /> Bergabung via WhatsApp
+          </a>
+        </div>
+
+      </section>
+
       {/* Artikel Terbaru */}
       {latestArticles.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 py-20">
-          {/* Divider */}
           <div className="mb-12 flex items-end justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-2">
-                <i className="bi bi-journal-text mr-1.5" />
-                Blog
+                <i className="bi bi-journal-text mr-1.5" />Blog
               </p>
               <h2 className="text-3xl font-bold md:text-4xl">Artikel Terbaru</h2>
               <p className="mt-2 text-gray-400">Tips dan panduan digitalisasi bisnis untuk UMKM Indonesia.</p>
             </div>
-            <Link
-              href="/artikel"
-              className="shrink-0 inline-flex items-center gap-2 rounded-lg border border-gray-700 px-4 py-2 text-sm text-gray-300 hover:border-gray-500 hover:text-white transition-all"
-            >
+            <Link href="/artikel" className="shrink-0 inline-flex items-center gap-2 rounded-lg border border-gray-700 px-4 py-2 text-sm text-gray-300 hover:border-gray-500 hover:text-white transition-all">
               Lihat Semua <i className="bi bi-arrow-right" />
             </Link>
           </div>
-
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {latestArticles.map((article) => (
               <Link key={article.slug} href={`/artikel/${article.slug}`} className="group block cursor-pointer">
                 <article className="relative h-full overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 p-6 transition-all hover:border-gray-600 hover:bg-gray-900">
-                  {/* Glow on hover */}
                   <div className="absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100 pointer-events-none">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/8 to-indigo-500/8" />
                   </div>
-
                   <div className="relative z-10 flex h-full flex-col">
-                    {/* Tags */}
                     <div className="flex flex-wrap gap-1.5 mb-4">
                       {article.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="rounded-full bg-blue-500/10 border border-blue-500/20 px-2.5 py-0.5 text-xs text-blue-300">
-                          {tag}
-                        </span>
+                        <span key={tag} className="rounded-full bg-blue-500/10 border border-blue-500/20 px-2.5 py-0.5 text-xs text-blue-300">{tag}</span>
                       ))}
                     </div>
-
-                    {/* Title */}
-                    <h3 className="text-lg font-semibold leading-snug mb-3 line-clamp-2 group-hover:text-blue-300 transition-colors">
-                      {article.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-sm text-gray-400 leading-relaxed line-clamp-3 flex-1">
-                      {article.description}
-                    </p>
-
-                    {/* Footer */}
+                    <h3 className="text-lg font-semibold leading-snug mb-3 line-clamp-2 group-hover:text-blue-300 transition-colors">{article.title}</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed line-clamp-3 flex-1">{article.description}</p>
                     <div className="mt-5 flex items-center justify-between border-t border-gray-800 pt-4">
                       <time className="flex items-center gap-1.5 text-xs text-gray-500">
-                        <i className="bi bi-calendar3" />
-                        {formatDate(article.date)}
+                        <i className="bi bi-calendar3" />{formatDate(article.date)}
                       </time>
                       <span className="inline-flex items-center gap-1 text-xs font-medium text-blue-400 group-hover:text-blue-300 transition-all group-hover:gap-2">
                         Baca <i className="bi bi-arrow-right text-xs transition-transform group-hover:translate-x-0.5" />
