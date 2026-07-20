@@ -167,6 +167,26 @@ const KATEGORI_CONFIG = {
 
 const WA_LINK = 'https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20bergabung%20komunitas%20Zomet'
 
+const announcements = [
+  { icon: 'bi-rocket-takeoff', text: 'ZResto v2.3 — Kitchen Display kini support multi-layar & dark mode!', cta: 'Lihat Update' },
+  { icon: 'bi-shield-lock',    text: 'ZOne SSO: login QR & Face ID kini aktif di semua app ekosistem Zomet', cta: 'Pelajari' },
+  { icon: 'bi-cart3',          text: 'ZPos v1.8 — fitur multi-kasir & shift report tersedia untuk semua plan', cta: 'Coba Sekarang' },
+  { icon: 'bi-people-fill',    text: 'Bergabung komunitas 2.400+ pengguna Zomet — tips & diskusi setiap hari', cta: 'Gabung' },
+]
+
+const kotaData = [
+  { nama: 'Jakarta',    wilayah: 'DKI Jakarta',        bisnis: 342, cx: 148, cy: 120, r: 5   },
+  { nama: 'Surabaya',   wilayah: 'Jawa Timur',         bisnis: 287, cx: 202, cy: 118, r: 5   },
+  { nama: 'Bandung',    wilayah: 'Jawa Barat',         bisnis: 198, cx: 160, cy: 126, r: 4   },
+  { nama: 'Medan',      wilayah: 'Sumatera Utara',     bisnis: 176, cx: 68,  cy: 32,  r: 4   },
+  { nama: 'Makassar',   wilayah: 'Sulawesi Selatan',   bisnis: 154, cx: 274, cy: 112, r: 3.5 },
+  { nama: 'Semarang',   wilayah: 'Jawa Tengah',        bisnis: 143, cx: 180, cy: 119, r: 3.5 },
+  { nama: 'Yogyakarta', wilayah: 'DIY',                bisnis: 128, cx: 184, cy: 124, r: 3   },
+  { nama: 'Malang',     wilayah: 'Jawa Timur',         bisnis: 112, cx: 205, cy: 125, r: 3   },
+  { nama: 'Palembang',  wilayah: 'Sumatera Selatan',   bisnis: 98,  cx: 90,  cy: 90,  r: 3   },
+  { nama: 'Balikpapan', wilayah: 'Kalimantan Timur',   bisnis: 87,  cx: 232, cy: 88,  r: 2.5 },
+]
+
 function TestimoniCard({ t }: { t: Testimoni }) {
   return (
     <div className="inline-flex w-72 shrink-0 flex-col gap-3 rounded-xl border border-gray-800 bg-gray-900/70 p-5 align-top whitespace-normal">
@@ -205,6 +225,9 @@ export default function HomeClient({ latestArticles }: Props) {
   const [tRow1, setTRow1] = useState<Testimoni[]>([...allTestimoni.slice(0, 10), ...allTestimoni.slice(0, 10)])
   const [tRow2, setTRow2] = useState<Testimoni[]>([...allTestimoni.slice(10), ...allTestimoni.slice(10)])
   const [toast, setToast] = useState<{ icon: string; text: string; key: number } | null>(null)
+  const [announcementIdx, setAnnouncementIdx] = useState(0)
+  const [announcementDismissed, setAnnouncementDismissed] = useState(false)
+  const [onlineBiz, setOnlineBiz] = useState(312)
   const forumRef = useRef<HTMLElement>(null)
 
   const countUsers = useCountUp(2400,  1600, countersStarted)
@@ -220,6 +243,22 @@ export default function HomeClient({ latestArticles }: Props) {
     const r2 = shuffle(allTestimoni.slice(10))
     setTRow1([...r1, ...r1])
     setTRow2([...r2, ...r2])
+  }, [])
+
+  // Announcement bar — rotasi setiap 6 detik
+  useEffect(() => {
+    const id = setInterval(() => setAnnouncementIdx(i => (i + 1) % announcements.length), 6000)
+    return () => clearInterval(id)
+  }, [])
+
+  // Hero "bisnis aktif sekarang" — fluktuasi ±1-3 setiap 3-4 detik
+  useEffect(() => {
+    const tick = () => {
+      const delta = Math.floor(Math.random() * 5) - 2   // -2 sampai +2
+      setOnlineBiz(v => Math.max(305, Math.min(322, v + delta)))
+    }
+    const id = setInterval(tick, 3000 + Math.random() * 1500)
+    return () => clearInterval(id)
   }, [])
 
   // Toast notifikasi — muncul setiap 5.5 detik, mulai setelah 2.5 detik
@@ -261,33 +300,95 @@ export default function HomeClient({ latestArticles }: Props) {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white">
 
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2 text-2xl font-bold">
-            <i className="bi bi-grid-3x3-gap-fill text-blue-400" /> Zomet
+      {/* Header + Announcement Bar (sticky bersama) */}
+      <div className="sticky top-0 z-50">
+
+        {/* Announcement Bar */}
+        {!announcementDismissed && (
+          <div className="bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-700 text-white text-xs">
+            <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between gap-3">
+              <div className="flex-1" />
+              <span key={announcementIdx} className="announce-fade inline-flex items-center gap-2 text-center">
+                <i className={`bi ${announcements[announcementIdx].icon} shrink-0`} />
+                <span className="hidden sm:inline">{announcements[announcementIdx].text}</span>
+                <span className="sm:hidden">{announcements[announcementIdx].cta}</span>
+                <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
+                   className="shrink-0 font-semibold underline underline-offset-2 hover:no-underline hidden sm:inline">
+                  {announcements[announcementIdx].cta} →
+                </a>
+              </span>
+              <div className="flex-1 flex justify-end">
+                <button onClick={() => setAnnouncementDismissed(true)}
+                        className="p-1 hover:bg-white/10 rounded transition-colors" aria-label="Tutup">
+                  <i className="bi bi-x text-base" />
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Link href="/artikel" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
-              Artikel
-            </Link>
-            <a href="#forum" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
-              Forum
-            </a>
-            <button
-              onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
-              className="rounded-lg bg-gray-800 px-4 py-2 text-sm hover:bg-gray-700 transition-colors"
-            >
-              {lang === 'id' ? 'EN' : 'ID'}
-            </button>
-          </div>
-        </nav>
-      </header>
+        )}
+
+        {/* Navbar */}
+        <header className="border-b border-gray-800 bg-gray-950/80 backdrop-blur">
+          <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+            <div className="flex items-center gap-2 text-2xl font-bold">
+              <i className="bi bi-grid-3x3-gap-fill text-blue-400" /> Zomet
+            </div>
+            <div className="flex items-center gap-3">
+              <Link href="/artikel" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
+                Artikel
+              </Link>
+              <a href="#forum" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
+                Forum
+              </a>
+              <button
+                onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
+                className="rounded-lg bg-gray-800 px-4 py-2 text-sm hover:bg-gray-700 transition-colors"
+              >
+                {lang === 'id' ? 'EN' : 'ID'}
+              </button>
+            </div>
+          </nav>
+        </header>
+
+      </div>
 
       {/* Hero */}
       <section className="mx-auto max-w-7xl px-6 py-24 text-center">
         <h1 className="text-5xl font-bold tracking-tight md:text-6xl">{title}</h1>
         <p className="mt-6 text-xl text-gray-400">{subtitle}</p>
+
+        {/* Hero Stats */}
+        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16">
+          {[
+            { value: String(apps.length), label: lang === 'id' ? 'Aplikasi Aktif' : 'Active Apps', color: 'text-white' },
+            { value: '2.400+',            label: lang === 'id' ? 'Pengguna'        : 'Users',        color: 'text-white' },
+            { value: '128rb+',            label: lang === 'id' ? 'Transaksi/Bulan' : 'Txn/Month',    color: 'text-white' },
+            { value: '98.5%',             label: lang === 'id' ? 'Kepuasan'        : 'Satisfaction', color: 'text-white' },
+          ].map((s, i) => (
+            <div key={s.label}>
+              {i > 0 && <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-8 w-px bg-gray-700" />}
+              <div className="relative">
+                <p className={`text-4xl font-bold ${s.color}`}>{s.value}</p>
+                <p className="mt-1 text-sm text-gray-400">{s.label}</p>
+              </div>
+            </div>
+          ))}
+
+          {/* Divider visual */}
+          <div className="hidden md:block h-8 w-px bg-gray-700" />
+
+          {/* Live counter */}
+          <div>
+            <div className="flex items-center justify-center gap-2">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+              </span>
+              <p className="text-4xl font-bold text-green-400 tabular-nums">{onlineBiz}</p>
+            </div>
+            <p className="mt-1 text-sm text-gray-400">{lang === 'id' ? 'Bisnis Aktif Sekarang' : 'Businesses Online Now'}</p>
+          </div>
+        </div>
       </section>
 
       {/* Apps Grid */}
@@ -351,6 +452,109 @@ export default function HomeClient({ latestArticles }: Props) {
               <TestimoniCard key={`r2-${t.id}-${i}`} t={t} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── PETA PENGGUNA ── */}
+      <section className="mx-auto max-w-7xl px-6 py-20">
+        <div className="mb-10">
+          <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-2">
+            <i className="bi bi-geo-alt-fill mr-1.5" />Sebaran
+          </p>
+          <h2 className="text-3xl font-bold md:text-4xl">Dipakai di Seluruh Indonesia</h2>
+          <p className="mt-2 text-gray-400">Dari Sabang sampai Merauke, ribuan bisnis mempercayakan operasional mereka ke ekosistem Zomet.</p>
+        </div>
+
+        <div className="grid lg:grid-cols-5 gap-8 items-start">
+
+          {/* SVG Peta */}
+          <div className="lg:col-span-3 rounded-2xl border border-gray-800 bg-gray-900/50 p-4 overflow-hidden">
+            <svg viewBox="0 0 560 165" width="100%" aria-label="Peta sebaran pengguna Zomet di Indonesia">
+              <defs>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="2" result="blur" />
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+
+              {/* ── Pulau-pulau (simplified) ── */}
+              {/* Sumatra */}
+              <path d="M12,32 L38,16 L62,18 L80,26 L96,42 L106,62 L108,84 L98,102 L80,110 L60,106 L40,92 L24,70 L12,50 Z"
+                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              {/* Jawa */}
+              <path d="M120,113 L146,108 L175,106 L203,108 L226,114 L228,127 L202,133 L172,132 L147,127 L120,122 Z"
+                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              {/* Bali */}
+              <path d="M230,113 L242,111 L244,122 L231,125 Z"
+                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              {/* NTB + NTT (Lombok, Sumbawa, Flores, Timor) */}
+              <ellipse cx="252" cy="126" rx="7" ry="4.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              <ellipse cx="270" cy="130" rx="10" ry="4.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              <ellipse cx="290" cy="132" rx="9" ry="4"   fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              <ellipse cx="306" cy="134" rx="7" ry="4"   fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              <ellipse cx="318" cy="135" rx="5" ry="3.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              {/* Kalimantan */}
+              <path d="M132,42 L162,30 L202,28 L236,36 L252,54 L256,80 L250,108 L230,118 L204,116 L178,110 L156,96 L136,72 L130,54 Z"
+                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              {/* Sulawesi */}
+              <path d="M260,52 L278,46 L290,56 L286,74 L296,90 L312,108 L303,120 L290,114 L278,100 L273,112 L261,117 L255,107 L260,92 L250,80 L256,66 Z"
+                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              {/* Maluku (scattered) */}
+              <circle cx="326" cy="70" r="7"   fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              <circle cx="338" cy="90" r="5.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              <circle cx="330" cy="108" r="4"  fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              <circle cx="345" cy="118" r="3.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              {/* Papua */}
+              <path d="M348,46 L386,36 L426,34 L462,42 L492,56 L510,74 L508,94 L494,110 L464,118 L430,116 L396,110 L364,98 L348,76 Z"
+                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              {/* Bird's Head Peninsula */}
+              <path d="M348,46 L355,38 L364,44 L356,56 Z"
+                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+
+              {/* ── City dots ── */}
+              {kotaData.map((kota, i) => (
+                <g key={kota.nama} filter="url(#glow)">
+                  {/* Pulsing ring */}
+                  <circle
+                    cx={kota.cx} cy={kota.cy} r={kota.r * 3}
+                    fill="#22c55e" className="dot-pulse"
+                    style={{ animationDelay: `${i * 0.3}s` }}
+                  />
+                  {/* Solid dot */}
+                  <circle cx={kota.cx} cy={kota.cy} r={kota.r} fill="#22c55e" />
+                </g>
+              ))}
+
+              {/* Labels untuk kota terbesar */}
+              {kotaData.slice(0, 5).map(kota => (
+                <text key={`lbl-${kota.nama}`} x={kota.cx + kota.r + 3} y={kota.cy + 4}
+                      fontSize="7" fill="#94a3b8" fontFamily="sans-serif">
+                  {kota.nama}
+                </text>
+              ))}
+            </svg>
+          </div>
+
+          {/* Kota Rankings */}
+          <div className="lg:col-span-2 space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-4">
+              <i className="bi bi-bar-chart-fill mr-1.5" />Kota Teratas
+            </p>
+            {kotaData.map((kota, i) => (
+              <div key={kota.nama} className="flex items-center gap-3 rounded-xl border border-gray-800 bg-gray-900/50 px-4 py-3">
+                <span className="text-xs font-bold text-gray-600 w-5 shrink-0">#{i + 1}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium truncate">{kota.nama}</p>
+                  <p className="text-xs text-gray-500 truncate">{kota.wilayah}</p>
+                </div>
+                <div className="text-right shrink-0">
+                  <p className="text-sm font-bold text-green-400 tabular-nums">{kota.bisnis}</p>
+                  <p className="text-xs text-gray-500">bisnis</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 

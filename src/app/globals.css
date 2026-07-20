@@ -40,6 +40,24 @@ html {
   animation-play-state: paused;
 }
 
+/* Announcement bar text fade */
+@keyframes announce-fade {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.announce-fade { animation: announce-fade 0.4s ease both; }
+
+/* Peta dot pulse */
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0;   transform: scale(3.5); }
+}
+.dot-pulse {
+  animation: dot-pulse 2.5s ease-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 /* Toast notification */
 @keyframes toast-show {
   0%   { transform: translateY(0.75rem); opacity: 0; }
