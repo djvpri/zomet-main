@@ -204,6 +204,7 @@ export default function HomeClient({ latestArticles }: Props) {
   // Dua baris marquee testimoni: row1 → kiri, row2 → kanan
   const [tRow1, setTRow1] = useState<Testimoni[]>([...allTestimoni.slice(0, 10), ...allTestimoni.slice(0, 10)])
   const [tRow2, setTRow2] = useState<Testimoni[]>([...allTestimoni.slice(10), ...allTestimoni.slice(10)])
+  const [toast, setToast] = useState<{ icon: string; text: string; key: number } | null>(null)
   const forumRef = useRef<HTMLElement>(null)
 
   const countUsers = useCountUp(2400,  1600, countersStarted)
@@ -219,6 +220,19 @@ export default function HomeClient({ latestArticles }: Props) {
     const r2 = shuffle(allTestimoni.slice(10))
     setTRow1([...r1, ...r1])
     setTRow2([...r2, ...r2])
+  }, [])
+
+  // Toast notifikasi — muncul setiap 5.5 detik, mulai setelah 2.5 detik
+  useEffect(() => {
+    let i = Math.floor(Math.random() * allActivitasTicker.length)
+    let timerId: ReturnType<typeof setTimeout>
+    const show = () => {
+      i = (i + 1) % allActivitasTicker.length
+      setToast({ ...allActivitasTicker[i], key: Date.now() })
+      timerId = setTimeout(show, 5500)
+    }
+    timerId = setTimeout(show, 2500)
+    return () => clearTimeout(timerId)
   }, [])
 
   useEffect(() => {
@@ -544,6 +558,25 @@ export default function HomeClient({ latestArticles }: Props) {
           <p>© 2026 PT Zomet Teknologi Indonesia. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* Toast notifikasi live */}
+      {toast && (
+        <div
+          key={toast.key}
+          className="toast-animate fixed bottom-24 left-6 z-50 flex items-center gap-3 rounded-xl border border-gray-700/80 bg-gray-900/95 px-4 py-3 shadow-2xl shadow-black/40 backdrop-blur-sm max-w-xs pointer-events-none"
+        >
+          <div className="shrink-0 h-9 w-9 rounded-full bg-blue-500/15 border border-blue-500/20 flex items-center justify-center">
+            <i className={`bi ${toast.icon} text-blue-400 text-sm`} />
+          </div>
+          <div className="min-w-0">
+            <p className="text-xs font-medium text-gray-100 leading-snug">{toast.text}</p>
+            <p className="text-xs text-gray-500 mt-0.5 flex items-center gap-1">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500" />
+              Baru saja
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Floating WhatsApp */}
       <a
