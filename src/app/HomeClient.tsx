@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import type { Article } from '@/lib/articles'
+import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 
 interface App {
   id: string; name: string; description: string; description_en: string
@@ -175,16 +176,16 @@ const announcements = [
 ]
 
 const kotaData = [
-  { nama: 'Jakarta',    wilayah: 'DKI Jakarta',        bisnis: 342, cx: 148, cy: 120, r: 5   },
-  { nama: 'Surabaya',   wilayah: 'Jawa Timur',         bisnis: 287, cx: 202, cy: 118, r: 5   },
-  { nama: 'Bandung',    wilayah: 'Jawa Barat',         bisnis: 198, cx: 160, cy: 126, r: 4   },
-  { nama: 'Medan',      wilayah: 'Sumatera Utara',     bisnis: 176, cx: 68,  cy: 32,  r: 4   },
-  { nama: 'Makassar',   wilayah: 'Sulawesi Selatan',   bisnis: 154, cx: 274, cy: 112, r: 3.5 },
-  { nama: 'Semarang',   wilayah: 'Jawa Tengah',        bisnis: 143, cx: 180, cy: 119, r: 3.5 },
-  { nama: 'Yogyakarta', wilayah: 'DIY',                bisnis: 128, cx: 184, cy: 124, r: 3   },
-  { nama: 'Malang',     wilayah: 'Jawa Timur',         bisnis: 112, cx: 205, cy: 125, r: 3   },
-  { nama: 'Palembang',  wilayah: 'Sumatera Selatan',   bisnis: 98,  cx: 90,  cy: 90,  r: 3   },
-  { nama: 'Balikpapan', wilayah: 'Kalimantan Timur',   bisnis: 87,  cx: 232, cy: 88,  r: 2.5 },
+  { nama: 'Jakarta',    wilayah: 'DKI Jakarta',        bisnis: 342, lng: 106.83, lat: -6.20, r: 5   },
+  { nama: 'Surabaya',   wilayah: 'Jawa Timur',         bisnis: 287, lng: 112.75, lat: -7.25, r: 5   },
+  { nama: 'Bandung',    wilayah: 'Jawa Barat',         bisnis: 198, lng: 107.62, lat: -6.92, r: 4   },
+  { nama: 'Medan',      wilayah: 'Sumatera Utara',     bisnis: 176, lng: 98.68,  lat:  3.60, r: 4   },
+  { nama: 'Makassar',   wilayah: 'Sulawesi Selatan',   bisnis: 154, lng: 119.42, lat: -5.15, r: 3.5 },
+  { nama: 'Semarang',   wilayah: 'Jawa Tengah',        bisnis: 143, lng: 110.42, lat: -7.00, r: 3.5 },
+  { nama: 'Yogyakarta', wilayah: 'DIY',                bisnis: 128, lng: 110.37, lat: -7.80, r: 3   },
+  { nama: 'Malang',     wilayah: 'Jawa Timur',         bisnis: 112, lng: 112.62, lat: -7.98, r: 3   },
+  { nama: 'Palembang',  wilayah: 'Sumatera Selatan',   bisnis: 98,  lng: 104.75, lat: -2.98, r: 3   },
+  { nama: 'Balikpapan', wilayah: 'Kalimantan Timur',   bisnis: 87,  lng: 116.85, lat: -1.27, r: 2.5 },
 ]
 
 function TestimoniCard({ t }: { t: Testimoni }) {
@@ -467,72 +468,63 @@ export default function HomeClient({ latestArticles }: Props) {
 
         <div className="grid lg:grid-cols-5 gap-8 items-start">
 
-          {/* SVG Peta */}
+          {/* Peta Map (react-simple-maps + world-atlas TopoJSON) */}
           <div className="lg:col-span-3 rounded-2xl border border-gray-800 bg-gray-900/50 p-4 overflow-hidden">
-            <svg viewBox="0 0 560 165" width="100%" aria-label="Peta sebaran pengguna Zomet di Indonesia">
+            <ComposableMap
+              projection="geoMercator"
+              projectionConfig={{ scale: 700, center: [118, -2] }}
+              width={560}
+              height={200}
+              style={{ width: '100%', height: 'auto' }}
+              aria-label="Peta sebaran pengguna Zomet di Indonesia"
+            >
               <defs>
                 <filter id="glow">
                   <feGaussianBlur stdDeviation="2" result="blur" />
-                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
                 </filter>
               </defs>
 
-              {/* ── Pulau-pulau (simplified) ── */}
-              {/* Sumatra */}
-              <path d="M12,32 L38,16 L62,18 L80,26 L96,42 L106,62 L108,84 L98,102 L80,110 L60,106 L40,92 L24,70 L12,50 Z"
-                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              {/* Jawa */}
-              <path d="M120,113 L146,108 L175,106 L203,108 L226,114 L228,127 L202,133 L172,132 L147,127 L120,122 Z"
-                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              {/* Bali */}
-              <path d="M230,113 L242,111 L244,122 L231,125 Z"
-                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              {/* NTB + NTT (Lombok, Sumbawa, Flores, Timor) */}
-              <ellipse cx="252" cy="126" rx="7" ry="4.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              <ellipse cx="270" cy="130" rx="10" ry="4.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              <ellipse cx="290" cy="132" rx="9" ry="4"   fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              <ellipse cx="306" cy="134" rx="7" ry="4"   fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              <ellipse cx="318" cy="135" rx="5" ry="3.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              {/* Kalimantan */}
-              <path d="M132,42 L162,30 L202,28 L236,36 L252,54 L256,80 L250,108 L230,118 L204,116 L178,110 L156,96 L136,72 L130,54 Z"
-                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              {/* Sulawesi */}
-              <path d="M260,52 L278,46 L290,56 L286,74 L296,90 L312,108 L303,120 L290,114 L278,100 L273,112 L261,117 L255,107 L260,92 L250,80 L256,66 Z"
-                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              {/* Maluku (scattered) */}
-              <circle cx="326" cy="70" r="7"   fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              <circle cx="338" cy="90" r="5.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              <circle cx="330" cy="108" r="4"  fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              <circle cx="345" cy="118" r="3.5" fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              {/* Papua */}
-              <path d="M348,46 L386,36 L426,34 L462,42 L492,56 L510,74 L508,94 L494,110 L464,118 L430,116 L396,110 L364,98 L348,76 Z"
-                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
-              {/* Bird's Head Peninsula */}
-              <path d="M348,46 L355,38 L364,44 L356,56 Z"
-                    fill="#1e293b" stroke="#334155" strokeWidth="0.8" />
+              <Geographies geography="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json">
+                {({ geographies }) =>
+                  geographies
+                    .filter(geo => String(geo.id) === '360')
+                    .map(geo => (
+                      <Geography
+                        key={geo.rsmKey}
+                        geography={geo}
+                        fill="#1e293b"
+                        stroke="#334155"
+                        strokeWidth={0.5}
+                        style={{
+                          default: { outline: 'none' },
+                          hover:   { outline: 'none', fill: '#263246' },
+                          pressed: { outline: 'none' },
+                        }}
+                      />
+                    ))
+                }
+              </Geographies>
 
-              {/* ── City dots ── */}
               {kotaData.map((kota, i) => (
-                <g key={kota.nama} filter="url(#glow)">
-                  {/* Pulsing ring */}
-                  <circle
-                    cx={kota.cx} cy={kota.cy} r={kota.r * 3}
-                    fill="#22c55e" className="dot-pulse"
-                    style={{ animationDelay: `${i * 0.3}s` }}
-                  />
-                  {/* Solid dot */}
-                  <circle cx={kota.cx} cy={kota.cy} r={kota.r} fill="#22c55e" />
-                </g>
+                <Marker key={kota.nama} coordinates={[kota.lng, kota.lat]}>
+                  <g filter="url(#glow)">
+                    <circle
+                      r={kota.r * 2.5}
+                      fill="#22c55e"
+                      className="dot-pulse"
+                      style={{ animationDelay: `${i * 0.3}s` }}
+                    />
+                    <circle r={kota.r} fill="#22c55e" />
+                    {i < 5 && (
+                      <text x={kota.r + 3} y={4} fontSize="7" fill="#94a3b8" fontFamily="sans-serif">
+                        {kota.nama}
+                      </text>
+                    )}
+                  </g>
+                </Marker>
               ))}
-
-              {/* Labels untuk kota terbesar */}
-              {kotaData.slice(0, 5).map(kota => (
-                <text key={`lbl-${kota.nama}`} x={kota.cx + kota.r + 3} y={kota.cy + 4}
-                      fontSize="7" fill="#94a3b8" fontFamily="sans-serif">
-                  {kota.nama}
-                </text>
-              ))}
-            </svg>
+            </ComposableMap>
           </div>
 
           {/* Kota Rankings */}
