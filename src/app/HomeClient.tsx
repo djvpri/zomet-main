@@ -14,9 +14,10 @@ interface Testimoni {
 }
 interface ForumThread {
   id: string; user: string; initial: string; color: string
-  waktu: string; judul: string; kategori: 'tips' | 'pertanyaan' | 'update' | 'diskusi'
+  waktu: string; judul: string; icon?: string; kategori: 'tips' | 'pertanyaan' | 'update' | 'diskusi'
   balasan: number; views: number; app: string
 }
+interface TickerItem { icon: string; text: string }
 interface Props { latestArticles: Article[] }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -114,12 +115,12 @@ const allForumThreads: ForumThread[] = [
   { id: 'p9',  user: 'Surya Nugraha', initial: 'SN', color: 'bg-amber-600',  waktu: '2 minggu lalu', judul: 'Z-Rooms bisa integrasi dengan Google Calendar untuk notifikasi booking otomatis?', kategori: 'pertanyaan', balasan: 10, views: 158, app: 'Z-Rooms' },
   { id: 'p10', user: 'Wahyu Purnomo', initial: 'WP', color: 'bg-cyan-600',   waktu: '2 minggu lalu', judul: 'ZBarber bisa terima uang muka atau deposit dari pelanggan sebelum jadwal potong?', kategori: 'pertanyaan', balasan: 8,  views: 103, app: 'ZBarber' },
   // UPDATE (6)
-  { id: 'u1',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '5 jam lalu',    judul: '🚀 ZResto v2.3 — Kitchen Display System kini support multi-layar & dark mode!', kategori: 'update', balasan: 41, views: 589, app: 'Z-Resto' },
-  { id: 'u2',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '1 hari lalu',   judul: '🔔 ZOne SSO: login QR & Face ID kini aktif di semua app ekosistem Zomet', kategori: 'update', balasan: 35, views: 701, app: 'ZOne' },
-  { id: 'u3',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '3 hari lalu',   judul: '🆕 ZPos v1.8 — fitur multi-kasir dan shift report tersedia untuk semua plan!', kategori: 'update', balasan: 28, views: 445, app: 'ZPos' },
-  { id: 'u4',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '5 hari lalu',   judul: '✨ ZGym kini punya fitur kelas group: booking slot, absen member, laporan instruktur', kategori: 'update', balasan: 31, views: 512, app: 'ZGym' },
-  { id: 'u5',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '1 minggu lalu', judul: '🗺️ ZWisata v2.1 — laporan revenue per destinasi dan per paket tour sudah tersedia', kategori: 'update', balasan: 19, views: 378, app: 'ZWisata' },
-  { id: 'u6',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '2 minggu lalu', judul: '🔧 ZBengkel v1.5 — laporan servis per mekanik dan estimasi waktu selesai ditambahkan', kategori: 'update', balasan: 24, views: 423, app: 'ZBengkel' },
+  { id: 'u1',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '5 jam lalu',    judul: 'ZResto v2.3 — Kitchen Display System kini support multi-layar & dark mode!', icon: 'bi-rocket-takeoff', kategori: 'update', balasan: 41, views: 589, app: 'Z-Resto' },
+  { id: 'u2',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '1 hari lalu',   judul: 'ZOne SSO: login QR & Face ID kini aktif di semua app ekosistem Zomet', icon: 'bi-bell-fill', kategori: 'update', balasan: 35, views: 701, app: 'ZOne' },
+  { id: 'u3',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '3 hari lalu',   judul: 'ZPos v1.8 — fitur multi-kasir dan shift report tersedia untuk semua plan!', icon: 'bi-plus-square-fill', kategori: 'update', balasan: 28, views: 445, app: 'ZPos' },
+  { id: 'u4',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '5 hari lalu',   judul: 'ZGym kini punya fitur kelas group: booking slot, absen member, laporan instruktur', icon: 'bi-stars', kategori: 'update', balasan: 31, views: 512, app: 'ZGym' },
+  { id: 'u5',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '1 minggu lalu', judul: 'ZWisata v2.1 — laporan revenue per destinasi dan per paket tour sudah tersedia', icon: 'bi-map-fill', kategori: 'update', balasan: 19, views: 378, app: 'ZWisata' },
+  { id: 'u6',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '2 minggu lalu', judul: 'ZBengkel v1.5 — laporan servis per mekanik dan estimasi waktu selesai ditambahkan', icon: 'bi-wrench-adjustable', kategori: 'update', balasan: 24, views: 423, app: 'ZBengkel' },
   // DISKUSI (6)
   { id: 'd1',  user: 'Budi Santoso',  initial: 'BS', color: 'bg-green-600',  waktu: '1 hari lalu',   judul: 'Cerita sukses: 3 bulan pakai ZBengkel, omzet naik 30% karena laporan makin rapi', kategori: 'diskusi', balasan: 19, views: 445, app: 'ZBengkel' },
   { id: 'd2',  user: 'Mega Lestari',  initial: 'ML', color: 'bg-pink-600',   waktu: '4 hari lalu',   judul: 'ZLaundry mode offline ngebantu banget waktu internet mati seharian — super rekomen!', kategori: 'diskusi', balasan: 22, views: 334, app: 'ZLaundry' },
@@ -130,31 +131,31 @@ const allForumThreads: ForumThread[] = [
 ]
 
 // ── Pool 24 item ticker — diacak tiap kunjungan ───────────────────────────────
-const allActivitasTicker = [
-  '🛒 Ahmad R. dari Surabaya baru bergabung di ZPos',
-  '💰 Warung Pak Seno memproses 28 transaksi hari ini',
-  '💪 ZGym FitZone mendaftarkan 5 member baru pagi ini',
-  '🍽️ Rina K. upgrade Z-Resto ke paket Pro',
-  '🔧 Tim ZBengkel Maju berhasil ekspor laporan bulanan',
-  '🔐 ZOne: 12 pengguna login via Face ID pagi ini',
-  '📈 ZTrader: AI Gemini unggul di sesi trading siang ini',
-  '👕 ZLaundry Bu Sari melayani 47 kg cucian hari ini',
-  '✅ Z-Absen: 98% karyawan hadir tepat waktu minggu ini',
-  '✂️ ZBarber Keren memproses 15 appointment hari Sabtu',
-  '🖨️ ZPrint Jaya mencetak 200 pcs kartu nama hari ini',
-  '🧳 ZWisata Indah menjual 3 paket tour ke Bali hari ini',
-  '💍 ZGold Toko Mulia transaksi perhiasan senilai Rp 45 juta',
-  '🏢 ZRooms: Meeting room A full booking sampai Jumat',
-  '🎯 ZBilliar Asik: meja 3 dipakai non-stop selama 4 jam',
-  '🏥 Z-Medics Klinik Sehat input 12 rekam medis hari ini',
-  '🌟 ZSnap: 340 soal berhasil dijawab AI hari ini',
-  '👁️ ZFace: 89 identifikasi wajah sukses pagi ini',
-  '📊 ZPos Toko Berkah: omzet hari ini tembus Rp 8,7 juta',
-  '🎽 ZGym Power House: 23 member check-in pagi tadi',
-  '🧼 ZLaundry Express: order kilat 15 kg selesai dalam 3 jam',
-  '🍕 Z-Resto Warung Bahagia: 87 orderan meja terlayani',
-  '💎 ZGold Galeri Prima: stok 2 kg emas 24K masuk hari ini',
-  '🚀 ZOne: 7 bisnis baru aktivasi SSO ekosistem Zomet hari ini',
+const allActivitasTicker: TickerItem[] = [
+  { icon: 'bi-cart3',            text: 'Ahmad R. dari Surabaya baru bergabung di ZPos' },
+  { icon: 'bi-cash-coin',        text: 'Warung Pak Seno memproses 28 transaksi hari ini' },
+  { icon: 'bi-heart-pulse',      text: 'ZGym FitZone mendaftarkan 5 member baru pagi ini' },
+  { icon: 'bi-cup-hot',          text: 'Rina K. upgrade Z-Resto ke paket Pro' },
+  { icon: 'bi-tools',            text: 'Tim ZBengkel Maju berhasil ekspor laporan bulanan' },
+  { icon: 'bi-shield-lock',      text: 'ZOne: 12 pengguna login via Face ID pagi ini' },
+  { icon: 'bi-graph-up-arrow',   text: 'ZTrader: AI Gemini unggul di sesi trading siang ini' },
+  { icon: 'bi-droplet',          text: 'ZLaundry Bu Sari melayani 47 kg cucian hari ini' },
+  { icon: 'bi-check-circle-fill',text: 'Z-Absen: 98% karyawan hadir tepat waktu minggu ini' },
+  { icon: 'bi-scissors',         text: 'ZBarber Keren memproses 15 appointment hari Sabtu' },
+  { icon: 'bi-printer',          text: 'ZPrint Jaya mencetak 200 pcs kartu nama hari ini' },
+  { icon: 'bi-compass',          text: 'ZWisata Indah menjual 3 paket tour ke Bali hari ini' },
+  { icon: 'bi-gem',              text: 'ZGold Toko Mulia transaksi perhiasan senilai Rp 45 juta' },
+  { icon: 'bi-building',         text: 'ZRooms: Meeting room A full booking sampai Jumat' },
+  { icon: 'bi-trophy',           text: 'ZBilliar Asik: meja 3 dipakai non-stop selama 4 jam' },
+  { icon: 'bi-hospital',         text: 'Z-Medics Klinik Sehat input 12 rekam medis hari ini' },
+  { icon: 'bi-robot',            text: 'ZSnap: 340 soal berhasil dijawab AI hari ini' },
+  { icon: 'bi-person-badge',     text: 'ZFace: 89 identifikasi wajah sukses pagi ini' },
+  { icon: 'bi-bar-chart-fill',   text: 'ZPos Toko Berkah: omzet hari ini tembus Rp 8,7 juta' },
+  { icon: 'bi-activity',         text: 'ZGym Power House: 23 member check-in pagi tadi' },
+  { icon: 'bi-basket',           text: 'ZLaundry Express: order kilat 15 kg selesai dalam 3 jam' },
+  { icon: 'bi-shop',             text: 'Z-Resto Warung Bahagia: 87 orderan meja terlayani' },
+  { icon: 'bi-gem',              text: 'ZGold Galeri Prima: stok 2 kg emas 24K masuk hari ini' },
+  { icon: 'bi-rocket-takeoff',   text: 'ZOne: 7 bisnis baru aktivasi SSO ekosistem Zomet hari ini' },
 ]
 
 const KATEGORI_CONFIG = {
@@ -199,7 +200,7 @@ export default function HomeClient({ latestArticles }: Props) {
   const [countersStarted, setCountersStarted] = useState(false)
   // Inisialisasi deterministik untuk SSR; useEffect mengacak di client
   const [displayedThreads, setDisplayedThreads] = useState<ForumThread[]>(allForumThreads.slice(0, 8))
-  const [tickerItems, setTickerItems] = useState<string[]>([...allActivitasTicker, ...allActivitasTicker])
+  const [tickerItems, setTickerItems] = useState<TickerItem[]>([...allActivitasTicker, ...allActivitasTicker])
   // Dua baris marquee testimoni: row1 → kiri, row2 → kanan
   const [tRow1, setTRow1] = useState<Testimoni[]>([...allTestimoni.slice(0, 10), ...allTestimoni.slice(0, 10)])
   const [tRow2, setTRow2] = useState<Testimoni[]>([...allTestimoni.slice(10), ...allTestimoni.slice(10)])
@@ -301,7 +302,7 @@ export default function HomeClient({ latestArticles }: Props) {
                   </div>
                   <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-blue-400 group-hover:text-blue-300">
                     {ctaText}
-                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                    <i className="bi bi-arrow-right transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </div>
@@ -393,7 +394,8 @@ export default function HomeClient({ latestArticles }: Props) {
             <div className="flex animate-marquee whitespace-nowrap gap-8">
               {tickerItems.map((item, i) => (
                 <span key={i} className="inline-flex items-center gap-2 text-sm text-gray-300 shrink-0">
-                  {item}
+                  <i className={`bi ${item.icon} text-blue-400 shrink-0`} />
+                  {item.text}
                   <span className="text-gray-700">•</span>
                 </span>
               ))}
@@ -454,6 +456,7 @@ export default function HomeClient({ latestArticles }: Props) {
                         <span className="rounded-full bg-gray-800 px-2 py-0.5 text-xs text-gray-400">{thread.app}</span>
                       </div>
                       <p className="text-sm font-medium leading-snug text-gray-100 group-hover:text-white line-clamp-2 mb-3">
+                        {thread.icon && <i className={`bi ${thread.icon} mr-1.5 text-blue-400`} />}
                         {thread.judul}
                       </p>
                       <div className="flex items-center gap-4 text-xs text-gray-500">
