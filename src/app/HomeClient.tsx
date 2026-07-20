@@ -11,9 +11,18 @@ interface App {
 interface ForumThread {
   id: string; user: string; initial: string; color: string
   waktu: string; judul: string; kategori: 'tips' | 'pertanyaan' | 'update' | 'diskusi'
-  balasan: number; views: number; app: string; pinned?: boolean
+  balasan: number; views: number; app: string
 }
 interface Props { latestArticles: Article[] }
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 function useCountUp(target: number, duration: number, started: boolean) {
   const [count, setCount] = useState(0)
@@ -52,39 +61,79 @@ const apps: App[] = [
   { id: 'zone', name: 'ZOne', description: 'Hub terpusat untuk manajemen user dan app di ekosistem Zomet.', description_en: 'Centralized hub for user and app management across Zomet ecosystem.', url: 'https://zone.zomet.my.id/', bsIcon: 'bi-globe2', tags: ['Hub', 'Admin'] },
 ]
 
-const forumThreads: ForumThread[] = [
-  { id: '1', user: 'Ahmad Rizki', initial: 'AR', color: 'bg-blue-600', waktu: '2 jam lalu', judul: 'Tips setting laporan harian ZPos supaya kasir lebih efisien dan cepat', kategori: 'tips', balasan: 24, views: 312, app: 'ZPos', pinned: true },
-  { id: '2', user: 'Tim Zomet', initial: 'Z', color: 'bg-indigo-500', waktu: '5 jam lalu', judul: '🚀 Update ZResto v2.3 — Kitchen Display System kini support multi-layar & dark mode!', kategori: 'update', balasan: 41, views: 589, app: 'ZResto', pinned: true },
-  { id: '3', user: 'Sari Dewi', initial: 'SD', color: 'bg-purple-600', waktu: '8 jam lalu', judul: 'ZGym bisa export data member ke Excel atau PDF ya? Butuh buat laporan akhir bulan', kategori: 'pertanyaan', balasan: 8, views: 97, app: 'ZGym' },
-  { id: '4', user: 'Budi Santoso', initial: 'BS', color: 'bg-green-600', waktu: '1 hari lalu', judul: 'Cerita sukses: 3 bulan pakai ZBengkel, omzet naik 30% karena laporan makin rapi', kategori: 'diskusi', balasan: 19, views: 445, app: 'ZBengkel' },
-  { id: '5', user: 'Tim Zomet', initial: 'Z', color: 'bg-indigo-500', waktu: '1 hari lalu', judul: '🔔 ZOne SSO update: login QR & Face ID kini aktif di semua app ekosistem Zomet', kategori: 'update', balasan: 35, views: 701, app: 'ZOne' },
-  { id: '6', user: 'Rina Kusuma', initial: 'RK', color: 'bg-orange-600', waktu: '2 hari lalu', judul: 'Z-Absen GPS sering tidak akurat di dalam gedung 3 lantai, ada yang pernah ngalami?', kategori: 'pertanyaan', balasan: 13, views: 178, app: 'Z-Absen' },
-  { id: '7', user: 'Hendra W.', initial: 'HW', color: 'bg-teal-600', waktu: '3 hari lalu', judul: 'Step-by-step setup ZWisata untuk paket wisata custom per-customer dengan harga beda', kategori: 'tips', balasan: 17, views: 263, app: 'ZWisata' },
-  { id: '8', user: 'Mega Lestari', initial: 'ML', color: 'bg-pink-600', waktu: '4 hari lalu', judul: 'ZLaundry mode offline ngebantu banget waktu internet mati seharian, rekomen buat semua!', kategori: 'diskusi', balasan: 22, views: 334, app: 'ZLaundry' },
+// ── Pool 32 thread — 8 dipilih secara acak setiap kunjungan ──────────────────
+const allForumThreads: ForumThread[] = [
+  // TIPS (10)
+  { id: 't1',  user: 'Ahmad Rizki',   initial: 'AR', color: 'bg-blue-600',   waktu: '2 jam lalu',    judul: 'Tips setting laporan harian ZPos supaya kasir lebih efisien dan cepat', kategori: 'tips', balasan: 24, views: 312, app: 'ZPos' },
+  { id: 't2',  user: 'Hendra W.',     initial: 'HW', color: 'bg-teal-600',   waktu: '3 hari lalu',   judul: 'Step-by-step setup ZWisata untuk paket tour custom per-customer dengan harga beda', kategori: 'tips', balasan: 17, views: 263, app: 'ZWisata' },
+  { id: 't3',  user: 'Dewi Santika',  initial: 'DS', color: 'bg-violet-600', waktu: '4 hari lalu',   judul: 'Cara pakai timer multi-meja ZBilliar di jam sibuk tanpa bikin staf bingung', kategori: 'tips', balasan: 11, views: 189, app: 'ZBilliar' },
+  { id: 't4',  user: 'Faisal H.',     initial: 'FH', color: 'bg-orange-600', waktu: '5 hari lalu',   judul: 'Optimasi Kitchen Display ZResto biar dapur lebih sat-set saat jam makan siang', kategori: 'tips', balasan: 14, views: 231, app: 'Z-Resto' },
+  { id: 't5',  user: 'Candra G.',     initial: 'CG', color: 'bg-green-600',  waktu: '6 hari lalu',   judul: 'Tips laporan stok emas harian di ZGold supaya akurat dan mudah dipahami owner', kategori: 'tips', balasan: 9,  views: 145, app: 'ZGold' },
+  { id: 't6',  user: 'Yusuf R.',      initial: 'YR', color: 'bg-red-600',    waktu: '1 minggu lalu', judul: 'Cara kalibrasi GPS Z-Absen supaya titik lokasi tetap akurat di gedung bertingkat', kategori: 'tips', balasan: 21, views: 298, app: 'Z-Absen' },
+  { id: 't7',  user: 'Lina K.',       initial: 'LK', color: 'bg-pink-600',   waktu: '1 minggu lalu', judul: 'Cara setting kategori cucian di ZLaundry biar pricelist makin fleksibel dan rapi', kategori: 'tips', balasan: 13, views: 176, app: 'ZLaundry' },
+  { id: 't8',  user: 'Bintang P.',    initial: 'BP', color: 'bg-cyan-600',   waktu: '2 minggu lalu', judul: 'Template work order ZBengkel yang paling sering kami pakai — share gratis!', kategori: 'tips', balasan: 18, views: 247, app: 'ZBengkel' },
+  { id: 't9',  user: 'Nina S.',       initial: 'NS', color: 'bg-amber-600',  waktu: '2 minggu lalu', judul: 'Cara hitung harga spanduk per m² di ZPrint dengan margin keuntungan otomatis', kategori: 'tips', balasan: 7,  views: 112, app: 'ZPrint' },
+  { id: 't10', user: 'Rani P.',       initial: 'RP', color: 'bg-indigo-600', waktu: '3 minggu lalu', judul: 'Jadwal kelas ZGym supaya slot tidak bentrok dan semua member happy tanpa rebutan', kategori: 'tips', balasan: 15, views: 204, app: 'ZGym' },
+  // PERTANYAAN (10)
+  { id: 'p1',  user: 'Sari Dewi',     initial: 'SD', color: 'bg-purple-600', waktu: '8 jam lalu',    judul: 'ZGym bisa export data member ke Excel atau PDF ya? Butuh buat laporan akhir bulan', kategori: 'pertanyaan', balasan: 8,  views: 97,  app: 'ZGym' },
+  { id: 'p2',  user: 'Rina Kusuma',   initial: 'RK', color: 'bg-orange-600', waktu: '2 hari lalu',   judul: 'Z-Absen GPS sering tidak akurat di dalam gedung 3 lantai, ada yang pernah ngalami?', kategori: 'pertanyaan', balasan: 13, views: 178, app: 'Z-Absen' },
+  { id: 'p3',  user: 'Eko Prasetyo',  initial: 'EP', color: 'bg-teal-600',   waktu: '3 hari lalu',   judul: 'ZResto bisa dipakai untuk multi-cabang dengan satu akun admin pusat ya?', kategori: 'pertanyaan', balasan: 19, views: 256, app: 'Z-Resto' },
+  { id: 'p4',  user: 'Maya Tanjung',  initial: 'MT', color: 'bg-pink-600',   waktu: '4 hari lalu',   judul: 'ZSnap kompatibel dengan Chromebook atau hanya support PC dan Mac saja?', kategori: 'pertanyaan', balasan: 6,  views: 84,  app: 'ZSnap' },
+  { id: 'p5',  user: 'Dodi Anwar',    initial: 'DA', color: 'bg-blue-600',   waktu: '5 hari lalu',   judul: 'Cara setup login QR di ZOne untuk karyawan yang tidak punya smartphone pribadi?', kategori: 'pertanyaan', balasan: 11, views: 143, app: 'ZOne' },
+  { id: 'p6',  user: 'Rini Hartati',  initial: 'RH', color: 'bg-violet-600', waktu: '6 hari lalu',   judul: 'ZMedics bisa backup rekam medis otomatis ke Google Drive atau cloud lain nggak?', kategori: 'pertanyaan', balasan: 9,  views: 127, app: 'Z-Medics' },
+  { id: 'p7',  user: 'Tomi Bagus',    initial: 'TB', color: 'bg-green-600',  waktu: '1 minggu lalu', judul: 'ZBilliar timer bisa di-reset manual kalau pelanggan komplain tagihannya tidak sesuai?', kategori: 'pertanyaan', balasan: 5,  views: 76,  app: 'ZBilliar' },
+  { id: 'p8',  user: 'Ayu Cahyani',   initial: 'AC', color: 'bg-red-600',    waktu: '1 minggu lalu', judul: 'ZTrader ini hanya simulator atau bisa connect ke akun broker saham sungguhan?', kategori: 'pertanyaan', balasan: 22, views: 341, app: 'ZTrader' },
+  { id: 'p9',  user: 'Surya Nugraha', initial: 'SN', color: 'bg-amber-600',  waktu: '2 minggu lalu', judul: 'Z-Rooms bisa integrasi dengan Google Calendar untuk notifikasi booking otomatis?', kategori: 'pertanyaan', balasan: 10, views: 158, app: 'Z-Rooms' },
+  { id: 'p10', user: 'Wahyu Purnomo', initial: 'WP', color: 'bg-cyan-600',   waktu: '2 minggu lalu', judul: 'ZBarber bisa terima uang muka atau deposit dari pelanggan sebelum jadwal potong?', kategori: 'pertanyaan', balasan: 8,  views: 103, app: 'ZBarber' },
+  // UPDATE (6)
+  { id: 'u1',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '5 jam lalu',    judul: '🚀 ZResto v2.3 — Kitchen Display System kini support multi-layar & dark mode!', kategori: 'update', balasan: 41, views: 589, app: 'Z-Resto' },
+  { id: 'u2',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '1 hari lalu',   judul: '🔔 ZOne SSO: login QR & Face ID kini aktif di semua app ekosistem Zomet', kategori: 'update', balasan: 35, views: 701, app: 'ZOne' },
+  { id: 'u3',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '3 hari lalu',   judul: '🆕 ZPos v1.8 — fitur multi-kasir dan shift report tersedia untuk semua plan!', kategori: 'update', balasan: 28, views: 445, app: 'ZPos' },
+  { id: 'u4',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '5 hari lalu',   judul: '✨ ZGym kini punya fitur kelas group: booking slot, absen member, laporan instruktur', kategori: 'update', balasan: 31, views: 512, app: 'ZGym' },
+  { id: 'u5',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '1 minggu lalu', judul: '🗺️ ZWisata v2.1 — laporan revenue per destinasi dan per paket tour sudah tersedia', kategori: 'update', balasan: 19, views: 378, app: 'ZWisata' },
+  { id: 'u6',  user: 'Tim Zomet',     initial: 'Z',  color: 'bg-indigo-500', waktu: '2 minggu lalu', judul: '🔧 ZBengkel v1.5 — laporan servis per mekanik dan estimasi waktu selesai ditambahkan', kategori: 'update', balasan: 24, views: 423, app: 'ZBengkel' },
+  // DISKUSI (6)
+  { id: 'd1',  user: 'Budi Santoso',  initial: 'BS', color: 'bg-green-600',  waktu: '1 hari lalu',   judul: 'Cerita sukses: 3 bulan pakai ZBengkel, omzet naik 30% karena laporan makin rapi', kategori: 'diskusi', balasan: 19, views: 445, app: 'ZBengkel' },
+  { id: 'd2',  user: 'Mega Lestari',  initial: 'ML', color: 'bg-pink-600',   waktu: '4 hari lalu',   judul: 'ZLaundry mode offline ngebantu banget waktu internet mati seharian — super rekomen!', kategori: 'diskusi', balasan: 22, views: 334, app: 'ZLaundry' },
+  { id: 'd3',  user: 'Hasan K.',      initial: 'HK', color: 'bg-amber-600',  waktu: '5 hari lalu',   judul: 'Sudah 2 minggu amati ZTrader: AI mana yang paling konsisten profit di LQ45?', kategori: 'diskusi', balasan: 33, views: 567, app: 'ZTrader' },
+  { id: 'd4',  user: 'Ratna Sari',    initial: 'RS', color: 'bg-violet-600', waktu: '6 hari lalu',   judul: 'Review jujur: ZPos vs aplikasi kasir lain yang pernah saya coba selama 2 tahun ini', kategori: 'diskusi', balasan: 27, views: 489, app: 'ZPos' },
+  { id: 'd5',  user: 'Joko W.',       initial: 'JW', color: 'bg-teal-600',   waktu: '1 minggu lalu', judul: 'Tips jaga stok perhiasan saat harga emas naik drastis — sharing pengalaman pakai ZGold', kategori: 'diskusi', balasan: 16, views: 274, app: 'ZGold' },
+  { id: 'd6',  user: 'Ferry R.',      initial: 'FR', color: 'bg-blue-600',   waktu: '2 minggu lalu', judul: 'Dari catatan manual ke ZMedics: pengalaman klinik kami selama 6 bulan pemakaian', kategori: 'diskusi', balasan: 14, views: 231, app: 'Z-Medics' },
 ]
 
-const aktivitasTicker = [
+// ── Pool 24 item ticker — diacak tiap kunjungan ───────────────────────────────
+const allActivitasTicker = [
   '🛒 Ahmad R. dari Surabaya baru bergabung di ZPos',
   '💰 Warung Pak Seno memproses 28 transaksi hari ini',
-  '💪 ZGym FitZone mendaftarkan 5 member baru',
+  '💪 ZGym FitZone mendaftarkan 5 member baru pagi ini',
   '🍽️ Rina K. upgrade Z-Resto ke paket Pro',
   '🔧 Tim ZBengkel Maju berhasil ekspor laporan bulanan',
   '🔐 ZOne: 12 pengguna login via Face ID pagi ini',
-  '📈 ZTrader: AI Gemini unggul di sesi trading tadi',
+  '📈 ZTrader: AI Gemini unggul di sesi trading siang ini',
   '👕 ZLaundry Bu Sari melayani 47 kg cucian hari ini',
   '✅ Z-Absen: 98% karyawan hadir tepat waktu minggu ini',
   '✂️ ZBarber Keren memproses 15 appointment hari Sabtu',
   '🖨️ ZPrint Jaya mencetak 200 pcs kartu nama hari ini',
-  '🧳 ZWisata Indah menjual 3 paket tour ke Bali',
-  '💍 ZGold Toko Mulia transaksi perhiasan Rp 45 juta',
+  '🧳 ZWisata Indah menjual 3 paket tour ke Bali hari ini',
+  '💍 ZGold Toko Mulia transaksi perhiasan senilai Rp 45 juta',
   '🏢 ZRooms: Meeting room A full booking sampai Jumat',
+  '🎯 ZBilliar Asik: meja 3 dipakai non-stop selama 4 jam',
+  '🏥 Z-Medics Klinik Sehat input 12 rekam medis hari ini',
+  '🌟 ZSnap: 340 soal berhasil dijawab AI hari ini',
+  '👁️ ZFace: 89 identifikasi wajah sukses pagi ini',
+  '📊 ZPos Toko Berkah: omzet hari ini tembus Rp 8,7 juta',
+  '🎽 ZGym Power House: 23 member check-in pagi tadi',
+  '🧼 ZLaundry Express: order kilat 15 kg selesai dalam 3 jam',
+  '🍕 Z-Resto Warung Bahagia: 87 orderan meja terlayani',
+  '💎 ZGold Galeri Prima: stok 2 kg emas 24K masuk hari ini',
+  '🚀 ZOne: 7 bisnis baru aktivasi SSO ekosistem Zomet hari ini',
 ]
 
 const KATEGORI_CONFIG = {
-  tips:       { label: 'Tips & Trik', icon: 'bi-lightbulb', cls: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25' },
+  tips:       { label: 'Tips & Trik', icon: 'bi-lightbulb',      cls: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25' },
   pertanyaan: { label: 'Pertanyaan',  icon: 'bi-question-circle', cls: 'bg-amber-500/15 text-amber-400 border-amber-500/25' },
-  update:     { label: 'Update',      icon: 'bi-megaphone', cls: 'bg-blue-500/15 text-blue-400 border-blue-500/25' },
-  diskusi:    { label: 'Diskusi',     icon: 'bi-chat-dots', cls: 'bg-violet-500/15 text-violet-400 border-violet-500/25' },
+  update:     { label: 'Update',      icon: 'bi-megaphone',       cls: 'bg-blue-500/15 text-blue-400 border-blue-500/25' },
+  diskusi:    { label: 'Diskusi',     icon: 'bi-chat-dots',       cls: 'bg-violet-500/15 text-violet-400 border-violet-500/25' },
 }
 
 const WA_LINK = 'https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20bergabung%20komunitas%20Zomet'
@@ -93,11 +142,21 @@ export default function HomeClient({ latestArticles }: Props) {
   const [lang, setLang] = useState<'id' | 'en'>('id')
   const [activeTab, setActiveTab] = useState<'semua' | 'tips' | 'pertanyaan' | 'update' | 'diskusi'>('semua')
   const [countersStarted, setCountersStarted] = useState(false)
+  // Inisialisasi deterministik untuk SSR; useEffect mengacak di client
+  const [displayedThreads, setDisplayedThreads] = useState<ForumThread[]>(allForumThreads.slice(0, 8))
+  const [tickerItems, setTickerItems] = useState<string[]>([...allActivitasTicker, ...allActivitasTicker])
   const forumRef = useRef<HTMLElement>(null)
 
   const countUsers = useCountUp(2400,  1600, countersStarted)
   const countTrx   = useCountUp(128000, 2000, countersStarted)
   const countSatis = useCountUp(985,   1800, countersStarted)
+
+  // Acak konten forum & ticker setiap kunjungan (client-side, setelah hydration)
+  useEffect(() => {
+    setDisplayedThreads(shuffle(allForumThreads).slice(0, 8))
+    const s = shuffle(allActivitasTicker)
+    setTickerItems([...s, ...s])
+  }, [])
 
   useEffect(() => {
     const el = forumRef.current
@@ -110,8 +169,8 @@ export default function HomeClient({ latestArticles }: Props) {
   }, [])
 
   const filteredThreads = activeTab === 'semua'
-    ? forumThreads
-    : forumThreads.filter(t => t.kategori === activeTab)
+    ? displayedThreads
+    : displayedThreads.filter(t => t.kategori === activeTab)
 
   const title    = lang === 'id' ? 'Ekosistem Aplikasi Zomet' : 'Zomet App Ecosystem'
   const subtitle = lang === 'id' ? 'Platform lengkap untuk kebutuhan bisnis digital Anda' : 'Complete platform for your digital business needs'
@@ -121,8 +180,6 @@ export default function HomeClient({ latestArticles }: Props) {
     if (!dateStr) return ''
     return new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
   }
-
-  const tickerItems = [...aktivitasTicker, ...aktivitasTicker]
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white">
@@ -198,8 +255,7 @@ export default function HomeClient({ latestArticles }: Props) {
         <div className="mb-12 flex items-end justify-between gap-4 flex-wrap">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-2">
-              <i className="bi bi-people-fill mr-1.5" />
-              Komunitas
+              <i className="bi bi-people-fill mr-1.5" />Komunitas
             </p>
             <h2 className="text-3xl font-bold md:text-4xl">Forum & Diskusi</h2>
             <p className="mt-2 text-gray-400">Bergabung dengan ribuan pengguna Zomet — berbagi tips, tanya jawab, dan update terbaru.</p>
@@ -217,10 +273,10 @@ export default function HomeClient({ latestArticles }: Props) {
         {/* Stats counters */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {[
-            { icon: 'bi-people', value: countUsers.toLocaleString('id-ID') + '+', label: 'Pengguna Aktif', color: 'text-blue-400' },
-            { icon: 'bi-grid-3x3-gap', value: String(apps.length), label: 'Aplikasi Zomet', color: 'text-purple-400' },
-            { icon: 'bi-lightning-charge', value: countTrx.toLocaleString('id-ID') + '+', label: 'Transaksi/Bulan', color: 'text-emerald-400' },
-            { icon: 'bi-star', value: (countSatis / 10).toFixed(1) + '%', label: 'Tingkat Kepuasan', color: 'text-amber-400' },
+            { icon: 'bi-people',           value: countUsers.toLocaleString('id-ID') + '+', label: 'Pengguna Aktif',    color: 'text-blue-400' },
+            { icon: 'bi-grid-3x3-gap',     value: String(apps.length),                      label: 'Aplikasi Zomet',   color: 'text-purple-400' },
+            { icon: 'bi-lightning-charge', value: countTrx.toLocaleString('id-ID') + '+',   label: 'Transaksi/Bulan',  color: 'text-emerald-400' },
+            { icon: 'bi-star',             value: (countSatis / 10).toFixed(1) + '%',        label: 'Tingkat Kepuasan', color: 'text-amber-400' },
           ].map((s) => (
             <div key={s.label} className="rounded-xl border border-gray-800 bg-gray-900/60 p-5 text-center">
               <i className={`bi ${s.icon} text-2xl ${s.color} mb-2 block`} />
@@ -257,11 +313,11 @@ export default function HomeClient({ latestArticles }: Props) {
         {/* Tab filter */}
         <div className="mb-6 flex gap-2 flex-wrap">
           {([
-            ['semua', 'bi-grid', 'Semua'],
-            ['tips', 'bi-lightbulb', 'Tips & Trik'],
+            ['semua',      'bi-grid',           'Semua'],
+            ['tips',       'bi-lightbulb',       'Tips & Trik'],
             ['pertanyaan', 'bi-question-circle', 'Pertanyaan'],
-            ['update', 'bi-megaphone', 'Update'],
-            ['diskusi', 'bi-chat-dots', 'Diskusi'],
+            ['update',     'bi-megaphone',       'Update'],
+            ['diskusi',    'bi-chat-dots',       'Diskusi'],
           ] as const).map(([val, icon, label]) => (
             <button
               key={val}
@@ -278,58 +334,50 @@ export default function HomeClient({ latestArticles }: Props) {
         </div>
 
         {/* Thread cards */}
-        <div className="grid gap-3 md:grid-cols-2">
-          {filteredThreads.map((thread) => {
-            const kat = KATEGORI_CONFIG[thread.kategori]
-            return (
-              <a
-                key={thread.id}
-                href={WA_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block rounded-xl border border-gray-800 bg-gray-900/50 p-5 transition-all hover:border-gray-600 hover:bg-gray-900 cursor-pointer"
-              >
-                <div className="flex items-start gap-3">
-                  {/* Avatar */}
-                  <div className={`shrink-0 h-9 w-9 rounded-full ${thread.color} flex items-center justify-center text-xs font-bold text-white`}>
-                    {thread.initial}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    {/* Meta */}
-                    <div className="flex flex-wrap items-center gap-2 mb-2">
-                      {thread.pinned && (
-                        <span className="inline-flex items-center gap-1 text-xs text-amber-400">
-                          <i className="bi bi-pin-angle-fill" /> Disematkan
+        {filteredThreads.length === 0 ? (
+          <div className="rounded-xl border border-gray-800 bg-gray-900/40 p-10 text-center text-gray-500 text-sm">
+            <i className="bi bi-chat-square text-3xl block mb-3 text-gray-700" />
+            Tidak ada thread kategori ini saat ini — muat ulang halaman untuk konten berbeda.
+          </div>
+        ) : (
+          <div className="grid gap-3 md:grid-cols-2">
+            {filteredThreads.map((thread) => {
+              const kat = KATEGORI_CONFIG[thread.kategori]
+              return (
+                <a
+                  key={thread.id}
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block rounded-xl border border-gray-800 bg-gray-900/50 p-5 transition-all hover:border-gray-600 hover:bg-gray-900 cursor-pointer"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`shrink-0 h-9 w-9 rounded-full ${thread.color} flex items-center justify-center text-xs font-bold text-white`}>
+                      {thread.initial}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                        <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs ${kat.cls}`}>
+                          <i className={`bi ${kat.icon}`} /> {kat.label}
                         </span>
-                      )}
-                      <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs ${kat.cls}`}>
-                        <i className={`bi ${kat.icon}`} /> {kat.label}
-                      </span>
-                      <span className="rounded-full bg-gray-800 px-2 py-0.5 text-xs text-gray-400">{thread.app}</span>
-                    </div>
-                    {/* Title */}
-                    <p className="text-sm font-medium leading-snug text-gray-100 group-hover:text-white line-clamp-2 mb-3">
-                      {thread.judul}
-                    </p>
-                    {/* Footer */}
-                    <div className="flex items-center gap-4 text-xs text-gray-500">
-                      <span className="flex items-center gap-1">
-                        <i className="bi bi-person" /> {thread.user}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <i className="bi bi-chat" /> {thread.balasan} balasan
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <i className="bi bi-eye" /> {thread.views.toLocaleString('id-ID')}
-                      </span>
-                      <span className="ml-auto">{thread.waktu}</span>
+                        <span className="rounded-full bg-gray-800 px-2 py-0.5 text-xs text-gray-400">{thread.app}</span>
+                      </div>
+                      <p className="text-sm font-medium leading-snug text-gray-100 group-hover:text-white line-clamp-2 mb-3">
+                        {thread.judul}
+                      </p>
+                      <div className="flex items-center gap-4 text-xs text-gray-500">
+                        <span className="flex items-center gap-1"><i className="bi bi-person" /> {thread.user}</span>
+                        <span className="flex items-center gap-1"><i className="bi bi-chat" /> {thread.balasan} balasan</span>
+                        <span className="flex items-center gap-1"><i className="bi bi-eye" /> {thread.views.toLocaleString('id-ID')}</span>
+                        <span className="ml-auto">{thread.waktu}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            )
-          })}
-        </div>
+                </a>
+              )
+            })}
+          </div>
+        )}
 
         {/* CTA gabung */}
         <div className="mt-10 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-8 text-center">
