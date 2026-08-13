@@ -228,6 +228,7 @@ export default function HomeClient({ latestArticles }: Props) {
   const [toast, setToast] = useState<{ icon: string; text: string; key: number } | null>(null)
   const [announcementIdx, setAnnouncementIdx] = useState(0)
   const [announcementDismissed, setAnnouncementDismissed] = useState(false)
+  const [shortsOpen, setShortsOpen] = useState(false)
   const [onlineBiz, setOnlineBiz] = useState(312)
   const forumRef = useRef<HTMLElement>(null)
 
@@ -770,6 +771,51 @@ export default function HomeClient({ latestArticles }: Props) {
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500" />
               Baru saja
             </p>
+          </div>
+        </div>
+      )}
+
+      {/* Floating YouTube Shorts */}
+      <div className="fixed bottom-6 left-6 z-50">
+        <button
+          onClick={() => setShortsOpen(true)}
+          aria-label="Lihat promo video"
+          className="group flex items-center gap-2 rounded-full border border-gray-700 bg-gray-900/95 px-4 py-2.5 shadow-xl shadow-black/40 backdrop-blur transition-all hover:border-blue-500/60 hover:bg-gray-800 active:scale-95"
+        >
+          <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-600">
+            <i className="bi bi-play-fill ml-0.5 text-sm text-white" />
+            <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-red-500 animate-ping opacity-75" />
+          </span>
+          <span className="text-sm font-medium text-gray-100">Promo</span>
+        </button>
+      </div>
+
+      {/* Shorts Modal */}
+      {shortsOpen && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setShortsOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-[320px] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShortsOpen(false)}
+              aria-label="Tutup"
+              className="absolute -top-10 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-gray-800/90 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors z-10"
+            >
+              <i className="bi bi-x-lg text-sm" />
+            </button>
+            <div className="aspect-[9/16] w-full overflow-hidden rounded-xl border border-gray-700 bg-black shadow-2xl shadow-black/60">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/76MSnxQD178"
+                title="Promo Zomet"
+                className="h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
       )}
