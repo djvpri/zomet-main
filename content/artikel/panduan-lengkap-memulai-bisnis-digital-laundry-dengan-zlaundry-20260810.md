@@ -1,7 +1,7 @@
 ---
 title: "Panduan Lengkap Memulai Bisnis Digital Laundry dengan ZLaundry"
 description: "Temukan cara memulai dan mengembangkan bisnis laundry Anda ke era digital dengan bantuan aplikasi ZLaundry. Pelajari fitur-fitur unggulan dan langkah-langkah implementasinya."
-date: "20260810"
+date: "2026-08-10"
 tags:
   - "bisnis laundry"
   - "aplikasi POS"

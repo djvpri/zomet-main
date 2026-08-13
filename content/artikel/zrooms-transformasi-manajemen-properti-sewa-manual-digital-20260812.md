@@ -1,7 +1,7 @@
 ---
 title: "Z-Rooms: Transformasi Manajemen Properti Sewa dari Manual ke Digital"
 description: "Temukan bagaimana Z-Rooms merevolusi manajemen kos, kontrakan, dan hotel Anda. Bandingkan cara manual vs digital untuk efisiensi, keuntungan lebih, dan bebas repot."
-date: "20260812"
+date: "2026-08-12"
 tags:
   - "Z-Rooms"
   - "manajemen properti"

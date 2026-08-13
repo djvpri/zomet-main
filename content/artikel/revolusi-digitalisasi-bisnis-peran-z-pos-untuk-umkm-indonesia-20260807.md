@@ -1,7 +1,7 @@
 ---
 title: "Revolusi Digitalisasi Bisnis: Peran Z Pos untuk UMKM Indonesia"
 description: "Pelajari bagaimana Z Pos, aplikasi kasir digital yang simpel dan mobile-friendly, merevolusi digitalisasi UMKM di Indonesia, membantu efisiensi dan pertumbuhan bisnis Anda."
-date: "20260807"
+date: "2026-08-07"
 tags:
   - "Z Pos"
   - "UMKM"

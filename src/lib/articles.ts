@@ -4,6 +4,13 @@ import matter from 'gray-matter'
 
 const artikelDir = path.join(process.cwd(), 'content/artikel')
 
+// Normalize date: accepts "20260809" or "2026-08-09" -> "2026-08-09"
+function normalizeDate(d: unknown): string {
+  const s = String(d ?? '').replace(/[^0-9]/g, '')
+  if (s.length !== 8) return String(d ?? '').slice(0, 10)
+  return `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}`
+}
+
 export interface Article {
   slug: string
   title: string
@@ -25,7 +32,7 @@ export function getAllArticles(): Article[] {
         slug,
         title: data.title ?? slug,
         description: data.description ?? '',
-        date: data.date ? String(data.date).slice(0, 10) : '',
+        date: normalizeDate(data.date),
         tags: data.tags ?? [],
       }
     })
@@ -47,7 +54,7 @@ export async function getArticle(slug: string): Promise<Article | null> {
     slug,
     title: data.title ?? slug,
     description: data.description ?? '',
-    date: data.date ? String(data.date).slice(0, 10) : '',
+    date: normalizeDate(data.date),
     tags: data.tags ?? [],
     content: processed.toString(),
   }

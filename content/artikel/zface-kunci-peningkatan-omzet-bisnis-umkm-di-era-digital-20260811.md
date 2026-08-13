@@ -1,7 +1,7 @@
 ---
 title: "ZFace: Kunci Peningkatan Omzet Bisnis UMKM di Era Digital"
 description: "Maksimalkan omzet bisnis UMKM Anda dengan ZFace, layanan verifikasi wajah & tanda tangan. Tingkatkan keamanan, efisiensi, dan kepuasan pelanggan secara signifikan."
-date: "20260811"
+date: "2026-08-11"
 tags:
   - "ZFace"
   - "face recognition"

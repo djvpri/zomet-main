@@ -1,7 +1,7 @@
 ---
 title: "Kisah Sukses UMKM: Bengkel Maju Jaya Transformasi dengan ZBengkel"
 description: "Pelajari kisah nyata Bengkel Maju Jaya, UMKM yang sukses bertransformasi dengan ZBengkel. Tingkatkan efisiensi, kelola stok, dan raih profit lebih."
-date: "20260809"
+date: "2026-08-09"
 tags:
   - "ZBengkel"
   - "Manajemen Bengkel"

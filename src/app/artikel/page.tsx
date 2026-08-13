@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   },
 }
 
+// Revalidate every hour so new articles appear without a full rebuild
+export const revalidate = 3600
+
 export default function ArtikelPage() {
   const articles = getAllArticles()
 

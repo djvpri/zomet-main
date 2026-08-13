@@ -1,7 +1,7 @@
 ---
 title: "Rahasia Omzet Melejit: Tips Optimalisasi ZGold untuk Bisnis Perhiasan Anda"
 description: "Temukan cara melipatgandakan omzet bisnis perhiasan Anda dengan ZGold, aplikasi POS canggih. Pelajari fitur unggulan dan tips praktis untuk kelola emas, perak, platinum akurat!"
-date: "20260808"
+date: "2026-08-08"
 tags:
   - "ZGold"
   - "POS Perhiasan"
