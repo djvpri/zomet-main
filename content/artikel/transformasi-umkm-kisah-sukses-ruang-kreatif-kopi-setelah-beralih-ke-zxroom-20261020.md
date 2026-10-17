@@ -2,7 +2,7 @@
 title: "Transformasi UMKM: Kisah Sukses 'Ruang Kreatif Kopi' Setelah Beralih ke ZXRoom"
 description: "Simak kisah inspiratif UMKM 'Ruang Kreatif Kopi' yang berhasil meningkatkan efisiensi dan pendapatan berkat aplikasi booking ruang ZXRoom. Temukan solusi digital untuk bisnis Anda."
 date: "2026-10-17"
-image: "/api/uploads/artikel/artikel-1792146195837-ijee7m.jpeg"
+image: "http://zpromo.zomet.my.id/api/uploads/artikel/artikel-1792146195837-ijee7m.jpeg"
 tags:
   - "ZXRoom"
   - "aplikasi booking ruang"
