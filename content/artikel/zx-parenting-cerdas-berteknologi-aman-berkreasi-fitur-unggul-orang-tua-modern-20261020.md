@@ -2,7 +2,7 @@
 title: "ZX Parenting: Cerdas Berteknologi, Aman Berkreasi – Menguak Fitur Unggulan untuk Orang Tua Modern"
 description: "Temukan fitur unggulan ZX Parenting, aplikasi revolusioner untuk orang tua di Indonesia. Kelola waktu layar, lindungi anak dari konten negatif, dan pantau aktivitas digital mereka dengan cerdas."
 date: "2026-10-17"
-image: "/api/uploads/artikel/artikel-1792146195854-hic2w1.jpeg"
+image: "http://zpromo.zomet.my.id/api/uploads/artikel/artikel-1792146195854-hic2w1.jpeg"
 tags:
   - "Parenting Digital"
   - "Aplikasi Keluarga"
