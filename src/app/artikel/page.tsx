@@ -48,8 +48,15 @@ export default function ArtikelPage() {
           <div className="space-y-6">
             {articles.map((article) => (
               <Link key={article.slug} href={`/artikel/${article.slug}`} className="block group">
-                <article className="rounded-xl border border-gray-800 bg-gray-900/50 p-6 transition-all hover:border-gray-600 hover:bg-gray-900">
-                  <div className="flex flex-wrap gap-2 mb-3">
+                <article className="rounded-xl border border-gray-800 bg-gray-900/50 overflow-hidden transition-all hover:border-gray-600 hover:bg-gray-900">
+                  {article.image && (
+                    <div className="aspect-[16/9] bg-gray-800 overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <div className="flex flex-wrap gap-2 mb-3">
                     {article.tags.map((tag) => (
                       <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-gray-800 text-gray-300">
                         {tag}
@@ -65,6 +72,7 @@ export default function ArtikelPage() {
                     <span className="text-sm text-blue-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
                       Baca selengkapnya <i className="bi bi-arrow-right" />
                     </span>
+                  </div>
                   </div>
                 </article>
               </Link>

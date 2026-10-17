@@ -721,7 +721,14 @@ export default function HomeClient({ latestArticles }: Props) {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {latestArticles.map((article) => (
               <Link key={article.slug} href={`/artikel/${article.slug}`} className="group block cursor-pointer">
-                <article className="relative h-full overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 p-6 transition-all hover:border-gray-600 hover:bg-gray-900">
+                <article className="relative h-full overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-all hover:border-gray-600 hover:bg-gray-900">
+                  {article.image && (
+                    <div className="aspect-[16/9] bg-gray-800 overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    </div>
+                  )}
+                  <div className="p-6">
                   <div className="absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100 pointer-events-none">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/8 to-indigo-500/8" />
                   </div>
@@ -741,6 +748,7 @@ export default function HomeClient({ latestArticles }: Props) {
                         Baca <i className="bi bi-arrow-right text-xs transition-transform group-hover:translate-x-0.5" />
                       </span>
                     </div>
+                  </div>
                   </div>
                 </article>
               </Link>

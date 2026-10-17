@@ -17,6 +17,7 @@ export interface Article {
   description: string
   date: string
   tags: string[]
+  image?: string
   content?: string
 }
 
@@ -34,6 +35,7 @@ export function getAllArticles(): Article[] {
         description: data.description ?? '',
         date: normalizeDate(data.date),
         tags: data.tags ?? [],
+        image: data.image ?? undefined,
       }
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -56,6 +58,7 @@ export async function getArticle(slug: string): Promise<Article | null> {
     description: data.description ?? '',
     date: normalizeDate(data.date),
     tags: data.tags ?? [],
+    image: data.image ?? undefined,
     content: processed.toString(),
   }
 }

@@ -20,11 +20,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       type: 'article',
       publishedTime: article.date,
       siteName: 'Zomet',
+      ...(article.image ? { images: [{ url: article.image }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: article.title,
       description: article.description,
+      ...(article.image ? { images: [article.image] } : {}),
     },
   }
 }
@@ -67,6 +69,12 @@ export default async function ArtikelDetailPage({ params }: { params: { slug: st
       </header>
 
       <article className="mx-auto max-w-3xl px-6 py-16">
+        {article.image && (
+          <div className="mb-8 rounded-xl overflow-hidden border border-gray-800">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={article.image} alt={article.title} className="w-full aspect-[16/9] object-cover" />
+          </div>
+        )}
         {/* Meta */}
         <div className="mb-8">
           <div className="flex flex-wrap gap-2 mb-4">
