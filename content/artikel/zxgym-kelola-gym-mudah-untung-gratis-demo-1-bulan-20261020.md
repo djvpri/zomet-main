@@ -2,7 +2,7 @@
 title: "ZXGym: Kelola Gym Lebih Mudah & Untung dengan Gratis Demo 1 Bulan!"
 description: "Optimalkan bisnis gym & fitness Anda dengan ZXGym! Kelola member, jadwal, dan cek-in otomatis. Coba gratis demo 1 bulan sekarang & rasakan peningkatannya!"
 date: "2026-10-17"
-image: "http://zpromo.zomet.my.id/api/uploads/artikel/artikel-1792146195848-7dlmq4.jpeg"
+image: "https://zpromo.zomet.my.id/api/uploads/artikel/artikel-1792146195848-7dlmq4.jpeg"
 tags:
   - "aplikasi gym"
   - "software fitness"
