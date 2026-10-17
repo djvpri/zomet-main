@@ -2,7 +2,7 @@
 title: "Z1 Pos: Menambah Produk Toko Semudah Memotret, Khusus UMKM Android!"
 description: "Optimalkan bisnis UMKM Anda dengan Z1 Pos! Aplikasi kasir Android multi-tenant ini mudahkan tambah produk, kelola banyak toko, dan laporan lengkap. Efisiensi di genggaman Anda."
 date: "2026-10-17"
-image: "/api/uploads/artikel/artikel-1792146195843-rtptn8.jpeg"
+image: "http://zpromo.zomet.my.id/api/uploads/artikel/artikel-1792146195843-rtptn8.jpeg"
 tags:
   - "Z1 Pos"
   - "aplikasi kasir"
