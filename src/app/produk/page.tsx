@@ -128,8 +128,9 @@ export default function ProdukPage() {
             const shell =
               'group flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-gradient-to-b from-gray-900 to-gray-900/40 transition-all hover:-translate-y-0.5 hover:border-gray-600 cursor-pointer'
 
+            // detail -> halaman internal; tanpa detail -> app eksternal
             return p.detail ? (
-              <Link key={p.id} href={p.url} className={shell}>
+              <Link key={p.id} href={`/produk/${p.detail}`} className={shell}>
                 {inner}
               </Link>
             ) : (

@@ -39,8 +39,10 @@ export const products: Product[] = [
     url: 'https://zxgym.zomet.my.id/',
     bsIcon: 'bi-heart-pulse',
     tags: ['Fitness', 'SaaS'],
-    price: 'Langganan',
-    priceNote: 'per outlet',
+    detail: 'zxgym',
+    thumb: '/images/zxgym/dashboard.webp',
+    price: 'Hubungi kami',
+    priceNote: 'per cabang',
     live: true,
   },
   {
