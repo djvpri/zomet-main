@@ -336,8 +336,8 @@ export default function HomeClient({ latestArticles }: Props) {
               <i className="bi bi-grid-3x3-gap-fill text-blue-400" /> Zomet
             </div>
             <div className="flex items-center gap-3">
-              <Link href="/z1pos" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
-                Z1 Pos
+              <Link href="/produk" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
+                Produk
               </Link>
               <Link href="/artikel" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
                 Artikel
