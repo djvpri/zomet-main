@@ -20,6 +20,8 @@ interface Spec {
   note: string
   pick: (file: string) => boolean
   version: string
+  /** true = tombol menuju halaman rilis repo, bukan file aset langsung */
+  linkToRepo?: boolean
 }
 
 const mb = (bytes: number) => `${(bytes / 1048576).toFixed(1)} MB`
@@ -52,23 +54,28 @@ export const Z1POS_DOWNLOADS: Spec[] = [
   },
 ]
 
-/** ZXGym desktop (Tauri thin-client): installer + portable. */
+/** ZXGym desktop (Tauri thin-client): satu tombol ke halaman rilis repo. */
 export const ZXGYM_DOWNLOADS: Spec[] = [
   {
-    id: 'zxgym-installer',
+    id: 'zxgym-windows',
     repo: 'zgym_windows',
-    name: 'ZXGym — Installer',
-    note: 'Windows 10/11 64-bit · butuh WebView2 (bawaan Win 10/11)',
+    name: 'ZXGym — Windows',
+    note: 'Installer & portable tersedia di halaman rilis · Windows 10/11 64-bit, butuh WebView2',
     pick: (f) => f.endsWith('_x64-setup.exe'),
     version: '0.2.2',
+    linkToRepo: true,
   },
+]
+
+/** Z-Rooms Android: APK. */
+export const ZROOMS_DOWNLOADS: Spec[] = [
   {
-    id: 'zxgym-portable',
-    repo: 'zgym_windows',
-    name: 'ZXGym — Portable',
-    note: 'Satu file .exe, jalankan langsung tanpa instalasi',
-    pick: (f) => f.endsWith('_x64.exe') && !f.includes('setup'),
-    version: '0.2.2',
+    id: 'zrooms-apk',
+    repo: 'Z-Rooms-android',
+    name: 'Z-Rooms — Android',
+    note: 'Android 8+ · pasang APK, izinkan install dari sumber tak dikenal',
+    pick: (f) => f.endsWith('.apk'),
+    version: '1.0.39',
   },
 ]
 
@@ -101,14 +108,21 @@ export async function getDownloads(specs: Spec[]): Promise<DownloadItem[]> {
     const rel = releases.get(spec.repo)
     const releaseUrl = `https://github.com/djvpri/${spec.repo}/releases/latest`
     const hit = rel?.assets.find((a) => spec.pick(a.name))
+    // linkToRepo: arahkan ke halaman rilis repo, bukan file aset
+    const url = spec.linkToRepo ? `https://github.com/djvpri/${spec.repo}` : hit?.browser_download_url || releaseUrl
     return {
       id: spec.id,
       name: spec.name,
       version: rel ? rel.tag_name.replace(/^v/, '') : spec.version,
       releaseUrl,
-      assets: hit
-        ? [{ label: 'Unduh', url: hit.browser_download_url, size: mb(hit.size), note: spec.note }]
-        : [{ label: 'Halaman rilis', url: releaseUrl, size: '', note: spec.note }],
+      assets: [
+        {
+          label: spec.linkToRepo ? 'Buka halaman rilis' : hit ? 'Unduh' : 'Halaman rilis',
+          url,
+          size: hit && !spec.linkToRepo ? mb(hit.size) : '',
+          note: spec.note,
+        },
+      ],
     }
   })
 }
