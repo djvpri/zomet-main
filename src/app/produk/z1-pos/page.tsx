@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getDownloads } from '@/lib/downloads'
+import { getDownloads, Z1POS_DOWNLOADS } from '@/lib/downloads'
 
 export const metadata: Metadata = {
   title: 'Z1 Pos — Kasir & Label Harga | Zomet',
@@ -46,7 +46,7 @@ function Check() {
 }
 
 export default async function Z1PosPage() {
-  const downloads = await getDownloads()
+  const downloads = await getDownloads(Z1POS_DOWNLOADS)
 
   return (
     <main className="min-h-screen bg-gray-950 text-white">
