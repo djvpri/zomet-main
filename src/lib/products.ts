@@ -32,18 +32,6 @@ export const products: Product[] = [
     live: true,
   },
   {
-    id: 'zone',
-    name: 'ZOne',
-    description: 'Hub terpusat: manajemen user, SSO, dan akses semua aplikasi ekosistem Zomet dari satu tempat.',
-    description_en: 'Central hub: user management, SSO, and access to every Zomet app from one place.',
-    url: 'https://zone.zomet.my.id/',
-    bsIcon: 'bi-globe2',
-    tags: ['Hub', 'Admin'],
-    price: 'Termasuk akun',
-    priceNote: 'semua paket Zomet',
-    live: true,
-  },
-  {
     id: 'zgym',
     name: 'ZGym',
     description: 'Manajemen membership gym: kelas, jadwal instruktur, absensi member, dan laporan keuangan.',
