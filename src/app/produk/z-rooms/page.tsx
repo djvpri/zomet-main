@@ -144,15 +144,15 @@ export default async function ZRoomsPage() {
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             {[
-              { img: 'dashboard', title: 'Dashboard', desc: 'Hunian, kamar terisi, pendapatan bulan ini, dan aktivitas terbaru.', wide: true },
-              { img: 'kamar', title: 'Kamar', desc: 'Daftar kamar beserta status terisi atau kosong.' },
-              { img: 'penyewa', title: 'Penyewa', desc: 'Data penyewa, kamar yang dipakai, dan masa sewanya.' },
-              { img: 'booking-baru', title: 'Booking / sewa baru', desc: 'Pesan kamar untuk penyewa baru, langsung tercatat.' },
-              { img: 'karaoke', title: 'Karaoke', desc: 'Sewa ruang karaoke dengan hitungan waktu dan tarif.' },
-              { img: 'penjualan', title: 'Penjualan barang', desc: 'Kasir untuk minuman, makanan, dan item tambahan.' },
-              { img: 'shift', title: 'Shift kasir', desc: 'Buka dan tutup shift, kas awal dan kas akhir tercatat.' },
-              { img: 'keuangan', title: 'Keuangan', desc: 'Pendapatan, tagihan, dan pengeluaran dalam satu layar.' },
-              { img: 'pengaturan', title: 'Pengaturan', desc: 'Identitas penginapan, tarif, dan pengaturan aplikasi.', wide: true },
+              { img: 'dashboard', w: 602, h: 305, title: 'Dashboard', desc: 'Hunian, kamar terisi, pendapatan bulan ini, dan aktivitas terbaru.', wide: true },
+              { img: 'kamar', w: 602, h: 321, title: 'Kamar', desc: 'Daftar kamar beserta status terisi atau kosong.' },
+              { img: 'penyewa', w: 602, h: 272, title: 'Penyewa', desc: 'Data penyewa, kamar yang dipakai, dan masa sewanya.' },
+              { img: 'booking-baru', w: 602, h: 383, title: 'Booking / sewa baru', desc: 'Pesan kamar untuk penyewa baru, langsung tercatat.' },
+              { img: 'karaoke', w: 602, h: 295, title: 'Karaoke', desc: 'Sewa ruang karaoke dengan hitungan waktu dan tarif.' },
+              { img: 'penjualan', w: 602, h: 253, title: 'Penjualan barang', desc: 'Kasir untuk minuman, makanan, dan item tambahan.' },
+              { img: 'shift', w: 602, h: 364, title: 'Shift kasir', desc: 'Buka dan tutup shift, kas awal dan kas akhir tercatat.' },
+              { img: 'keuangan', w: 602, h: 327, title: 'Keuangan', desc: 'Pendapatan, tagihan, dan pengeluaran dalam satu layar.' },
+              { img: 'pengaturan', w: 602, h: 375, title: 'Pengaturan', desc: 'Identitas penginapan, tarif, dan pengaturan aplikasi.', wide: true },
             ].map((f) => (
               <figure
                 key={f.img}
@@ -161,7 +161,15 @@ export default async function ZRoomsPage() {
                 }`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/images/zrooms/${f.img}.webp`} alt={f.title} className="block w-full border-b border-gray-800" />
+                <img
+                  src={`/images/zrooms/${f.img}.webp`}
+                  alt={f.title}
+                  width={f.w}
+                  height={f.h}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto w-full border-b border-gray-800"
+                />
                 <figcaption className="px-5 py-4">
                   <b className="block text-sm font-bold">{f.title}</b>
                   <span className="mt-1 block text-xs leading-relaxed text-gray-400">{f.desc}</span>

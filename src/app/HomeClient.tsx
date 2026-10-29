@@ -217,6 +217,7 @@ function TestimoniCard({ t }: { t: Testimoni }) {
 
 export default function HomeClient({ latestArticles }: Props) {
   const [lang, setLang] = useState<'id' | 'en'>('id')
+  const [menuBuka, setMenuBuka] = useState(false)
   const [activeTab, setActiveTab] = useState<'semua' | 'tips' | 'pertanyaan' | 'update' | 'diskusi'>('semua')
   const [countersStarted, setCountersStarted] = useState(false)
   // Inisialisasi deterministik untuk SSR; useEffect mengacak di client
@@ -332,9 +333,9 @@ export default function HomeClient({ latestArticles }: Props) {
         {/* Navbar */}
         <header className="border-b border-gray-800 bg-gray-950/80 backdrop-blur">
           <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <div className="flex items-center gap-2 text-2xl font-bold">
+            <Link href="/" className="flex items-center gap-2 text-2xl font-bold">
               <i className="bi bi-grid-3x3-gap-fill text-blue-400" /> Zomet
-            </div>
+            </Link>
             <div className="flex items-center gap-3">
               <Link href="/produk" className="text-sm text-gray-300 hover:text-white hidden sm:block transition-colors">
                 Produk
@@ -347,12 +348,49 @@ export default function HomeClient({ latestArticles }: Props) {
               </a>
               <button
                 onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
-                className="rounded-lg bg-gray-800 px-4 py-2 text-sm hover:bg-gray-700 transition-colors"
+                className="min-h-[44px] rounded-lg bg-gray-800 px-4 py-2 text-sm hover:bg-gray-700 transition-colors"
               >
                 {lang === 'id' ? 'EN' : 'ID'}
               </button>
+              {/* Tautan Produk/Artikel/Forum disembunyikan di HP; tanpa tombol ini
+                  pengunjung mobile tidak punya jalan ke halaman produk sama sekali. */}
+              <button
+                type="button"
+                onClick={() => setMenuBuka(!menuBuka)}
+                aria-expanded={menuBuka}
+                aria-label={menuBuka ? 'Tutup menu' : 'Buka menu'}
+                aria-controls="menu-hp"
+                className="grid h-11 w-11 place-items-center rounded-lg bg-gray-800 text-gray-200 hover:bg-gray-700 transition-colors sm:hidden"
+              >
+                <i className={`bi ${menuBuka ? 'bi-x-lg' : 'bi-list'} text-lg`} aria-hidden="true" />
+              </button>
             </div>
           </nav>
+          {menuBuka && (
+            <div id="menu-hp" className="border-t border-gray-800 bg-gray-950 px-6 py-3 sm:hidden">
+              <Link
+                href="/produk"
+                onClick={() => setMenuBuka(false)}
+                className="flex min-h-[48px] items-center gap-3 rounded-lg px-3 text-base text-gray-200 hover:bg-gray-900"
+              >
+                <i className="bi bi-box-seam text-blue-400" aria-hidden="true" /> Produk
+              </Link>
+              <Link
+                href="/artikel"
+                onClick={() => setMenuBuka(false)}
+                className="flex min-h-[48px] items-center gap-3 rounded-lg px-3 text-base text-gray-200 hover:bg-gray-900"
+              >
+                <i className="bi bi-journal-text text-blue-400" aria-hidden="true" /> Artikel
+              </Link>
+              <a
+                href="#forum"
+                onClick={() => setMenuBuka(false)}
+                className="flex min-h-[48px] items-center gap-3 rounded-lg px-3 text-base text-gray-200 hover:bg-gray-900"
+              >
+                <i className="bi bi-chat-dots text-blue-400" aria-hidden="true" /> Forum
+              </a>
+            </div>
+          )}
         </header>
 
       </div>
@@ -629,7 +667,7 @@ export default function HomeClient({ latestArticles }: Props) {
             <button
               key={val}
               onClick={() => setActiveTab(val)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all border ${
+              className={`inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all border ${
                 activeTab === val
                   ? 'bg-blue-600 border-blue-500 text-white'
                   : 'bg-gray-900 border-gray-700 text-gray-400 hover:border-gray-500 hover:text-white'
@@ -717,7 +755,7 @@ export default function HomeClient({ latestArticles }: Props) {
               <h2 className="text-3xl font-bold md:text-4xl">Artikel Terbaru</h2>
               <p className="mt-2 text-gray-400">Tips dan panduan digitalisasi bisnis untuk UMKM Indonesia.</p>
             </div>
-            <Link href="/artikel" className="shrink-0 inline-flex items-center gap-2 rounded-lg border border-gray-700 px-4 py-2 text-sm text-gray-300 hover:border-gray-500 hover:text-white transition-all">
+            <Link href="/artikel" className="shrink-0 inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-gray-700 px-4 py-2 text-sm text-gray-300 hover:border-gray-500 hover:text-white transition-all">
               Lihat Semua <i className="bi bi-arrow-right" />
             </Link>
           </div>

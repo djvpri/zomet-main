@@ -92,7 +92,7 @@ export default function ProdukPage() {
                   {p.thumb ? (
                     <>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={p.thumb} alt={p.name} className="h-full w-full object-cover object-top opacity-90" />
+                      <img src={p.thumb} alt={p.name} width={1919} height={1030} className="h-full w-full object-cover object-top opacity-90" />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/90" />
                       <ZoomThumb src={p.thumb} alt={p.name} />
                     </>

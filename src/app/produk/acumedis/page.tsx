@@ -128,7 +128,9 @@ export default function AcuMedisPage() {
             <img
               src="/images/acumedis/dashboard.webp"
               alt="Beranda AcuMedis"
-              className="block w-full rounded-[1.6rem]"
+              width={709}
+              height={1600}
+              className="block h-auto w-full rounded-[1.6rem]"
             />
           </div>
         </section>
@@ -155,7 +157,11 @@ export default function AcuMedisPage() {
                   <img
                     src={`/images/acumedis/${f.img}.webp`}
                     alt={f.title}
-                    className={`block rounded-lg border border-gray-800 ${f.wide ? 'max-h-[460px]' : 'max-h-[420px]'} w-auto`}
+                    width={709}
+                    height={1600}
+                    loading="lazy"
+                    decoding="async"
+                    className={`block h-auto rounded-lg border border-gray-800 ${f.wide ? 'max-h-[460px]' : 'max-h-[420px]'} w-auto`}
                   />
                 </div>
                 <figcaption className="px-5 py-4">

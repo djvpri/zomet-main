@@ -212,14 +212,14 @@ export default async function ZXCarwashPage() {
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             {[
-              { img: 'kasir', title: 'Kasir', desc: 'Plat nomor, jenis kendaraan, paket cuci dan add-on dalam satu bon.' },
-              { img: 'antrian', title: 'Antrian per bay', desc: 'Mobil mana di bay mana, tukang yang mengerjakan, dan statusnya.' },
-              { img: 'dashboard', title: 'Layanan & harga', desc: 'Paket cuci, harga per jenis kendaraan, dan komisi tukang.' },
-              { img: 'menu', title: 'Menu kantin', desc: 'Produk makanan dan minuman beserta stok, bisa ditambah dari HP.' },
-              { img: 'shift', title: 'Shift & kas', desc: 'Kas awal, kas seharusnya, kas fisik, dan selisihnya.' },
-              { img: 'laporan', title: 'Laporan harian', desc: 'Omzet hari ini, pisah cuci dan kantin, plus daftar bon terakhir.' },
-              { img: 'member', title: 'Member', desc: 'Poin dan saldo deposit per pelanggan, bisa diisi langsung.' },
-              { img: 'pengaturan', title: 'Pengaturan', desc: 'Identitas usaha, catatan nota, printer, dan status langganan.', wide: true },
+              { img: 'kasir', w: 709, h: 1600, title: 'Kasir', desc: 'Plat nomor, jenis kendaraan, paket cuci dan add-on dalam satu bon.' },
+              { img: 'antrian', w: 1080, h: 2436, title: 'Antrian per bay', desc: 'Mobil mana di bay mana, tukang yang mengerjakan, dan statusnya.' },
+              { img: 'dashboard', w: 709, h: 1600, title: 'Layanan & harga', desc: 'Paket cuci, harga per jenis kendaraan, dan komisi tukang.' },
+              { img: 'menu', w: 709, h: 1600, title: 'Menu kantin', desc: 'Produk makanan dan minuman beserta stok, bisa ditambah dari HP.' },
+              { img: 'shift', w: 709, h: 1600, title: 'Shift & kas', desc: 'Kas awal, kas seharusnya, kas fisik, dan selisihnya.' },
+              { img: 'laporan', w: 709, h: 1600, title: 'Laporan harian', desc: 'Omzet hari ini, pisah cuci dan kantin, plus daftar bon terakhir.' },
+              { img: 'member', w: 709, h: 1600, title: 'Member', desc: 'Poin dan saldo deposit per pelanggan, bisa diisi langsung.' },
+              { img: 'pengaturan', w: 709, h: 1600, title: 'Pengaturan', desc: 'Identitas usaha, catatan nota, printer, dan status langganan.', wide: true },
             ].map((f) => (
               <figure
                 key={f.img}
@@ -232,6 +232,10 @@ export default async function ZXCarwashPage() {
                   <img
                     src={`/images/zxcarwash/${f.img}.webp`}
                     alt={f.title}
+                    width={f.w}
+                    height={f.h}
+                    loading="lazy"
+                    decoding="async"
                     className="block w-auto rounded-lg border border-gray-800"
                     style={{ maxHeight: f.wide ? 460 : 420 }}
                   />
