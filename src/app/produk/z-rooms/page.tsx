@@ -3,15 +3,15 @@ import Link from 'next/link'
 import { getDownloads, ZROOMS_DOWNLOADS } from '@/lib/downloads'
 
 export const metadata: Metadata = {
-  title: 'Z-Rooms — Booking Ruangan & Meeting Room | Zomet',
+  title: 'ZXRoom — Booking Ruangan & Meeting Room | Zomet',
   description:
-    'Z-Rooms: booking ruangan untuk meeting room, studio, dan co-working space. Cek jadwal, pesan slot, dan kelola pembayaran. Aplikasi Android. Rp 100.000/bulan atau Rp 1.000.000/tahun.',
+    'ZXRoom: booking ruangan untuk meeting room, studio, dan co-working space. Cek jadwal, pesan slot, dan kelola pembayaran. Aplikasi Android. Rp 100.000/bulan atau Rp 1.000.000/tahun.',
 }
 
 export const revalidate = 3600
 
 const planFeats = [
-  'Z-Rooms versi web (semua fitur)',
+  'ZXRoom versi web (semua fitur)',
   'Aplikasi Android (APK)',
   'Ruangan & jadwal tanpa batas',
   'Booking online + konfirmasi otomatis',
@@ -63,7 +63,7 @@ export default async function ZRoomsPage() {
           <span>/</span>
           <Link href="/produk" className="hover:text-gray-300">Produk</Link>
           <span>/</span>
-          <span className="text-gray-300">Z-Rooms</span>
+          <span className="text-gray-300">ZXRoom</span>
         </nav>
 
         {/* hero */}
@@ -77,7 +77,7 @@ export default async function ZRoomsPage() {
               <span className="bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-transparent">jadwal rapi</span>
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-400">
-              <b className="text-gray-200">Z-Rooms</b> mengurus booking meeting room, studio, dan co-working space — cek
+              <b className="text-gray-200">ZXRoom</b> mengurus booking meeting room, studio, dan co-working space — cek
               ketersediaan, pesan slot, sampai tagihan. Pengelola bisa pantau dari HP.
             </p>
             <div className="mt-7 flex flex-wrap items-baseline gap-3">
@@ -137,7 +137,7 @@ export default async function ZRoomsPage() {
         <section className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-violet-400">Tampilan</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Sembilan layar utama Z-Rooms</h2>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Sembilan layar utama ZXRoom</h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-400">
               Dari kamar dan penyewa sampai karaoke, penjualan, shift kasir, dan laporan pendapatan.
             </p>
@@ -199,7 +199,7 @@ export default async function ZRoomsPage() {
                 ))}
               </ul>
               <a
-                href="https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20langganan%20Z-Rooms%20tahunan"
+                href="https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20langganan%20ZXRoom%20tahunan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-5 w-full cursor-pointer rounded-lg bg-blue-600 px-4 py-2.5 text-center text-sm font-semibold transition-colors hover:bg-blue-500"
@@ -223,7 +223,7 @@ export default async function ZRoomsPage() {
                 ))}
               </ul>
               <a
-                href="https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20langganan%20Z-Rooms%20bulanan"
+                href="https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20langganan%20ZXRoom%20bulanan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-5 w-full cursor-pointer rounded-lg border border-gray-700 bg-gray-800 px-4 py-2.5 text-center text-sm font-semibold transition-colors hover:border-gray-600 hover:bg-gray-700"
@@ -241,7 +241,7 @@ export default async function ZRoomsPage() {
         <section id="unduh" className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-violet-400">Unduhan</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Aplikasi Android Z-Rooms</h2>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Aplikasi Android ZXRoom</h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-400">
               Untuk pengelola yang perlu memantau booking dari HP. Selalu versi terbaru dari GitHub Releases.
             </p>
@@ -302,21 +302,21 @@ export default async function ZRoomsPage() {
         <section className="pb-16">
           <div className="flex flex-col items-start justify-between gap-5 rounded-2xl border border-gray-700 bg-gradient-to-r from-violet-950/40 to-gray-900/40 p-7 sm:flex-row sm:items-center">
             <div>
-              <h2 className="text-xl font-extrabold tracking-tight">Siap kelola ruangan Anda di Z-Rooms?</h2>
+              <h2 className="text-xl font-extrabold tracking-tight">Siap kelola ruangan Anda di ZXRoom?</h2>
               <p className="mt-1.5 text-sm text-gray-400">Mulai dari web, atau pasang aplikasinya di Android.</p>
             </div>
             <a
               href="#unduh"
               className="shrink-0 cursor-pointer rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold transition-colors hover:bg-blue-500"
             >
-              Unduh Z-Rooms
+              Unduh ZXRoom
             </a>
           </div>
         </section>
 
         <footer className="flex flex-col gap-2 border-t border-gray-800 py-6 text-xs text-gray-500 sm:flex-row sm:justify-between">
           <span>© 2026 PT Zomet Teknologi Indonesia</span>
-          <span>zomet.my.id · Z-Rooms</span>
+          <span>zomet.my.id · ZXRoom</span>
         </footer>
       </div>
     </main>

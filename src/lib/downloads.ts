@@ -67,12 +67,12 @@ export const ZXGYM_DOWNLOADS: Spec[] = [
   },
 ]
 
-/** Z-Rooms Android: APK. */
+/** ZXRoom Android: APK. */
 export const ZROOMS_DOWNLOADS: Spec[] = [
   {
     id: 'zrooms-apk',
     repo: 'Z-Rooms-android',
-    name: 'Z-Rooms — Android',
+    name: 'ZXRoom — Android',
     note: 'Android 8+ · pasang APK, izinkan install dari sumber tak dikenal',
     pick: (f) => f.endsWith('.apk'),
     version: '1.0.39',

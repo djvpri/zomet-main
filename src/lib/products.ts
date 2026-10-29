@@ -128,7 +128,7 @@ export const products: Product[] = [
   },
   {
     id: 'zrooms',
-    name: 'Z-Rooms',
+    name: 'ZXRoom',
     description: 'Booking ruangan untuk meeting room dan co-working space. Tersedia sebagai aplikasi Android.',
     description_en: 'Room booking for meeting rooms and co-working spaces. Available as an Android app.',
     url: 'https://z-rooms.zomet.my.id/',
