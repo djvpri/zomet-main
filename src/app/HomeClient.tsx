@@ -322,7 +322,7 @@ export default function HomeClient({ latestArticles }: Props) {
               </span>
               <div className="flex-1 flex justify-end">
                 <button onClick={() => setAnnouncementDismissed(true)}
-                        className="p-1 hover:bg-white/10 rounded transition-colors" aria-label="Tutup">
+                        className="grid h-11 w-11 place-items-center rounded hover:bg-white/10 transition-colors" aria-label="Tutup">
                   <i className="bi bi-x text-base" />
                 </button>
               </div>
