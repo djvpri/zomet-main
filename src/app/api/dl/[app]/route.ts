@@ -8,6 +8,7 @@ const REPOS: Record<string, { repo: string; ext: string }> = {
   acumedis: { repo: 'acumedis-android', ext: '.apk' },
   zrooms: { repo: 'Z-Rooms-android', ext: '.apk' },
   zxgym: { repo: 'zgym_windows', ext: '.exe' },
+  z1label: { repo: 'z1label-android', ext: '.apk' },
   memberkit: { repo: 'memberkit', ext: '.apk' },
 }
 

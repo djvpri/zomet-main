@@ -22,6 +22,8 @@ interface Spec {
   version: string
   /** true = tombol menuju halaman rilis repo, bukan file aset langsung */
   linkToRepo?: boolean
+  /** kunci /api/dl/<api> — tautan tahan ganti versi (selalu rilis terbaru) */
+  api?: string
 }
 
 const mb = (bytes: number) => `${(bytes / 1048576).toFixed(1)} MB`
@@ -51,6 +53,7 @@ export const Z1POS_DOWNLOADS: Spec[] = [
     note: 'Android 8+ · cetak label TSPL via Bluetooth',
     pick: (f) => f.endsWith('.apk'),
     version: '1.8.62',
+    api: 'z1label',
   },
 ]
 
@@ -63,6 +66,7 @@ export const ZXGYM_DOWNLOADS: Spec[] = [
     note: 'Windows 10/11 64-bit · installer, butuh WebView2',
     pick: (f) => f.endsWith('_x64-setup.exe'),
     version: '0.2.2',
+    api: 'zxgym',
   },
 ]
 
@@ -75,6 +79,7 @@ export const ZROOMS_DOWNLOADS: Spec[] = [
     note: 'Android 8+ · pasang APK, izinkan install dari sumber tak dikenal',
     pick: (f) => f.endsWith('.apk'),
     version: '1.0.39',
+    api: 'zrooms',
   },
 ]
 
@@ -108,7 +113,11 @@ export async function getDownloads(specs: Spec[]): Promise<DownloadItem[]> {
     const releaseUrl = `https://github.com/djvpri/${spec.repo}/releases/latest`
     const hit = rel?.assets.find((a) => spec.pick(a.name))
     // linkToRepo: arahkan ke halaman rilis repo, bukan file aset
-    const url = spec.linkToRepo ? `https://github.com/djvpri/${spec.repo}` : hit?.browser_download_url || releaseUrl
+    const url = spec.linkToRepo
+      ? `https://github.com/djvpri/${spec.repo}`
+      : spec.api
+        ? `/api/dl/${spec.api}`
+        : hit?.browser_download_url || releaseUrl
     return {
       id: spec.id,
       name: spec.name,
