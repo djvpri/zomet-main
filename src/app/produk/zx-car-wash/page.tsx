@@ -201,6 +201,26 @@ export default async function ZXCarwashPage() {
           </div>
         </section>
 
+        {/* pratinjau aplikasi */}
+        <section className="border-t border-gray-800 py-16">
+          <div className="mx-auto mb-10 max-w-xl text-center">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-cyan-400">Tampilan</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Layanan dan harga dalam satu layar</h2>
+            <p className="mt-3 text-sm leading-relaxed text-gray-400">
+              Paket cuci dengan harga per jenis kendaraan dan komisi tukang, berdampingan dengan add-on — diatur sendiri
+              dari HP kasir.
+            </p>
+          </div>
+          <div className="mx-auto w-full max-w-[290px] overflow-hidden rounded-[2rem] border border-gray-700 bg-gray-900 p-2 shadow-2xl shadow-black/60">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/zxcarwash/dashboard.webp"
+              alt="Layanan dan harga paket cuci di ZX Carwash"
+              className="block w-full rounded-[1.6rem]"
+            />
+          </div>
+        </section>
+
         {/* fitur */}
         <section id="fitur" className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-10 max-w-xl text-center">
