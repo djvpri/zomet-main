@@ -205,19 +205,43 @@ export default async function ZXCarwashPage() {
         <section className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-cyan-400">Tampilan</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Layanan dan harga dalam satu layar</h2>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Delapan layar yang dipakai setiap hari</h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-400">
-              Paket cuci dengan harga per jenis kendaraan dan komisi tukang, berdampingan dengan add-on — diatur sendiri
-              dari HP kasir.
+              Dari kasir dan antrian sampai menu kantin, shift, laporan, member, dan pengaturan — semuanya dari HP.
             </p>
           </div>
-          <div className="mx-auto w-full max-w-[290px] overflow-hidden rounded-[2rem] border border-gray-700 bg-gray-900 p-2 shadow-2xl shadow-black/60">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/zxcarwash/dashboard.webp"
-              alt="Layanan dan harga paket cuci di ZX Carwash"
-              className="block w-full rounded-[1.6rem]"
-            />
+          <div className="grid gap-5 sm:grid-cols-2">
+            {[
+              { img: 'kasir', title: 'Kasir', desc: 'Plat nomor, jenis kendaraan, paket cuci dan add-on dalam satu bon.' },
+              { img: 'antrian', title: 'Antrian per bay', desc: 'Mobil mana di bay mana, tukang yang mengerjakan, dan statusnya.' },
+              { img: 'dashboard', title: 'Layanan & harga', desc: 'Paket cuci, harga per jenis kendaraan, dan komisi tukang.' },
+              { img: 'menu', title: 'Menu kantin', desc: 'Produk makanan dan minuman beserta stok, bisa ditambah dari HP.' },
+              { img: 'shift', title: 'Shift & kas', desc: 'Kas awal, kas seharusnya, kas fisik, dan selisihnya.' },
+              { img: 'laporan', title: 'Laporan harian', desc: 'Omzet hari ini, pisah cuci dan kantin, plus daftar bon terakhir.' },
+              { img: 'member', title: 'Member', desc: 'Poin dan saldo deposit per pelanggan, bisa diisi langsung.' },
+              { img: 'pengaturan', title: 'Pengaturan', desc: 'Identitas usaha, catatan nota, printer, dan status langganan.', wide: true },
+            ].map((f) => (
+              <figure
+                key={f.img}
+                className={`m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600 ${
+                  f.wide ? 'sm:col-span-2' : ''
+                }`}
+              >
+                <div className="flex justify-center bg-gray-950 p-3">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/images/zxcarwash/${f.img}.webp`}
+                    alt={f.title}
+                    className="block w-auto rounded-lg border border-gray-800"
+                    style={{ maxHeight: f.wide ? 460 : 420 }}
+                  />
+                </div>
+                <figcaption className="px-5 py-4">
+                  <b className="block text-sm font-bold">{f.title}</b>
+                  <span className="mt-1 block text-xs leading-relaxed text-gray-400">{f.desc}</span>
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </section>
 
