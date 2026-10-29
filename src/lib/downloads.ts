@@ -60,10 +60,9 @@ export const ZXGYM_DOWNLOADS: Spec[] = [
     id: 'zxgym-windows',
     repo: 'zgym_windows',
     name: 'ZXGym — Windows',
-    note: 'Installer & portable tersedia di halaman rilis · Windows 10/11 64-bit, butuh WebView2',
+    note: 'Windows 10/11 64-bit · installer, butuh WebView2',
     pick: (f) => f.endsWith('_x64-setup.exe'),
     version: '0.2.2',
-    linkToRepo: true,
   },
 ]
 

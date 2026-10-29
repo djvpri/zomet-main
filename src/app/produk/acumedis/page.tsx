@@ -96,7 +96,7 @@ export default function AcuMedisPage() {
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href="https://github.com/djvpri/acumedis-android/releases/latest"
+                href="/api/dl/acumedis"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold transition-colors hover:bg-blue-500"
