@@ -180,7 +180,7 @@ export const products: Product[] = [
     bsIcon: 'bi-shield-check',
     tags: ['Parenting', 'Android'],
     detail: 'zx-parenting',
-    thumb: '/images/zxparenting/feature.webp',
+    thumb: '/images/zxparenting/profil.webp',
     price: 'Rp 100.000',
     priceNote: 'per bulan · Pro; Elite Rp 250.000/bulan',
     live: true,

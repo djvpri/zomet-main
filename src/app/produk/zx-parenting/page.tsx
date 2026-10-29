@@ -206,20 +206,58 @@ export default async function ZXParentingPage() {
           </div>
         </section>
 
-        {/* banner */}
-        <section className="border-t border-gray-800 py-14">
-          <figure className="m-0 overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/50">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/zxparenting/feature.webp"
-              alt="ZX Parenting — Cerdas Berteknologi, Aman Berkreasi"
-              width={1024}
-              height={500}
-              loading="lazy"
-              decoding="async"
-              className="block h-auto w-full"
-            />
-          </figure>
+        {/* pratinjau aplikasi */}
+        <section className="border-t border-gray-800 py-16">
+          <div className="mx-auto mb-10 max-w-xl text-center">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-violet-400">Tampilan</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">App orang tua</h2>
+            <p className="mt-3 text-sm leading-relaxed text-gray-400">
+              Profil, anak, tugas, hadiah, dan langganan — semua dari satu aplikasi.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
+              <div className="flex justify-center bg-gray-950 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/zxparenting/profil.webp"
+                  alt="Profil di aplikasi ZX Parenting untuk orang tua"
+                  width={709}
+                  height={1600}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto rounded-lg border border-gray-800"
+                  style={{ maxHeight: 420 }}
+                />
+              </div>
+              <figcaption className="px-5 py-4">
+                <b className="block text-sm font-bold">Profil</b>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-400">
+                  Identitas orang tua, pengaturan bahasa, status langganan, dan keluar akun.
+                </span>
+              </figcaption>
+            </figure>
+            <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
+              <div className="flex justify-center bg-gray-950 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/zxparenting/feature.webp"
+                  alt="ZX Parenting — Cerdas Berteknologi, Aman Berkreasi"
+                  width={1024}
+                  height={500}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto w-full self-center rounded-lg border border-gray-800"
+                />
+              </div>
+              <figcaption className="px-5 py-4">
+                <b className="block text-sm font-bold">Cerdas berteknologi, aman berkreasi</b>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-400">
+                  Kontrol waktu layar, blokir konten, zona aman GPS, dan apresiasi lewat Token.
+                </span>
+              </figcaption>
+            </figure>
+          </div>
         </section>
 
         {/* fitur */}
