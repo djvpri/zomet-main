@@ -135,6 +135,7 @@ export const products: Product[] = [
     bsIcon: 'bi-house-door',
     tags: ['Booking', 'Workspace'],
     detail: 'z-rooms',
+    thumb: '/images/zrooms/dashboard.webp',
     price: 'Rp 100.000',
     priceNote: 'per bulan · atau 1 juta/tahun',
     live: true,

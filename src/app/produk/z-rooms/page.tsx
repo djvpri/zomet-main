@@ -133,6 +133,44 @@ export default async function ZRoomsPage() {
           </div>
         </section>
 
+        {/* pratinjau aplikasi */}
+        <section className="border-t border-gray-800 py-16">
+          <div className="mx-auto mb-10 max-w-xl text-center">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-violet-400">Tampilan</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Sembilan layar utama Z-Rooms</h2>
+            <p className="mt-3 text-sm leading-relaxed text-gray-400">
+              Dari kamar dan penyewa sampai karaoke, penjualan, shift kasir, dan laporan pendapatan.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {[
+              { img: 'dashboard', title: 'Dashboard', desc: 'Hunian, kamar terisi, pendapatan bulan ini, dan aktivitas terbaru.', wide: true },
+              { img: 'kamar', title: 'Kamar', desc: 'Daftar kamar beserta status terisi atau kosong.' },
+              { img: 'penyewa', title: 'Penyewa', desc: 'Data penyewa, kamar yang dipakai, dan masa sewanya.' },
+              { img: 'booking-baru', title: 'Booking / sewa baru', desc: 'Pesan kamar untuk penyewa baru, langsung tercatat.' },
+              { img: 'karaoke', title: 'Karaoke', desc: 'Sewa ruang karaoke dengan hitungan waktu dan tarif.' },
+              { img: 'penjualan', title: 'Penjualan barang', desc: 'Kasir untuk minuman, makanan, dan item tambahan.' },
+              { img: 'shift', title: 'Shift kasir', desc: 'Buka dan tutup shift, kas awal dan kas akhir tercatat.' },
+              { img: 'keuangan', title: 'Keuangan', desc: 'Pendapatan, tagihan, dan pengeluaran dalam satu layar.' },
+              { img: 'pengaturan', title: 'Pengaturan', desc: 'Identitas penginapan, tarif, dan pengaturan aplikasi.', wide: true },
+            ].map((f) => (
+              <figure
+                key={f.img}
+                className={`m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600 ${
+                  f.wide ? 'sm:col-span-2' : ''
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/images/zrooms/${f.img}.webp`} alt={f.title} className="block w-full border-b border-gray-800" />
+                <figcaption className="px-5 py-4">
+                  <b className="block text-sm font-bold">{f.title}</b>
+                  <span className="mt-1 block text-xs leading-relaxed text-gray-400">{f.desc}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
         {/* harga */}
         <section id="harga" className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-8 max-w-xl text-center">
