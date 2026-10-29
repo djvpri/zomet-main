@@ -149,6 +149,7 @@ export const products: Product[] = [
     bsIcon: 'bi-car-front',
     tags: ['POS', 'SaaS'],
     detail: 'zx-car-wash',
+    thumb: '/images/zxcarwash/dashboard.webp',
     price: 'Rp 100.000',
     priceNote: 'per bulan · atau 1 juta/tahun',
     live: true,
