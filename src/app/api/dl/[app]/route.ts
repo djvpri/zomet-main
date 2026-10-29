@@ -11,6 +11,10 @@ const REPOS: Record<string, { repo: string; ext: string }> = {
   z1label: { repo: 'z1label-android', ext: '.apk' },
   zxcarwash: { repo: 'zx-carwash', ext: '.apk' },
   memberkit: { repo: 'memberkit', ext: '.apk' },
+  // dua APK: orang tua + anak. `zxparenting` = app ortu (yang dipakai membeli)
+  zxparenting: { repo: 'ZX-Parenting-ortu', ext: '.apk' },
+  zxparentingortu: { repo: 'ZX-Parenting-ortu', ext: '.apk' },
+  zxparentinganak: { repo: 'ZX-Parenting-agent', ext: '.apk' },
 }
 
 export async function GET(_req: Request, { params }: { params: Promise<{ app: string }> }) {

@@ -170,6 +170,22 @@ export const products: Product[] = [
     live: true,
   },
   {
+    id: 'zxparenting',
+    name: 'ZX Parenting',
+    description:
+      'Pengasuhan digital: kontrol waktu layar, blokir aplikasi & situs, zona aman GPS, jadwal tidur, kuis belajar, dan hadiah Token. Dua aplikasi Android — untuk orang tua dan untuk anak.',
+    description_en:
+      'Digital parenting: screen-time control, app & site blocking, GPS safe zones, curfew, quizzes, and Token rewards. Two Android apps — one for parents, one for kids.',
+    url: '/produk/zx-parenting',
+    bsIcon: 'bi-shield-check',
+    tags: ['Parenting', 'Android'],
+    detail: 'zx-parenting',
+    thumb: '/images/zxparenting/feature.webp',
+    price: 'Rp 100.000',
+    priceNote: 'per bulan · Pro; Elite Rp 250.000/bulan',
+    live: true,
+  },
+  {
     id: 'zwisata',
     name: 'ZWisata',
     description: 'Manajemen paket wisata & tour dengan laporan pendapatan dan booking online.',

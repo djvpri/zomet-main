@@ -147,3 +147,25 @@ export const ZXCARWASH_DOWNLOADS: Spec[] = [
     api: 'zxcarwash',
   },
 ]
+
+/** ZX Parenting: dua APK — app orang tua dan app anak. */
+export const ZXPARENTING_DOWNLOADS: Spec[] = [
+  {
+    id: 'zxparenting-ortu',
+    repo: 'ZX-Parenting-ortu',
+    name: 'ZX Parenting — Orang Tua',
+    note: 'Android 8+ · kelola anak, aturan perangkat, laporan, Token',
+    pick: (f) => f.endsWith('.apk'),
+    version: '3.8.1',
+    api: 'zxparentingortu',
+  },
+  {
+    id: 'zxparenting-anak',
+    repo: 'ZX-Parenting-agent',
+    name: 'ZX Parenting — Anak',
+    note: 'Android 8+ · dipasang di HP anak, pairing dengan token dari app ortu',
+    pick: (f) => f.endsWith('.apk'),
+    version: '2.8.5',
+    api: 'zxparentinganak',
+  },
+]
