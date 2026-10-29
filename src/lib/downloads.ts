@@ -134,3 +134,16 @@ export async function getDownloads(specs: Spec[]): Promise<DownloadItem[]> {
     }
   })
 }
+
+/** ZX Carwash Android: APK kasir cuci + kantin. */
+export const ZXCARWASH_DOWNLOADS: Spec[] = [
+  {
+    id: 'zxcarwash-apk',
+    repo: 'zx-carwash',
+    name: 'ZX Carwash — Android',
+    note: 'Android 8+ · kasir offline, printer thermal Bluetooth 58mm',
+    pick: (f) => f.endsWith('.apk'),
+    version: '0.6.1',
+    api: 'zxcarwash',
+  },
+]

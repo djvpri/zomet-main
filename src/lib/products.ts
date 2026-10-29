@@ -141,6 +141,19 @@ export const products: Product[] = [
     live: true,
   },
   {
+    id: 'zxcarwash',
+    name: 'ZX Carwash',
+    description: 'Kasir cuci mobil + kantin: satu bon gabungan, antrian per bay, komisi tukang, shift, dan laporan. Jalan offline, tersedia sebagai aplikasi Android.',
+    description_en: 'Car wash + canteen POS: one combined bill, per-bay queue, worker commission, shifts, and reports. Works offline, available as an Android app.',
+    url: '/produk/zx-car-wash',
+    bsIcon: 'bi-car-front',
+    tags: ['POS', 'SaaS'],
+    detail: 'zx-car-wash',
+    price: 'Rp 100.000',
+    priceNote: 'per bulan · atau 1 juta/tahun',
+    live: true,
+  },
+  {
     // Z-Medics sudah digantikan AcuMedis (nama baru + fitur analisis lidah AI)
     id: 'acumedis',
     name: 'AcuMedis',
