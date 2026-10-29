@@ -241,6 +241,29 @@ export default async function ZXParentingPage() {
               <div className="flex justify-center bg-gray-950 p-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
+                  src="/images/zxparenting/marketplace.webp"
+                  alt="Marketplace hadiah anak di aplikasi ZX Parenting"
+                  width={709}
+                  height={1600}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto rounded-lg border border-gray-800"
+                  style={{ maxHeight: 420 }}
+                />
+              </div>
+              <figcaption className="px-5 py-4">
+                <b className="block text-sm font-bold">Marketplace & pesanan hadiah</b>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-400">
+                  Anak meminta hadiah, orang tua menyetujui atau menolak — Token terpotong otomatis saat disetujui.
+                </span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <figure className="m-0 mt-5 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
+              <div className="flex justify-center bg-gray-950 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src="/images/zxparenting/feature.webp"
                   alt="ZX Parenting — Cerdas Berteknologi, Aman Berkreasi"
                   width={1024}
@@ -256,8 +279,7 @@ export default async function ZXParentingPage() {
                   Kontrol waktu layar, blokir konten, zona aman GPS, dan apresiasi lewat Token.
                 </span>
               </figcaption>
-            </figure>
-          </div>
+          </figure>
         </section>
 
         {/* fitur */}
