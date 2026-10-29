@@ -140,13 +140,15 @@ export const products: Product[] = [
     live: true,
   },
   {
-    id: 'zmedics',
-    name: 'Z-Medics',
-    description: 'Platform kesehatan dengan rekam medis digital dan konsultasi.',
-    description_en: 'Healthcare platform with digital medical records and consultations.',
-    url: 'https://zmedics.zomet.my.id/',
-    bsIcon: 'bi-hospital',
+    // Z-Medics sudah digantikan AcuMedis (nama baru + fitur analisis lidah AI)
+    id: 'acumedis',
+    name: 'AcuMedis',
+    description: 'Klinik akupunktur & TCM: pasien, jadwal, sesi terapi, analisis lidah AI, nota thermal, dan laporan keuangan. Tersedia sebagai aplikasi Android.',
+    description_en: 'Acupuncture & TCM clinic: patients, scheduling, therapy sessions, AI tongue analysis, thermal receipts, and finance reports. Available as an Android app.',
+    url: 'https://acumedis.zomet.my.id/',
+    bsIcon: 'bi-clipboard2-pulse',
     tags: ['Health', 'SaaS'],
+    live: true,
   },
   {
     id: 'zwisata',
