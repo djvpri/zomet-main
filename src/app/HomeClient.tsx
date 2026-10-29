@@ -78,7 +78,7 @@ const allTestimoni: Testimoni[] = [
   { id: 'tm7',  user: 'Fajar Nugroho',      initial: 'FN', color: 'bg-teal-600',   bisnis: 'Bengkel Jaya Motor',    kota: 'Medan',     app: 'ZBengkel',  bintang: 5, kutipan: 'Estimasi selesai otomatis ZBengkel bikin pelanggan tidak kabur nunggu. Omzet naik 25%.' },
   { id: 'tm8',  user: 'Mega Lestari',       initial: 'ML', color: 'bg-pink-600',   bisnis: 'Bu Mega Laundry',       kota: 'Bali',      app: 'ZLaundry', bintang: 5, kutipan: 'Notifikasi WA ZLaundry bikin pelanggan senang. Tidak ada lagi yang nanya sudah selesai belum.' },
   { id: 'tm9',  user: 'Yanto Pratama',      initial: 'YP', color: 'bg-cyan-600',   bisnis: 'Barber Boss',           kota: 'Surabaya',  app: 'ZBarber',   bintang: 5, kutipan: 'Appointment online ZBarber habis dipesan dalam 2 jam. Antrian jadi terkontrol rapi.' },
-  { id: 'tm10', user: 'Lilis Handayani',    initial: 'LH', color: 'bg-red-600',    bisnis: 'Klinik Sehat Mandiri',  kota: 'Jakarta',   app: 'Z-Medics',  bintang: 5, kutipan: 'Rekam medis digital ZMedics sangat membantu. Riwayat pasien muncul dalam hitungan detik.' },
+  { id: 'tm10', user: 'Lilis Handayani',    initial: 'LH', color: 'bg-red-600',    bisnis: 'Klinik Sehat Mandiri',  kota: 'Jakarta',   app: 'AcuMedis',  bintang: 5, kutipan: 'Rekam medis digital AcuMedis sangat membantu. Riwayat pasien muncul dalam hitungan detik.' },
   { id: 'tm11', user: 'Rudi Hermawan',      initial: 'RH', color: 'bg-indigo-600', bisnis: 'Tour Indah Nusantara',  kota: 'Lombok',    app: 'ZWisata',   bintang: 5, kutipan: 'Laporan revenue per paket ZWisata bikin saya tahu persis paket mana yang paling laku.' },
   { id: 'tm12', user: 'Anita Dewi',         initial: 'AD', color: 'bg-purple-600', bisnis: 'Copy Center Prima',     kota: 'Bekasi',    app: 'ZPrint',    bintang: 5, kutipan: 'Harga per m² di ZPrint otomatis terhitung. Tidak ada lagi salah hitung spanduk meter-meteran.' },
   { id: 'tm13', user: 'Surya Bakti',        initial: 'SB', color: 'bg-blue-600',   bisnis: 'Coffeeshop Asik',       kota: 'Makassar',  app: 'ZPos',      bintang: 5, kutipan: 'ZPos simpel tapi powerful. Staf baru langsung bisa pakai tanpa training panjang.' },
@@ -110,7 +110,7 @@ const allForumThreads: ForumThread[] = [
   { id: 'p3',  user: 'Eko Prasetyo',  initial: 'EP', color: 'bg-teal-600',   waktu: '3 hari lalu',   judul: 'ZResto bisa dipakai untuk multi-cabang dengan satu akun admin pusat ya?', kategori: 'pertanyaan', balasan: 19, views: 256, app: 'Z-Resto' },
   { id: 'p4',  user: 'Maya Tanjung',  initial: 'MT', color: 'bg-pink-600',   waktu: '4 hari lalu',   judul: 'ZSnap kompatibel dengan Chromebook atau hanya support PC dan Mac saja?', kategori: 'pertanyaan', balasan: 6,  views: 84,  app: 'ZSnap' },
   { id: 'p5',  user: 'Dodi Anwar',    initial: 'DA', color: 'bg-blue-600',   waktu: '5 hari lalu',   judul: 'Cara setup login QR di ZOne untuk karyawan yang tidak punya smartphone pribadi?', kategori: 'pertanyaan', balasan: 11, views: 143, app: 'ZOne' },
-  { id: 'p6',  user: 'Rini Hartati',  initial: 'RH', color: 'bg-violet-600', waktu: '6 hari lalu',   judul: 'ZMedics bisa backup rekam medis otomatis ke Google Drive atau cloud lain nggak?', kategori: 'pertanyaan', balasan: 9,  views: 127, app: 'Z-Medics' },
+  { id: 'p6',  user: 'Rini Hartati',  initial: 'RH', color: 'bg-violet-600', waktu: '6 hari lalu',   judul: 'AcuMedis bisa backup rekam medis otomatis ke Google Drive atau cloud lain nggak?', kategori: 'pertanyaan', balasan: 9,  views: 127, app: 'AcuMedis' },
   { id: 'p7',  user: 'Tomi Bagus',    initial: 'TB', color: 'bg-green-600',  waktu: '1 minggu lalu', judul: 'ZBilliar timer bisa di-reset manual kalau pelanggan komplain tagihannya tidak sesuai?', kategori: 'pertanyaan', balasan: 5,  views: 76,  app: 'ZBilliar' },
   { id: 'p8',  user: 'Ayu Cahyani',   initial: 'AC', color: 'bg-red-600',    waktu: '1 minggu lalu', judul: 'ZTrader ini hanya simulator atau bisa connect ke akun broker saham sungguhan?', kategori: 'pertanyaan', balasan: 22, views: 341, app: 'ZTrader' },
   { id: 'p9',  user: 'Surya Nugraha', initial: 'SN', color: 'bg-amber-600',  waktu: '2 minggu lalu', judul: 'Z-Rooms bisa integrasi dengan Google Calendar untuk notifikasi booking otomatis?', kategori: 'pertanyaan', balasan: 10, views: 158, app: 'Z-Rooms' },
@@ -128,7 +128,7 @@ const allForumThreads: ForumThread[] = [
   { id: 'd3',  user: 'Hasan K.',      initial: 'HK', color: 'bg-amber-600',  waktu: '5 hari lalu',   judul: 'Sudah 2 minggu amati ZTrader: AI mana yang paling konsisten profit di LQ45?', kategori: 'diskusi', balasan: 33, views: 567, app: 'ZTrader' },
   { id: 'd4',  user: 'Ratna Sari',    initial: 'RS', color: 'bg-violet-600', waktu: '6 hari lalu',   judul: 'Review jujur: ZPos vs aplikasi kasir lain yang pernah saya coba selama 2 tahun ini', kategori: 'diskusi', balasan: 27, views: 489, app: 'ZPos' },
   { id: 'd5',  user: 'Joko W.',       initial: 'JW', color: 'bg-teal-600',   waktu: '1 minggu lalu', judul: 'Tips jaga stok perhiasan saat harga emas naik drastis — sharing pengalaman pakai ZGold', kategori: 'diskusi', balasan: 16, views: 274, app: 'ZGold' },
-  { id: 'd6',  user: 'Ferry R.',      initial: 'FR', color: 'bg-blue-600',   waktu: '2 minggu lalu', judul: 'Dari catatan manual ke ZMedics: pengalaman klinik kami selama 6 bulan pemakaian', kategori: 'diskusi', balasan: 14, views: 231, app: 'Z-Medics' },
+  { id: 'd6',  user: 'Ferry R.',      initial: 'FR', color: 'bg-blue-600',   waktu: '2 minggu lalu', judul: 'Dari catatan manual ke AcuMedis: pengalaman klinik kami selama 6 bulan pemakaian', kategori: 'diskusi', balasan: 14, views: 231, app: 'AcuMedis' },
 ]
 
 // ── Pool 24 item ticker — diacak tiap kunjungan ───────────────────────────────
@@ -148,7 +148,7 @@ const allActivitasTicker: TickerItem[] = [
   { icon: 'bi-gem',              text: 'ZGold Toko Mulia transaksi perhiasan senilai Rp 45 juta' },
   { icon: 'bi-building',         text: 'ZRooms: Meeting room A full booking sampai Jumat' },
   { icon: 'bi-trophy',           text: 'ZBilliar Asik: meja 3 dipakai non-stop selama 4 jam' },
-  { icon: 'bi-hospital',         text: 'Z-Medics Klinik Sehat input 12 rekam medis hari ini' },
+  { icon: 'bi-clipboard2-pulse',  text: 'AcuMedis Klinik Sehat input 12 rekam medis hari ini' },
   { icon: 'bi-robot',            text: 'ZSnap: 340 soal berhasil dijawab AI hari ini' },
   { icon: 'bi-person-badge',     text: 'ZFace: 89 identifikasi wajah sukses pagi ini' },
   { icon: 'bi-bar-chart-fill',   text: 'ZPos Toko Berkah: omzet hari ini tembus Rp 8,7 juta' },
