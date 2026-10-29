@@ -333,7 +333,7 @@ export default function HomeClient({ latestArticles }: Props) {
         {/* Navbar */}
         <header className="border-b border-gray-800 bg-gray-950/80 backdrop-blur">
           <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <Link href="/" className="flex items-center gap-2 text-2xl font-bold">
+            <Link href="/" className="flex min-h-[44px] items-center gap-2 text-2xl font-bold">
               <i className="bi bi-grid-3x3-gap-fill text-blue-400" /> Zomet
             </Link>
             <div className="flex items-center gap-3">
@@ -608,7 +608,7 @@ export default function HomeClient({ latestArticles }: Props) {
             href={WA_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-500 transition-colors"
+            className="shrink-0 inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-500 transition-colors"
           >
             <i className="bi bi-plus-circle" /> Gabung Komunitas
           </a>
@@ -852,7 +852,7 @@ export default function HomeClient({ latestArticles }: Props) {
             <button
               onClick={() => setShortsOpen(false)}
               aria-label="Tutup"
-              className="absolute -top-10 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-gray-800/90 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors z-10"
+              className="absolute -top-12 right-0 flex h-11 w-11 items-center justify-center rounded-full bg-gray-800/90 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors z-10"
             >
               <i className="bi bi-x-lg text-sm" />
             </button>
