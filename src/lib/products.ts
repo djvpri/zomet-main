@@ -186,6 +186,21 @@ export const products: Product[] = [
     live: true,
   },
   {
+    id: 'zxpajak',
+    name: 'ZX Pajak Kendaraan',
+    description:
+      'Cek dan bayar pajak kendaraan plat KB Kalimantan Barat tanpa datang ke samsat: unggah STNK, terima rincian, bayar transfer, struk tersimpan. Tersedia sebagai aplikasi Android.',
+    description_en:
+      'Check and pay vehicle tax for KB (West Kalimantan) plates without visiting the samsat office: upload STNK, receive the breakdown, pay by transfer, keep the receipt. Available as an Android app.',
+    url: '/produk/zx-pajak',
+    bsIcon: 'bi-car-front-fill',
+    tags: ['Pajak', 'Android'],
+    detail: 'zx-pajak',
+    price: 'Gratis',
+    priceNote: 'biaya layanan muncul di rincian sebelum bayar',
+    live: true,
+  },
+  {
     id: 'zwisata',
     name: 'ZWisata',
     description: 'Manajemen paket wisata & tour dengan laporan pendapatan dan booking online.',
