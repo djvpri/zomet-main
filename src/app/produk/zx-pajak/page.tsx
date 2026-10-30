@@ -196,37 +196,56 @@ export default function ZXPajakPage() {
           </div>
         </section>
 
-        {/* pratinjau struk */}
+        {/* pratinjau layar */}
         <section className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-emerald-400">Tampilan</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Struk digital setelah lunas</h2>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Empat layar, dari rincian sampai struk</h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-400">
-              Nominal pajak, biaya cek, admin, dan kirim tercetak satu per satu, plus nomor resi pengiriman.
+              Total tagihan, rekening tujuan, bukti transfer, dan struk — semuanya tersimpan di HP.
             </p>
           </div>
-          <div className="mx-auto w-full max-w-[290px] overflow-hidden rounded-[2rem] border border-gray-700 bg-gray-900 p-2 shadow-2xl shadow-black/60">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/zxpajak/struk.webp"
-              alt="Struk digital ZX Pajak Kendaraan Kalbar"
-              width={709}
-              height={1600}
-              loading="lazy"
-              decoding="async"
-              className="block h-auto w-full rounded-[1.6rem]"
-            />
-          </div>
-          <div className="mx-auto mt-8 grid max-w-2xl gap-4 sm:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2">
             {[
-              ['Rincian terbuka', 'Empat baris biaya, bukan satu angka total.'],
-              ['Nomor resi', 'Kurir dan resi tercantum saat berkas dikirim.'],
-              ['Bisa dibagikan', 'Simpan sebagai gambar atau salin sebagai teks.'],
-            ].map(([t, d]) => (
-              <div key={t} className="rounded-xl border border-gray-800 bg-gray-900/50 p-4">
-                <b className="block text-sm">{t}</b>
-                <span className="mt-1 block text-xs leading-relaxed text-gray-400">{d}</span>
-              </div>
+              {
+                img: 'rincian', w: 709, h: 1600, t: 'Rincian tagihan',
+                d: 'Total, rincian biaya, dan detail pengiriman dalam satu layar sebelum membayar.',
+              },
+              {
+                img: 'bayar', w: 709, h: 1600, t: 'Pembayaran',
+                d: 'Nominal dan rekening tujuan ditampilkan; unggah bukti transfer, lalu kirim.',
+              },
+              {
+                img: 'terkirim', w: 709, h: 1600, t: 'Bukti terkirim',
+                d: 'Status jelas: bukti sudah dikirim dan sedang menunggu verifikasi admin.',
+              },
+              {
+                img: 'struk', w: 709, h: 1600, t: 'Struk digital',
+                d: 'Setelah lunas, struk tercetak dengan rincian, kurir, dan nomor resi.',
+              },
+            ].map((f) => (
+              <figure
+                key={f.img}
+                className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600"
+              >
+                <div className="flex justify-center bg-gray-950 p-3">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/images/zxpajak/${f.img}.webp`}
+                    alt={`${f.t} di ZX Pajak Kendaraan`}
+                    width={f.w}
+                    height={f.h}
+                    loading="lazy"
+                    decoding="async"
+                    className="block h-auto rounded-lg border border-gray-800"
+                    style={{ maxHeight: 420 }}
+                  />
+                </div>
+                <figcaption className="px-5 py-4">
+                  <b className="block text-sm font-bold">{f.t}</b>
+                  <span className="mt-1 block text-xs leading-relaxed text-gray-400">{f.d}</span>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </section>
