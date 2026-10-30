@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getDownloads, ZXPAJAK_DOWNLOADS } from '@/lib/downloads'
+import ZoomGambar from '../ZoomGambar'
 
 // ISR: halaman dirender ulang tiap 5 menit supaya versi & ukuran APK mengikuti
 // rilis terbaru. Tanpa ini, getDownloads() hanya jalan saat build (tanpa token)
@@ -251,16 +252,12 @@ export default async function ZXPajakPage() {
                 className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600"
               >
                 <div className="flex justify-center bg-gray-950 p-3">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <ZoomGambar
                     src={`/images/zxpajak/${f.img}.webp`}
                     alt={`${f.t} di ZX Pajak Kendaraan`}
                     width={f.w}
                     height={f.h}
-                    loading="lazy"
-                    decoding="async"
-                    className="block h-auto rounded-lg border border-gray-800"
-                    style={{ maxHeight: 420 }}
+                    maxHeight={420}
                   />
                 </div>
                 <figcaption className="px-5 py-4">

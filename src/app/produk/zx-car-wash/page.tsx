@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getDownloads, ZXCARWASH_DOWNLOADS } from '@/lib/downloads'
+import ZoomGambar from '../ZoomGambar'
 
 export const metadata: Metadata = {
   title: 'ZX Carwash — Kasir Cuci Mobil & Kantin | Zomet',
@@ -228,16 +229,13 @@ export default async function ZXCarwashPage() {
                 }`}
               >
                 <div className="flex justify-center bg-gray-950 p-3">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <ZoomGambar
                     src={`/images/zxcarwash/${f.img}.webp`}
                     alt={f.title}
                     width={f.w}
                     height={f.h}
-                    loading="lazy"
-                    decoding="async"
-                    className="block w-auto rounded-lg border border-gray-800"
-                    style={{ maxHeight: f.wide ? 460 : 420 }}
+                    maxHeight={f.wide ? 460 : 420}
+                    className="w-auto"
                   />
                 </div>
                 <figcaption className="px-5 py-4">

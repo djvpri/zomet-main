@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import ZoomGambar from '../ZoomGambar'
 
 export const metadata: Metadata = {
   title: 'AcuMedis — Klinik Akupunktur & TCM | Zomet',
@@ -154,14 +155,13 @@ export default function AcuMedisPage() {
               >
                 <div className={`bg-gray-950 ${f.wide ? 'p-4' : 'p-3'} flex justify-center`}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <ZoomGambar
                     src={`/images/acumedis/${f.img}.webp`}
                     alt={f.title}
                     width={709}
                     height={1600}
-                    loading="lazy"
-                    decoding="async"
-                    className={`block h-auto rounded-lg border border-gray-800 ${f.wide ? 'max-h-[460px]' : 'max-h-[420px]'} w-auto`}
+                    maxHeight={f.wide ? 460 : 420}
+                    className="w-auto"
                   />
                 </div>
                 <figcaption className="px-5 py-4">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getDownloads, ZROOMS_DOWNLOADS } from '@/lib/downloads'
+import ZoomGambar from '../ZoomGambar'
 
 export const metadata: Metadata = {
   title: 'ZXRoom — Booking Ruangan & Meeting Room | Zomet',
@@ -160,16 +161,15 @@ export default async function ZRoomsPage() {
                   f.wide ? 'sm:col-span-2' : ''
                 }`}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`/images/zrooms/${f.img}.webp`}
-                  alt={f.title}
-                  width={f.w}
-                  height={f.h}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto w-full border-b border-gray-800"
-                />
+                <div className="border-b border-gray-800 p-2">
+                  <ZoomGambar
+                    src={`/images/zrooms/${f.img}.webp`}
+                    alt={f.title}
+                    width={f.w}
+                    height={f.h}
+                    className="w-full"
+                  />
+                </div>
                 <figcaption className="px-5 py-4">
                   <b className="block text-sm font-bold">{f.title}</b>
                   <span className="mt-1 block text-xs leading-relaxed text-gray-400">{f.desc}</span>

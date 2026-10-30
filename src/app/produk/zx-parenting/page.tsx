@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getDownloads, ZXPARENTING_DOWNLOADS } from '@/lib/downloads'
+import ZoomGambar from '../ZoomGambar'
 
 export const metadata: Metadata = {
   title: 'ZX Parenting — Kontrol Orang Tua & HP Anak | Zomet',
@@ -218,17 +219,13 @@ export default async function ZXParentingPage() {
           <div className="grid gap-5 sm:grid-cols-2">
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/ortu-beranda.webp"
                   alt="Beranda aplikasi ZX Parenting orang tua"
                   width={709}
                   height={1600}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto rounded-lg border border-gray-800"
-                  style={{ maxHeight: 420 }}
-                />
+                  maxHeight={420}
+/>
               </div>
               <figcaption className="px-5 py-4">
                 <b className="block text-sm font-bold">Beranda</b>
@@ -239,17 +236,13 @@ export default async function ZXParentingPage() {
             </figure>
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/anak.webp"
                   alt="Daftar anak di aplikasi ZX Parenting"
                   width={1080}
                   height={2436}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto rounded-lg border border-gray-800"
-                  style={{ maxHeight: 420 }}
-                />
+                  maxHeight={420}
+/>
               </div>
               <figcaption className="px-5 py-4">
                 <b className="block text-sm font-bold">Anak</b>
@@ -260,17 +253,13 @@ export default async function ZXParentingPage() {
             </figure>
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/tugas.webp"
                   alt="Daftar tugas anak di aplikasi ZX Parenting"
                   width={709}
                   height={1600}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto rounded-lg border border-gray-800"
-                  style={{ maxHeight: 420 }}
-                />
+                  maxHeight={420}
+/>
               </div>
               <figcaption className="px-5 py-4">
                 <b className="block text-sm font-bold">Tugas</b>
@@ -281,17 +270,13 @@ export default async function ZXParentingPage() {
             </figure>
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/profil.webp"
                   alt="Profil di aplikasi ZX Parenting untuk orang tua"
                   width={709}
                   height={1600}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto rounded-lg border border-gray-800"
-                  style={{ maxHeight: 420 }}
-                />
+                  maxHeight={420}
+/>
               </div>
               <figcaption className="px-5 py-4">
                 <b className="block text-sm font-bold">Profil</b>
@@ -302,17 +287,13 @@ export default async function ZXParentingPage() {
             </figure>
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/marketplace.webp"
                   alt="Marketplace hadiah anak di aplikasi ZX Parenting"
                   width={709}
                   height={1600}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto rounded-lg border border-gray-800"
-                  style={{ maxHeight: 420 }}
-                />
+                  maxHeight={420}
+/>
               </div>
               <figcaption className="px-5 py-4">
                 <b className="block text-sm font-bold">Marketplace & pesanan hadiah</b>
@@ -325,15 +306,12 @@ export default async function ZXParentingPage() {
 
           <figure className="m-0 mt-5 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/feature.webp"
                   alt="ZX Parenting — Cerdas Berteknologi, Aman Berkreasi"
                   width={1024}
                   height={500}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto w-full self-center rounded-lg border border-gray-800"
+                  className="w-full"
                 />
               </div>
               <figcaption className="px-5 py-4">
@@ -357,17 +335,13 @@ export default async function ZXParentingPage() {
           <div className="grid gap-5 sm:grid-cols-2">
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/anak-beranda.webp"
                   alt="Beranda aplikasi ZX Parenting untuk anak"
                   width={709}
                   height={1600}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto rounded-lg border border-gray-800"
-                  style={{ maxHeight: 400 }}
-                />
+                  maxHeight={400}
+/>
               </div>
               <figcaption className="px-5 py-4">
                 <b className="block text-sm font-bold">Beranda anak</b>
@@ -378,17 +352,13 @@ export default async function ZXParentingPage() {
             </figure>
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/anak-tugas.webp"
                   alt="Daftar tugas di aplikasi ZX Parenting untuk anak"
                   width={1080}
                   height={2436}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto rounded-lg border border-gray-800"
-                  style={{ maxHeight: 400 }}
-                />
+                  maxHeight={400}
+/>
               </div>
               <figcaption className="px-5 py-4">
                 <b className="block text-sm font-bold">Tugas anak</b>
@@ -399,17 +369,13 @@ export default async function ZXParentingPage() {
             </figure>
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/anak-saya.webp"
                   alt="Profil di aplikasi ZX Parenting untuk anak"
                   width={709}
                   height={1600}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto rounded-lg border border-gray-800"
-                  style={{ maxHeight: 400 }}
-                />
+                  maxHeight={400}
+/>
               </div>
               <figcaption className="px-5 py-4">
                 <b className="block text-sm font-bold">Profil anak</b>
@@ -420,17 +386,13 @@ export default async function ZXParentingPage() {
             </figure>
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <ZoomGambar
                   src="/images/zxparenting/anak-kuis.webp"
                   alt="Kuis AI di aplikasi ZX Parenting untuk anak"
                   width={709}
                   height={1600}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto rounded-lg border border-gray-800"
-                  style={{ maxHeight: 400 }}
-                />
+                  maxHeight={400}
+/>
               </div>
               <figcaption className="px-5 py-4">
                 <b className="block text-sm font-bold">Kuis AI</b>
