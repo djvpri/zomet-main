@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import ZoomGambar from '../ZoomGambar'
 import { getDownloads, Z1POS_DOWNLOADS } from '@/lib/downloads'
 
 export const metadata: Metadata = {
@@ -131,11 +132,23 @@ export default async function Z1PosPage() {
                 <span className="ml-2 font-mono text-[10px] text-gray-500">Z1 Kasir — Toserba Raya Mart</span>
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/z1pos/kasir.webp" alt="Layar transaksi Z1 Kasir" className="block w-full" />
+              <ZoomGambar
+                src="/images/z1pos/kasir.webp"
+                alt="Layar transaksi Z1 Kasir"
+                width={1919}
+                height={1030}
+                className="w-full rounded-none border-0"
+              />
             </div>
             <div className="absolute -bottom-6 -right-2 w-40 overflow-hidden rounded-2xl border border-gray-700 bg-gray-900 shadow-2xl shadow-black/70 ring-4 ring-gray-950 sm:w-44">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/z1pos/label-a.webp" alt="Z1 Label di Android" className="block w-full" />
+              <ZoomGambar
+                src="/images/z1pos/label-a.webp"
+                alt="Z1 Label di Android"
+                width={709}
+                height={1600}
+                className="w-full rounded-none border-0"
+              />
             </div>
           </div>
         </section>
@@ -227,7 +240,15 @@ export default async function Z1PosPage() {
                 className={`m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600 ${f.wide ? 'sm:col-span-2' : ''}`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/images/z1pos/${f.img}.webp`} alt={f.title} className="block w-full border-b border-gray-800" />
+                <div className="border-b border-gray-800">
+                  <ZoomGambar
+                    src={`/images/z1pos/${f.img}.webp`}
+                    alt={f.title}
+                    width={1919}
+                    height={f.wide ? 1030 : 878}
+                    className="w-full rounded-none border-0"
+                  />
+                </div>
                 <figcaption className="px-5 py-4">
                   <b className="block text-sm font-bold">{f.title}</b>
                   <span className="mt-1 block text-xs leading-relaxed text-gray-400">{f.desc}</span>

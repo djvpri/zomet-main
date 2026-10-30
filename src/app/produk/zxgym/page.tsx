@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import ZoomGambar from '../ZoomGambar'
 import { getDownloads, ZXGYM_DOWNLOADS } from '@/lib/downloads'
 
 export const metadata: Metadata = {
@@ -134,7 +135,13 @@ export default async function ZXGymPage() {
               <span className="ml-2 font-mono text-[10px] text-gray-500">ZXGym — Dashboard</span>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/zxgym/dashboard.webp" alt="Dashboard ZXGym" className="block w-full" />
+            <ZoomGambar
+              src="/images/zxgym/dashboard.webp"
+              alt="Dashboard ZXGym"
+              width={1919}
+              height={1033}
+              className="w-full rounded-none border-0"
+            />
           </div>
         </section>
 
@@ -154,7 +161,15 @@ export default async function ZXGymPage() {
                 className={`m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600 ${f.wide ? 'sm:col-span-2' : ''}`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/images/zxgym/${f.img}.webp`} alt={f.title} className="block w-full border-b border-gray-800" />
+                <div className="border-b border-gray-800">
+                  <ZoomGambar
+                    src={`/images/zxgym/${f.img}.webp`}
+                    alt={f.title}
+                    width={1919}
+                    height={1031}
+                    className="w-full rounded-none border-0"
+                  />
+                </div>
                 <figcaption className="px-5 py-4">
                   <b className="block text-sm font-bold">{f.title}</b>
                   <span className="mt-1 block text-xs leading-relaxed text-gray-400">{f.desc}</span>
