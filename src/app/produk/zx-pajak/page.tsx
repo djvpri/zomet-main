@@ -1,5 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getDownloads, ZXPAJAK_DOWNLOADS } from '@/lib/downloads'
+
+// ISR: halaman dirender ulang tiap 5 menit supaya versi & ukuran APK mengikuti
+// rilis terbaru. Tanpa ini, getDownloads() hanya jalan saat build (tanpa token)
+// dan repo privat gagal dibaca.
+export const revalidate = 300
 
 export const metadata: Metadata = {
   title: 'ZX Pajak Kendaraan — Cek & Bayar Pajak KB Kalbar | Zomet',
@@ -90,7 +96,8 @@ function Check() {
   )
 }
 
-export default function ZXPajakPage() {
+export default async function ZXPajakPage() {
+  const downloads = await getDownloads(ZXPAJAK_DOWNLOADS)
   return (
     <main className="min-h-screen bg-gray-950 text-white">
       <header className="sticky top-0 z-20 border-b border-gray-800 bg-gray-950/90 backdrop-blur">
@@ -145,12 +152,10 @@ export default function ZXPajakPage() {
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href="https://wa.me/6282153533164?text=Halo%2C%20saya%20ingin%20mengunduh%20ZX%20Pajak%20Kendaraan"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/api/dl/zxpajak"
                 className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-lg bg-blue-600 px-5 text-sm font-semibold transition-colors hover:bg-blue-500"
               >
-                <i className="bi bi-download" aria-hidden="true" /> Minta file aplikasi
+                <i className="bi bi-download" aria-hidden="true" /> Unduh aplikasi
               </a>
               <a
                 href="#alur"
@@ -159,7 +164,20 @@ export default function ZXPajakPage() {
                 Lihat cara pakai
               </a>
             </div>
-            <ul className="mt-7 flex flex-wrap gap-6 text-xs text-gray-400">
+            <div className="mt-6 flex flex-wrap items-center gap-3 rounded-xl border border-gray-800 bg-gray-900/50 p-4">
+              <div className="grid h-11 w-11 place-items-center rounded-xl border border-gray-700 bg-gray-800/60 text-emerald-400">
+                <i className="bi bi-phone text-lg" aria-hidden="true" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold">{downloads[0]?.name ?? 'ZX Pajak Kendaraan — Android'}</p>
+                <p className="mt-0.5 text-xs text-gray-500">{downloads[0]?.assets[0]?.note}</p>
+              </div>
+              <div className="text-left text-xs text-gray-400 tabular-nums sm:text-right">
+                <b className="font-bold text-gray-200">v{downloads[0]?.version ?? '1.1.1'}</b>
+                {downloads[0]?.assets[0]?.size && <span className="block">{downloads[0].assets[0].size}</span>}
+              </div>
+            </div>
+            <ul className="mt-6 flex flex-wrap gap-6 text-xs text-gray-400">
               {['Plat KB Kalbar', 'Unggah STNK', 'Struk digital'].map((t) => (
                 <li key={t} className="flex items-center gap-2">
                   <span className="text-emerald-400"><Check /></span>
@@ -170,9 +188,9 @@ export default function ZXPajakPage() {
             <p className="mt-5 flex items-start gap-2 rounded-xl border border-gray-800 bg-gray-900/40 p-4 text-xs leading-relaxed text-gray-400">
               <i className="bi bi-info-circle mt-0.5 shrink-0 text-amber-400" aria-hidden="true" />
               <span>
-                Aplikasi ini dibagikan langsung (bukan di Play Store). Ketuk <b className="text-gray-200">Minta file
-                aplikasi</b> — kami kirim APK-nya. Saat memasang, izinkan <b className="text-gray-200">Install unknown
-                apps</b> untuk aplikasi pengirim.
+                <b className="text-gray-200">Android:</b> unduhan langsung berupa APK (belum di Play Store). Izinkan
+                <b className="text-gray-200"> Install unknown apps</b> untuk browser yang dipakai mengunduh; kalau Play
+                Protect muncul, pilih Install anyway. Tersedia juga cek pembaruan otomatis di dalam aplikasi.
               </span>
             </p>
           </div>

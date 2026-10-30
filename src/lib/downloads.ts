@@ -169,3 +169,16 @@ export const ZXPARENTING_DOWNLOADS: Spec[] = [
     api: 'zxparentinganak',
   },
 ]
+
+/** ZX Pajak Kendaraan Kalbar: APK pemilik kendaraan plat KB. */
+export const ZXPAJAK_DOWNLOADS: Spec[] = [
+  {
+    id: 'zxpajak-apk',
+    repo: 'pajak-kb-user',
+    name: 'ZX Pajak Kendaraan — Android',
+    note: 'Android 7+ · cek & bayar pajak kendaraan plat KB Kalimantan Barat',
+    pick: (f) => f.endsWith('.apk'),
+    version: '1.1.1',
+    api: 'zxpajak',
+  },
+]
