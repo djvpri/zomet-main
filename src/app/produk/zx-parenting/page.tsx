@@ -349,12 +349,12 @@ export default async function ZXParentingPage() {
         <section className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-emerald-400">Tampilan</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Tiga layar app anak</h2>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Empat layar app anak</h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-400">
-              Beranda dengan saldo Token, daftar tugas dengan progres, dan halaman profil di HP anak.
+              Beranda dengan saldo Token, daftar tugas dengan progres, kuis AI, dan halaman profil di HP anak.
             </p>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2">
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -415,6 +415,27 @@ export default async function ZXParentingPage() {
                 <b className="block text-sm font-bold">Profil anak</b>
                 <span className="mt-1 block text-xs leading-relaxed text-gray-400">
                   Nama, usia, Token, kuis, dan tugas milik anak dalam satu halaman.
+                </span>
+              </figcaption>
+            </figure>
+            <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
+              <div className="flex justify-center bg-gray-950 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/zxparenting/anak-kuis.webp"
+                  alt="Kuis AI di aplikasi ZX Parenting untuk anak"
+                  width={709}
+                  height={1600}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto rounded-lg border border-gray-800"
+                  style={{ maxHeight: 400 }}
+                />
+              </div>
+              <figcaption className="px-5 py-4">
+                <b className="block text-sm font-bold">Kuis AI</b>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-400">
+                  Anak memilih topik, level, dan jumlah soal — soal dibuat AI, Token masuk setelah selesai.
                 </span>
               </figcaption>
             </figure>
