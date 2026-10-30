@@ -196,6 +196,7 @@ export const products: Product[] = [
     bsIcon: 'bi-car-front-fill',
     tags: ['Pajak', 'Android'],
     detail: 'zx-pajak',
+    thumb: '/images/zxpajak/struk.webp',
     price: 'Gratis',
     priceNote: 'biaya layanan muncul di rincian sebelum bayar',
     live: true,

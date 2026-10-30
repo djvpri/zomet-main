@@ -196,6 +196,41 @@ export default function ZXPajakPage() {
           </div>
         </section>
 
+        {/* pratinjau struk */}
+        <section className="border-t border-gray-800 py-16">
+          <div className="mx-auto mb-10 max-w-xl text-center">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-emerald-400">Tampilan</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Struk digital setelah lunas</h2>
+            <p className="mt-3 text-sm leading-relaxed text-gray-400">
+              Nominal pajak, biaya cek, admin, dan kirim tercetak satu per satu, plus nomor resi pengiriman.
+            </p>
+          </div>
+          <div className="mx-auto w-full max-w-[290px] overflow-hidden rounded-[2rem] border border-gray-700 bg-gray-900 p-2 shadow-2xl shadow-black/60">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/zxpajak/struk.webp"
+              alt="Struk digital ZX Pajak Kendaraan Kalbar"
+              width={709}
+              height={1600}
+              loading="lazy"
+              decoding="async"
+              className="block h-auto w-full rounded-[1.6rem]"
+            />
+          </div>
+          <div className="mx-auto mt-8 grid max-w-2xl gap-4 sm:grid-cols-3">
+            {[
+              ['Rincian terbuka', 'Empat baris biaya, bukan satu angka total.'],
+              ['Nomor resi', 'Kurir dan resi tercantum saat berkas dikirim.'],
+              ['Bisa dibagikan', 'Simpan sebagai gambar atau salin sebagai teks.'],
+            ].map(([t, d]) => (
+              <div key={t} className="rounded-xl border border-gray-800 bg-gray-900/50 p-4">
+                <b className="block text-sm">{t}</b>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-400">{d}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* alur lengkap */}
         <section id="alur" className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-10 max-w-xl text-center">
