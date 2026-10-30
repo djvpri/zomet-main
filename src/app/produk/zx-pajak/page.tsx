@@ -200,13 +200,17 @@ export default function ZXPajakPage() {
         <section className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-emerald-400">Tampilan</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Empat layar, dari rincian sampai struk</h2>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Lima layar, dari input sampai struk</h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-400">
-              Total tagihan, rekening tujuan, bukti transfer, dan struk — semuanya tersimpan di HP.
+              Input plat, rincian tagihan, pembayaran, bukti terkirim, dan struk — semuanya di HP.
             </p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             {[
+              {
+                img: 'input', w: 709, h: 1600, t: 'Input plat',
+                d: 'Tiga kotak: KB terkunci, angka, lalu kode huruf — plus nomor WhatsApp untuk kabar status.',
+              },
               {
                 img: 'rincian', w: 709, h: 1600, t: 'Rincian tagihan',
                 d: 'Total, rincian biaya, dan detail pengiriman dalam satu layar sebelum membayar.',
