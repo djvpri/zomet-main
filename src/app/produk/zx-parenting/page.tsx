@@ -210,12 +210,33 @@ export default async function ZXParentingPage() {
         <section className="border-t border-gray-800 py-16">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-violet-400">Tampilan</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Lima layar app orang tua</h2>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Enam layar app orang tua</h2>
             <p className="mt-3 text-sm leading-relaxed text-gray-400">
-              Anak, tugas, marketplace hadiah, profil, dan langganan — semua dari satu aplikasi.
+              Beranda, anak, tugas, marketplace hadiah, profil, dan langganan — semua dari satu aplikasi.
             </p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
+            <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
+              <div className="flex justify-center bg-gray-950 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/zxparenting/ortu-beranda.webp"
+                  alt="Beranda aplikasi ZX Parenting orang tua"
+                  width={709}
+                  height={1600}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto rounded-lg border border-gray-800"
+                  style={{ maxHeight: 420 }}
+                />
+              </div>
+              <figcaption className="px-5 py-4">
+                <b className="block text-sm font-bold">Beranda</b>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-400">
+                  Semua anak dalam satu kartu: Token, koneksi perangkat, dan pintasan ke fitur pengawasan.
+                </span>
+              </figcaption>
+            </figure>
             <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
               <div className="flex justify-center bg-gray-950 p-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -322,6 +343,82 @@ export default async function ZXParentingPage() {
                 </span>
               </figcaption>
           </figure>
+        </section>
+
+        {/* pratinjau app anak */}
+        <section className="border-t border-gray-800 py-16">
+          <div className="mx-auto mb-10 max-w-xl text-center">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-emerald-400">Tampilan</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Tiga layar app anak</h2>
+            <p className="mt-3 text-sm leading-relaxed text-gray-400">
+              Beranda dengan saldo Token, daftar tugas dengan progres, dan halaman profil di HP anak.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
+              <div className="flex justify-center bg-gray-950 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/zxparenting/anak-beranda.webp"
+                  alt="Beranda aplikasi ZX Parenting untuk anak"
+                  width={709}
+                  height={1600}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto rounded-lg border border-gray-800"
+                  style={{ maxHeight: 400 }}
+                />
+              </div>
+              <figcaption className="px-5 py-4">
+                <b className="block text-sm font-bold">Beranda anak</b>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-400">
+                  Saldo Token, progres belajar, dan tombol menukar atau meminjam waktu main.
+                </span>
+              </figcaption>
+            </figure>
+            <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
+              <div className="flex justify-center bg-gray-950 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/zxparenting/anak-tugas.webp"
+                  alt="Daftar tugas di aplikasi ZX Parenting untuk anak"
+                  width={1080}
+                  height={2436}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto rounded-lg border border-gray-800"
+                  style={{ maxHeight: 400 }}
+                />
+              </div>
+              <figcaption className="px-5 py-4">
+                <b className="block text-sm font-bold">Tugas anak</b>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-400">
+                  Progres tugas dalam persen, daftar yang harus dikerjakan, dan Token yang didapat.
+                </span>
+              </figcaption>
+            </figure>
+            <figure className="m-0 flex flex-col overflow-hidden rounded-xl border border-gray-800 bg-gray-900/50 transition-colors hover:border-gray-600">
+              <div className="flex justify-center bg-gray-950 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/zxparenting/anak-saya.webp"
+                  alt="Profil di aplikasi ZX Parenting untuk anak"
+                  width={709}
+                  height={1600}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto rounded-lg border border-gray-800"
+                  style={{ maxHeight: 400 }}
+                />
+              </div>
+              <figcaption className="px-5 py-4">
+                <b className="block text-sm font-bold">Profil anak</b>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-400">
+                  Nama, usia, Token, kuis, dan tugas milik anak dalam satu halaman.
+                </span>
+              </figcaption>
+            </figure>
+          </div>
         </section>
 
         {/* fitur */}
